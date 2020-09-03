@@ -9,7 +9,6 @@ npm install -g @angular/cli
 
 ### Começo rápido
 
-```bash
 # clone o repositório
 git clone https://github.com/carloshaam/integrative-project-dh-santander.git
 
