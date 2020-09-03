@@ -4,7 +4,7 @@
 
 ```bash
 #Você usa a CLI Angular para criar projetos, gerar código de aplicativo e biblioteca e executar uma variedade de tarefas de desenvolvimento em andamento, como teste, empacotamento e implantação.
-Para instalar o Angular CLI, abra uma janela de terminal e execute o seguinte comando:
+#Para instalar o Angular CLI, abra uma janela de terminal e execute o seguinte comando:
 npm install -g @angular/cli
 
 ### Começo rápido
