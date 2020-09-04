@@ -1,5 +1,9 @@
 # Projeto Integrador - Digital House(Santander)
 
+## Links úteis
+UML: https://app.lucidchart.com/invitations/accept/756c4443-3598-4536-b239-ea2fd8e3d0e0
+Trello: https://trello.com/b/PbMj9PG8/projeto-integrador
+
 ## Instale o Angular CLI
 
 ```bash
