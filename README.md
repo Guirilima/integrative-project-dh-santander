@@ -16,7 +16,7 @@ git clone https://github.com/carloshaam/integrative-project-dh-santander.git
 # change directory to our repo
 cd integrative-project-dh-santander
 
-# install the repo with npm
+# acessa a pasta desejada e instale as dependências com npm
 npm install
 
 # iniciar o servidor
