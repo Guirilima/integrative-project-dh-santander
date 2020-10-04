@@ -1,0 +1,20 @@
+.container {
+    background-color:  #6394fd;
+    padding:30px;
+}
+.form-register{
+    color:#6394fd;
+    background-color: #22142b;
+    padding:10px;
+    border-radius:5px;
+}
+
+.form-control{
+    background:#22142b;
+    color:#6394fd;
+    border:1px solid #6394fd;
+}
+::-webkit-input-placeholder {
+    color: #6394fd;
+    font-size: 14px;
+ }
