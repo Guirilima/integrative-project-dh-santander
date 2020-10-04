@@ -24,7 +24,7 @@ public class UserEntity {
     @Column(name = "active_flag")
     private BigInteger flagActive;
 
-    @Column(name = "master_id_master",nullable = false)
+    @Column(name = "master_id_master")
     private BigInteger idMaster;
 
     @Column(name = "user_personal_iduser_personal",nullable = false)
