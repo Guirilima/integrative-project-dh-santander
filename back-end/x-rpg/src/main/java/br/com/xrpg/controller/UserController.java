@@ -2,6 +2,7 @@ package br.com.xrpg.controller;
 
 import br.com.xrpg.entity.RaceEntity;
 import br.com.xrpg.entity.UserEntity;
+import br.com.xrpg.service.MetodosValidadores;
 import br.com.xrpg.service.RaceService;
 import br.com.xrpg.service.UserService;
 import br.com.xrpg.vo.DadosUsuarioCadastramentoVO;
@@ -25,6 +26,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    MetodosValidadores metodosValidadores;
+
     @ApiOperation(value = "API responsavel por criar um novo usuario pelo cadastramento")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "criação concluída."),
@@ -41,6 +45,29 @@ public class UserController {
                     .status("OK")
                     .mensagem("")
                     .response(newUser).build(), HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                    .status("NOK")
+                    .mensagem(e.getMessage())
+                    .response(null).build(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(path = "/codificPass",produces = "application/json")
+    public ResponseEntity<HttpGenericResponse> validacaoPassword(@RequestParam("value") String value,
+                                                                 @RequestParam("qual") String qual) {
+        try {
+
+            if (qual.equals("1")) {
+                value = metodosValidadores.criptografarString(value);
+            }else {
+                value = metodosValidadores.descriptografarString(value);
+            }
+
+            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                    .status("OK")
+                    .mensagem("")
+                    .response(value).build(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("NOK")

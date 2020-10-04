@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserPersonalRepository userPersonalRepository;
 
-
     @Override
     public UserEntity criarNovoUsuarioCadastro(DadosUsuarioCadastramentoVO dadosNewUser) {
         //TODO | SERÁ NECESSARIO FAZER TRANSAÇÃO EM TRÊS TABELAS, SÃO ELAS>: USER_AUTH,USER_PERSONAL E USER
