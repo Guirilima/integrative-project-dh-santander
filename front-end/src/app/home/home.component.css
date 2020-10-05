@@ -36,7 +36,7 @@
     font-size: 25px;
     text-transform: uppercase;
     border-bottom: 1px solid #21212E;
-    width: 250px;
+    width: fit-content;
     font-weight: bold;
     padding: 5px;
 }
@@ -49,6 +49,13 @@
     height: auto;
     position: relative;
     left: 200px;
+}
+
+#contato .warrior-blue {
+  width: 350px;
+  height: auto;
+  position: relative;
+  left: 200px;
 }
 #funcionalidades {
     background-color: #21212E;
