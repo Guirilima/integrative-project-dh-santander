@@ -19,6 +19,15 @@
     color: #fff !important;
     font-size: 17px;
 }
+.img-cabecalho {
+    width: auto;
+    min-height: 500px;
+    background-size: cover;
+    display: block;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
 #sobre, #contato {
     background-image: linear-gradient(to right, #46C2FF, #BD11FA);
 }
