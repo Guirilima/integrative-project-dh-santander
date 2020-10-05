@@ -1,16 +1,15 @@
 .container {
-    background-color:  #6394fd;
-    padding:30px;
+    padding:10vh;
 }
 .form-login{
     color:#6394fd;
-    background-color: #22142b;
+    background-color: #1C1445;
     padding:10px;
     border-radius:5px;
 }
 
 .form-control{
-    background:#22142b;
+    background:#1C1445;
     color:#6394fd;
     border:1px solid #6394fd;
 }
