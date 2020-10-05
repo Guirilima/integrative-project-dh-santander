@@ -1,0 +1,78 @@
+
+.jumbotron {
+    background-color: #21212E;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+.dsc {
+    color: #2979FF;
+    font-size: 35px;
+}
+.botao{
+    width: 200px;
+    height: 50px;
+    padding: 12px;
+    background-image: linear-gradient(to right, #BD11FA, #46C2FF);
+    outline: unset;
+}
+.lead-titulo {
+    color: #fff !important;
+    font-size: 17px;
+}
+#sobre, #contato {
+    background-image: linear-gradient(to right, #46C2FF, #BD11FA);
+}
+#sobre .titulo-sobre,
+#contato .titulo-contato {
+    font-size: 25px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #21212E;
+    width: 250px;
+    font-weight: bold;
+    padding: 5px;
+}
+#sobre .logo-sobre {
+    width: 200px;
+    height: auto;
+}
+#sobre .personagem {
+    width: 250px;
+    height: auto;
+    position: relative;
+    left: 200px;
+}
+#funcionalidades {
+    background-color: #21212E;
+}
+#funcionalidades .text-color-azul {
+    color: #46C2FF;
+    font-size: 25px;
+}
+#funcionalidades .card {
+    background-color: #20202C;
+}
+#funcionalidades .card-header {
+    color: #46C2FF;
+}
+#funcionalidades .card-body {
+    color: white;
+}
+#funcionalidades .card-body .card-title {
+    font-size: 15px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #BD11FA;
+    width: 250px;
+    font-weight: bold;
+    padding: 5px;
+}
+.bg-purple {
+    width: 200px;
+    height: 50px;
+    padding: 12px;
+    background-color: #21212E;
+}
+.botao-contato {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
