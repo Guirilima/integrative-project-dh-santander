@@ -11,7 +11,7 @@ import { ContactComponent } from './contact/contact.component';
 	declarations: [
 		AppComponent,
 		ContactComponent
-	],
+],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
