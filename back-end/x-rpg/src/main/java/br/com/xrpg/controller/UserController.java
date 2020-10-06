@@ -43,8 +43,8 @@ public class UserController {
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
-                    .mensagem("")
-                    .response(newUser).build(), HttpStatus.OK);
+                    .mensagem("Usuário criado com sucesso.")
+                    .response(null).build(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("NOK")
