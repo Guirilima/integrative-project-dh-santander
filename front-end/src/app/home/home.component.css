@@ -28,9 +28,14 @@
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
 }
-#sobre, #contato {
+#sobre {
     background-image: linear-gradient(to right, #46C2FF, #BD11FA);
 }
+
+#contato {
+  background-image: linear-gradient(to left, #46C2FF, #BD11FA);
+}
+
 #sobre .titulo-sobre,
 #contato .titulo-contato {
     font-size: 25px;
@@ -92,3 +97,26 @@
     justify-content: center;
     align-items: center;
 }
+
+.card-controls {
+  margin: 15px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.button-change-card {
+  width: 100px;
+  height: 70px;
+  margin-left: 10px;
+  border-radius: 12%;
+  background-color: #21212E;
+  padding: 12px;
+  border: 1px solid #46C2FF;
+}
+
+.btn-icon {
+  background-color: #46C2FF;
+}
+
+
