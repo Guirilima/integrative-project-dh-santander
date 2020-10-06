@@ -1,7 +1,9 @@
 package br.com.xrpg.controller;
 
+import br.com.xrpg.entity.CepEntity;
 import br.com.xrpg.entity.RaceEntity;
 import br.com.xrpg.entity.UserEntity;
+import br.com.xrpg.service.CepService;
 import br.com.xrpg.service.MetodosValidadores;
 import br.com.xrpg.service.RaceService;
 import br.com.xrpg.service.UserService;
@@ -28,6 +30,9 @@ public class UserController {
 
     @Autowired
     MetodosValidadores metodosValidadores;
+
+    @Autowired
+    CepService cepService;
 
     @ApiOperation(value = "API responsavel por criar um novo usuario pelo cadastramento")
     @ApiResponses(value = {
@@ -58,16 +63,17 @@ public class UserController {
                                                                  @RequestParam("qual") String qual) {
         try {
 
-            if (qual.equals("1")) {
-                value = metodosValidadores.criptografarString(value);
-            }else {
-                value = metodosValidadores.descriptografarString(value);
-            }
+//            if (qual.equals("1")) {
+//                value = metodosValidadores.criptografarString(value);
+//            }else {
+//                value = metodosValidadores.descriptografarString(value);
+//            }
+            CepEntity ss = cepService.findByCep(value);
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
                     .mensagem("")
-                    .response(value).build(), HttpStatus.OK);
+                    .response(ss).build(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("NOK")
