@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -234,4 +235,22 @@ public class Utils {
             return "";
         }
     }
+
+
+    //METODOS CRIP
+    public static String criptografarString(String value) {
+
+        Base64.Encoder encoder = Base64.getEncoder();
+        byte[] encoded = encoder.encode(value.getBytes());
+
+        return new String(encoded);
+    }
+
+    public static String descriptografarString(String value) {
+        Base64.Decoder decoder = Base64.getDecoder();
+        byte[] decoded = decoder.decode(value);
+
+        return new String(decoded);
+    }
+
 }

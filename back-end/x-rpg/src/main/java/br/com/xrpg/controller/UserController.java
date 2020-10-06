@@ -28,17 +28,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    MetodosValidadores metodosValidadores;
-
-    @Autowired
-    CepService cepService;
-
     @ApiOperation(value = "API responsavel por criar um novo usuario pelo cadastramento")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "criação concluída."),
             @ApiResponse(code = 400, message = "Erro durante o salvamento e/ou manipulação dos dados.")
     })
+
     //@RequestMapping(value = "/cadastro-criar-usuario",method = RequestMethod.POST, produces = "application/json")
     @PostMapping(path = "/cadastro-criar-usuario",produces = "application/json")
     public ResponseEntity<HttpGenericResponse> criarNovoUsuarioCadastro(@RequestBody DadosUsuarioCadastramentoVO dadosNewUser) {
@@ -58,28 +53,5 @@ public class UserController {
         }
     }
 
-    @PostMapping(path = "/codificPass",produces = "application/json")
-    public ResponseEntity<HttpGenericResponse> validacaoPassword(@RequestParam("value") String value,
-                                                                 @RequestParam("qual") String qual) {
-        try {
-
-//            if (qual.equals("1")) {
-//                value = metodosValidadores.criptografarString(value);
-//            }else {
-//                value = metodosValidadores.descriptografarString(value);
-//            }
-            CepEntity ss = cepService.findByCep(value);
-
-            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
-                    .status("OK")
-                    .mensagem("")
-                    .response(ss).build(), HttpStatus.OK);
-        }catch (Exception e) {
-            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
-                    .status("NOK")
-                    .mensagem(e.getMessage())
-                    .response(null).build(), HttpStatus.BAD_REQUEST);
-        }
-    }
 
 }
