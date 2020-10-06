@@ -1,0 +1,26 @@
+#login {
+    padding:10vh;
+    background-image: linear-gradient(to right, #46C2FF, #BD11FA);
+}
+.form-login{
+    color:#2979FF;
+    background-color: #21212E;
+    padding:10px;
+    border-radius:5px;
+}
+
+.form-control{
+    background:#21212E;
+    color:#2979FF;
+    border:1px solid #2979FF;
+}
+::-webkit-input-placeholder {
+    color: #2979FF;
+    font-size: 14px;
+ }
+ .button{
+    width: 150px;
+    padding: 10px;
+    background-image: linear-gradient(to right, #BD11FA, #46C2FF);
+    outline: unset;
+}

@@ -1,0 +1,76 @@
+<div class="outside">
+
+  <img id="orangeDragon"[src]="ImageDragonPath">
+  <img id="femaleArcher"[src]="ImageArcherPath">
+
+<section class="inside" id="contact">
+  <h3 class="contact-title">Queremos ouvir de você!</h3>
+  <p>
+    Este espaco e reservado para que voce sugerir conteudos que quer ver no blog,
+    fazer elogios e reclamacoes, falar sobre divulgacao e outros assuntos que quiser. Nosso prazo de resposta e em ate 5 dias uteis. Voce tambem pode conferir perguntas e respostas frequentes.
+  </p>
+    <form method="POST">
+
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <label for="inputName">Nome</label>
+          <input type="text" class="form-control" id="inputName">
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="inputUser">Usuario</label>
+          <input type="text" class="form-control" id="inputUser">
+        </div>
+      </div>
+
+      <div class="form-row">
+
+      <div class="form-group col-md-8">
+        <label for="inputEmail asterisk">Email</label>
+        <input required type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Usaremos o email fornecido para entrar em contato</small>
+      </div>
+
+      <div class="form-group col-md-4">
+        <label for="inputTel">Telefone</label>
+        <input type="number" class="form-control" id="inputTel">
+      </div>
+
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="subject asterisk">Motivo do contato</label>
+      <select required class="form-control" id="subject">
+        <option>Elogios</option>
+        <option>Reclamacoes</option>
+        <option>Sugestao de Conteudo para o Blog</option>
+        <option>Imprensa</option>
+        <option selected>Outros</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1 asterisk">Detalhamento da situacao</label>
+      <textarea required class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Aceito ser contatado por telefone</label>
+    </div>
+
+    <div class="form-group">
+        <label for="inputFile">Anexo</label>
+        <input type="file" class="form-control-file" id="inputFile">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</section>
+</div>
+
+<!--  -->
+

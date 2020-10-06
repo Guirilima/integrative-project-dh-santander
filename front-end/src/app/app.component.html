@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-purple">
 	<div class="container">
-		<a class="navbar-brand" routerLink="/" routerLinkActive="active">Epic</a>
+		<a class="logo navbar-brand" routerLink="/" routerLinkActive="active"><img src="../assets/img/logo.png" class="img-fluid" alt=""></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav ml-auto">
+			<ul class="navbar-nav ml-auto nav-menu">
 				<li class="nav-item active">
 					<a class="nav-link mx-2" routerLink="/" routerLinkActive="active">INÍCIO <span
 							class="sr-only">(current)</span></a>
@@ -19,26 +19,26 @@
 					<a class="nav-link mx-2" href="#">FUNCIONALIDADES</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link mx-2" href="#">CONTATO</a>
+					<a class="nav-link mx-2" href="#"  routerLink="/contact" routerLinkActive="active">CONTATO</a>
 				</li>
 			</ul>
-			<a class="btn btn-primary mx-2 my-sm-0" routerLink="/login" routerLinkActive="active">Sign in</a>
-			<a class="btn btn-outline-primary mx-2 my-sm-0" routerLink="/register" routerLinkActive="active">Sign up</a>
+			<a class="btn botao btn-primary mx-2 my-sm-0" routerLink="/login" routerLinkActive="active">Sign in</a>
+			<a class="btn botao-hover btn-outline-primary mx-2 my-sm-0" routerLink="/register" routerLinkActive="active">Sign up</a>
 		</div>
 	</div>
 </nav>
 <section>
 	<router-outlet></router-outlet>
 </section>
-<footer class="pt-4 my-md-5 pt-md-5 border-top">
+<footer id="footer-contato" class="bg-purple">
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md">
-				<h1>Epic</h1>
+				<img src="../assets/img/logo.png" class="img-fluid" alt="">
 				<small class="d-block mb-3 text-muted">© 2017-2020</small>
 			</div>
 			<div class="col-6 col-md">
-				<h5>Features</h5>
+				<h5>Contato</h5>
 				<ul class="list-unstyled text-small">
 					<li>
 						<a href="" class="text-decoration-none mr-3"><img src="../assets/img/icons/facebook.svg" alt=""></a>
