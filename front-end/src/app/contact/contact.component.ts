@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  public ImageArcherPath = '/assets/img/fairy-pink.png';
+  public ImageFairyPath = '/assets/img/fairy-pink.png';
 
-  public ImageDragonPath =  '/assets/img/warrior-blue.png';
+  public ImageWarriorPath =  '/assets/img/warrior-blue.png';
 
   constructor() { }
 
