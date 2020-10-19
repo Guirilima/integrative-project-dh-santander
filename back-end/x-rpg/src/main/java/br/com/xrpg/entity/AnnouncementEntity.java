@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mysql.cj.jdbc.Blob;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -45,7 +43,7 @@ public class AnnouncementEntity {
 	private String title;
 	
 	@Column(name = "complete_content")
-	private Blob completeContent;
+	private String completeContent;
 	
 	@Column(name = "category")
 	private String category;

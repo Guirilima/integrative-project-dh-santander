@@ -37,13 +37,13 @@ public class UserPersonalEntity {
     @Column(name = "cpf",nullable = false)
     private String cpfPersonal;
     
-    @Column(name = "data de nascimento", nullable = false )
+    @Column(name = "data_de_nascimento", nullable = false )
     private Date dateOfBirth;
     
     @Column(name = "telefone", nullable = false)
     private String phoneNumber;
     
     @Column(name = "genero", nullable = false)
-    private char gender;
+    private String gender;
     
 }
