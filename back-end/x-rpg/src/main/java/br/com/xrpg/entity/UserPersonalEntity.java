@@ -25,31 +25,31 @@ public class UserPersonalEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "iduser_personal",nullable = false)
-    private BigInteger idUserPersonal;
+    @Column(name = "idUsuarioPessoal",nullable = false)
+    private BigInteger idUsuarioPessoal;
 
     @Column(name = "nome",nullable = false)
-    private String nomePersonal;
+    private String nomePessoal;
 
     @Column(name = "sobrenome")
-    private String sobrenomePersonal;
+    private String sobrenomePessoal;
 
-    @Column(name = "state",nullable = false)
-    private String statePersonal;
+    @Column(name = "estado",nullable = false)
+    private String estadoPessoal;
 
-    @Column(name = "city",nullable = false)
-    private String cityPersonal;
+    @Column(name = "cidade",nullable = false)
+    private String cidadePessoal;
 
     @Column(name = "cpf",nullable = false)
-    private String cpfPersonal;
+    private String cpfPessoal;
     
-    @Column(name = "data_de_nascimento", nullable = false )
-    private Date dateOfBirth;
+    @Column(name = "dataNascimento", nullable = false )
+    private Date dataNascimento;
     
     @Column(name = "telefone", nullable = false)
-    private String phoneNumber;
+    private String telefone;
     
-    @Column(name = "genero", nullable = false)
-    private String gender;
+    @Column(name = "genero", nullable = false) //F=Feminino/M=Masculino/P=prefiro não responde
+    private String genero;
     
 }

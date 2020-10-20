@@ -13,9 +13,9 @@ import br.com.xrpg.entity.UserPersonalEntity;
 public interface UserPersonalRepository extends CrudRepository<UserPersonalEntity, BigInteger> {
 
     @Query(value = "SELECT u.idUser,u.idUserAuth,ua.emailUser,ua.passwordUser," +
-            "up.cpfPersonal,up.nomePersonal,up.sobrenomePersonal FROM UserEntity u INNER JOIN UserAuthEntity ua ON ua.idUserAuth = u.idUserAuth " +
-            "INNER JOIN UserPersonalEntity up ON up.idUserPersonal = u.IdUserPersonal WHERE u.idUser = :idUser")
+            "up.cpfPessoal,up.nomePessoal,up.sobrenomePessoal FROM UserEntity u INNER JOIN UserAuthEntity ua ON ua.idUserAuth = u.idUserAuth " +
+            "INNER JOIN UserPersonalEntity up ON up.idUsuarioPessoal = u.IdUserPersonal WHERE u.idUser = :idUser")
     public Object buscarPorDadosDoUsuario(@Param("idUser") BigInteger idUser);
 
-    public UserPersonalEntity findByCpfPersonal(String cpfUser);
+    public UserPersonalEntity findByCpfPessoal(String cpfUser);
 }

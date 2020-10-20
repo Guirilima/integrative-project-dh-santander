@@ -26,6 +26,9 @@ public class DadosUsuarioCadastramentoVO {
     private String cpfUser;
     private String cityUser;
     private String stateUser;
+    private Date DateOfBirth;
+    private String phoneNumber;
+    private String genero;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private BigInteger idUser;

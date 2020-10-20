@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "character_entity") //Nome alterado de character para character_entity por motivo de DDL;
+@Table(name = "character") //Nome alterado de character para character_entity por motivo de DDL;
 public class CharacterEntity {
 
     @Id
