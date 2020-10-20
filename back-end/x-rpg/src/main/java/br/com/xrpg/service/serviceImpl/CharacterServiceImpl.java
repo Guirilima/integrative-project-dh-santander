@@ -21,8 +21,16 @@ public class CharacterServiceImpl implements CharacterService {
 		Optional
 		.ofNullable(newCharacter)
 		.orElseThrow( () -> new ErrorSalvamento("O nome do personagem não pode ser nulo"));
-
-        if (newCharacter.getBacksStory().length() > 449) throw new ErrorSalvamento("O backstory do personagem deve possuir menos que 450 caracteres");
+		
+		Optional
+		.ofNullable(newCharacter.getIdUser())
+		.orElseThrow( () -> new ErrorSalvamento("O personagem precisa estar atrelado a um usuario"));
+		
+		Optional
+		.ofNullable(newCharacter.getIdRace())
+		.orElseThrow( () -> new ErrorSalvamento("A raca do personagem não pode ser nula"));
+		
+        if (newCharacter.getBacksStory().length() < 450) throw new ErrorSalvamento("O backstory do personagem deve possuir, no maximo, 449 caracteres");
         
         this.characterRepository.save(newCharacter);	
         
