@@ -1,12 +1,10 @@
 package br.com.xrpg.vo;
 
-import br.com.xrpg.entity.UserAuthEntity;
-import br.com.xrpg.entity.UserEntity;
-import br.com.xrpg.entity.UserPersonalEntity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +22,9 @@ public class DadosUsuarioCadastramentoVO {
     private String cpfUser;
     private String cityUser;
     private String stateUser;
+    private Date DateOfBirth;
+    private String phoneNumber;
+    private String genero;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private BigInteger idUser;
