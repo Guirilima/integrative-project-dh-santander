@@ -1,11 +1,14 @@
 package br.com.xrpg.controller;
 
-import br.com.xrpg.entity.CepEntity;
-import br.com.xrpg.entity.RaceEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.xrpg.entity.UserEntity;
-import br.com.xrpg.service.CepService;
-import br.com.xrpg.service.MetodosValidadores;
-import br.com.xrpg.service.RaceService;
 import br.com.xrpg.service.UserService;
 import br.com.xrpg.vo.DadosUsuarioCadastramentoVO;
 import br.com.xrpg.vo.HttpGenericResponse;
@@ -13,12 +16,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")

@@ -1,12 +1,14 @@
 package br.com.xrpg.vo;
 
-import br.com.xrpg.entity.UserAuthEntity;
-import br.com.xrpg.entity.UserEntity;
-import br.com.xrpg.entity.UserPersonalEntity;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
-
 import java.math.BigInteger;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor

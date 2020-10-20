@@ -1,14 +1,19 @@
 package br.com.xrpg.service.serviceImpl;
 
-import br.com.xrpg.entity.CepEntity;
-import br.com.xrpg.service.CepService;
-import org.springframework.http.*;
+import java.util.Arrays;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.Arrays;
+import br.com.xrpg.entity.CepEntity;
+import br.com.xrpg.service.CepService;
 
 @Service
 public class CepServiceImpl implements CepService {

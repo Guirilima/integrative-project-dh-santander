@@ -1,8 +1,9 @@
 package br.com.xrpg.service.serviceImpl;
 
+import org.springframework.stereotype.Service;
+
 import br.com.xrpg.service.MetodosValidadores;
 import br.com.xrpg.utils.Utils;
-import org.springframework.stereotype.Service;
 
 @Service
 public class MetodosValidadoresImpl implements MetodosValidadores {

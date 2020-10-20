@@ -1,10 +1,11 @@
 package br.com.xrpg.repository;
 
-import br.com.xrpg.entity.UserEntity;
+import java.math.BigInteger;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigInteger;
+import br.com.xrpg.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, BigInteger> {

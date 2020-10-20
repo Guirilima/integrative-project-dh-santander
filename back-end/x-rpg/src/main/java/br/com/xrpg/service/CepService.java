@@ -1,7 +1,8 @@
 package br.com.xrpg.service;
 
-import br.com.xrpg.entity.CepEntity;
 import org.springframework.stereotype.Service;
+
+import br.com.xrpg.entity.CepEntity;
 
 @Service
 public interface CepService {

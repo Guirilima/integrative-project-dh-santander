@@ -1,12 +1,11 @@
 package br.com.xrpg.entity;
 
+import java.math.BigInteger;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Entity;
-import java.math.BigInteger;
 
 @Data
 @NoArgsConstructor

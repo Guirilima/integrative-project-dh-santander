@@ -1,9 +1,7 @@
 package br.com.xrpg.utils;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
-import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.Base64;
@@ -11,6 +9,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.regex.Pattern;
+
+import javax.swing.text.MaskFormatter;
+
+import org.apache.commons.lang3.StringUtils;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j //Log.Debug
 public class Utils {

@@ -1,5 +1,10 @@
 package br.com.xrpg.service.serviceImpl;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.xrpg.entity.UserAuthEntity;
 import br.com.xrpg.entity.UserEntity;
 import br.com.xrpg.entity.UserPersonalEntity;
@@ -10,10 +15,6 @@ import br.com.xrpg.repository.UserRepository;
 import br.com.xrpg.service.UserService;
 import br.com.xrpg.utils.Utils;
 import br.com.xrpg.vo.DadosUsuarioCadastramentoVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -1,14 +1,15 @@
 package br.com.xrpg.service.serviceImpl;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.xrpg.entity.ClassEntity;
 import br.com.xrpg.exceptions.ErrorSalvamento;
 import br.com.xrpg.repository.ClassRepository;
 import br.com.xrpg.service.ClassService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClassServiceImpl implements ClassService {

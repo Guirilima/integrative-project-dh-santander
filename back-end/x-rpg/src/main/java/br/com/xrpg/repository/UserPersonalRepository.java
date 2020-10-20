@@ -1,13 +1,13 @@
 package br.com.xrpg.repository;
 
-import br.com.xrpg.entity.UserPersonalEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.math.BigInteger;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigInteger;
+import br.com.xrpg.entity.UserPersonalEntity;
 
 @Repository
 public interface UserPersonalRepository extends CrudRepository<UserPersonalEntity, BigInteger> {
