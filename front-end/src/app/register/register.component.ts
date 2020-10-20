@@ -1,13 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormControl, FormGroup } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask'
+
+
+
 
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  
+  
 })
+
+
+
 export class RegisterComponent implements OnInit {
 
   cidade;
@@ -15,12 +23,9 @@ export class RegisterComponent implements OnInit {
  
   ngOnInit(): void {
     
-     
-
- 
 }
 
-  
+
 
 readonly apiURL : string; //url base 
 
@@ -33,10 +38,28 @@ constructor(private http : HttpClient) {
 
 }
 
+cadastrarUsuario()
+{
+  
+  var produto = { 
+    
+    cityUser : "",
+    cpfUser: "",
+    emailUser: "",
+
+
+
+}; //TODO isso tem que ser um GET e não um post
+
+
+
+}
+
+
 
 buscarCEP() {
 
-  var cep = (<HTMLInputElement>document.getElementById("cepInputID")).value;
+  var cep = (<HTMLInputElement>document.getElementById("idInputCep")).value;
 
   var produto = { nome : "" }; //TODO isso tem que ser um GET e não um post
   
@@ -45,8 +68,8 @@ buscarCEP() {
   this.http.post(`${ this.apiURL }/endereco/buscar-pelo-cep/${ cep }` , produto)
             .subscribe(
               (resultado:any) => {
-                this.estado = (JSON.stringify(resultado.response.city))
-                this.cidade = (JSON.stringify(resultado.response.state))
+                this.estado = resultado.response.city
+                this.cidade = resultado.response.state
                 if(this.cidade == "null" || this.estado == "null") console.log("CEP inválido !");
 
                 console.log(this.estado)
@@ -57,7 +80,5 @@ buscarCEP() {
                 }
               }
             );
-
-
-
             }}
+

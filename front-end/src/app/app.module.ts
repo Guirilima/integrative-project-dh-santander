@@ -8,6 +8,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 
 @NgModule({
@@ -16,16 +20,18 @@ import { HttpClientModule } from '@angular/common/http';
 		ContactComponent
 ],
 	imports: [
+		NgxMaskModule.forRoot(),
 		BrowserModule,
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		HttpClientModule,
     NgbModule,
-    CommonModule,
+	CommonModule,
     NgxBootstrapIconsModule.pick(allIcons),
   ],
   exports: [
-    AppComponent
+	AppComponent,
+
   ],
 	providers: [],
 	bootstrap: [AppComponent]

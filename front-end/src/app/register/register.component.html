@@ -6,19 +6,19 @@
             <div class="form-row pb-3">
                 <div class="col-md-4 mb-6">
                     <label for="primeiroNome">Nome</label>
-                    <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Primeiro Nome" required>
+                    <input type="name" class="form-control" id="idInputNome" placeholder="Primeiro Nome" required>
                     
                 </div>
                 <div class="col-md-4 mb-6">
                  
                   <label for="sobreNome">Sobrenome</label>
-                  <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Sobrenome" required>
+                  <input type="name" class="form-control" id="idInputSobrenome" placeholder="Sobrenome" required>
               </div>
 
               <div class="col-md-4 mb-6">
                  
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Digite seu email" required>
+                <input type="email" class="form-control" id="idInputEmail" placeholder="Digite seu email" required>
             </div>
 
             </div>
@@ -26,18 +26,18 @@
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="validationDefault01">Nome de Usuário</label>
-                <input type="text" class="form-control" id="validationDefault01" placeholder="Nome de usuário"  required>
+                <input type="text" class="form-control" id="idInputUser" placeholder="Nome de usuário"  required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="validationDefault01">CPF</label>
-                <input type="text" class="form-control" id="validationDefault01" placeholder="Insira seu CPF"  required>
+                <input type="text" class="form-control" id="idInputCPF" placeholder="Insira seu CPF"  required>
               </div>
             </div>
 
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="validationDefault01">CEP(apenas números)</label>
-                <input type="text" class="form-control" id="cepInputID" placeholder="CEP"  required>
+                <input type="text" class="form-control" id="idInputCep" placeholder="CEP"  required>
               </div>
               <div class="col-md-6 mb-3">
                 
@@ -51,24 +51,39 @@
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="validationDefault01">Estado</label>
-                <input type="text" class="form-control " readonly id="validationDefault01" placeholder="Aperte o botão 'encontrar' "  value = "{{ cidade }}" required>
+                <input type="text" class="form-control " readonly id="idInputEstado" placeholder="Aperte o botão 'encontrar' "  value = "{{ cidade }}" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="validationDefault01">Cidade</label>
-                <input type="text" class="form-control" readonly id="validationDefault01" placeholder="Aperte o botão 'encontrar' " value = "{{ estado }}" required>
+                <input type="text" class="form-control" readonly id="idInputCidade" placeholder="Aperte o botão 'encontrar' " value = "{{ estado }}" required>
               </div>
             </div>
+
+
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">Data de Nascimento</label>
+
+              </div>
+              <div class="col-md-6 mb-3">
+
+                <label for="validationDefault01">Telefone</label>
+                <input type="text" class="form-control phone_with_ddd" mask="[00]\[000]" id="idInputTelefone"   required>
+
+              </div>
+            </div>
+
 
 
 
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="exampleInputPassword1">Senha</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" required>
+                <input type="password" class="form-control" id="idInputSenha1" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="exampleInputPassword1">Confirmar</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" required>
+                <input type="password" class="form-control" id="idInputSenha2" required>
               </div>
             </div>
             <div class="form-group">
@@ -97,4 +112,5 @@
   </div>
   
 </section>
+
 
