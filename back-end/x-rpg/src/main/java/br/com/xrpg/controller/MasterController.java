@@ -2,11 +2,14 @@ package br.com.xrpg.controller;
 
 import java.math.BigInteger;
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +37,15 @@ public class MasterController {
 		return ResponseEntity.created(uri).build();
 	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<MasterEntity> update(@PathVariable BigInteger id, @RequestBody MasterEntity master) {
+		master.setId(id);
+
+		this.service.update(master);
+
+		return ResponseEntity.ok(master);
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<MasterEntity> findById(@PathVariable BigInteger id) {
 
@@ -41,5 +53,18 @@ public class MasterController {
 
 		return ResponseEntity.ok(master);
 
+	}
+
+	@GetMapping
+	public ResponseEntity<List<MasterEntity>> findAll() {
+		List<MasterEntity> allMasters = this.service.findAll();
+		return ResponseEntity.ok(allMasters);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteById(@PathVariable BigInteger id){
+		this.service.delete(id);
+		
+		return ResponseEntity.noContent().build();
 	}
 }

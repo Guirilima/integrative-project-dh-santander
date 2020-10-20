@@ -2,12 +2,17 @@ package br.com.xrpg.entity;
 
 import java.math.BigInteger;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +28,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode (onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Builder
 
 public class MasterEntity {
@@ -39,5 +44,9 @@ public class MasterEntity {
 
 	@Column(name = "campanhas_mestradas", nullable = false)
 	private Integer campanhasMestradas;
+
+	@OneToOne(mappedBy = "master", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private UserEntity user;
 
 }

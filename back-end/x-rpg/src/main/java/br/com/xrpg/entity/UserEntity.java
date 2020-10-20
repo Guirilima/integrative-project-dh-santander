@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigInteger;
 
 @Data
@@ -32,4 +35,8 @@ public class UserEntity {
 
     @Column(name = "user_auth_iduser_auth",nullable = false)
     private BigInteger idUserAuth;
+    
+    @OneToOne
+    @JoinColumn(name = "master_id", nullable = false, unique = true)
+    private MasterEntity master;
 }
