@@ -14,7 +14,7 @@ import br.com.xrpg.entity.RaceEntity;
 @Repository
 public interface CharacterRepository extends CrudRepository<CharacterEntity, BigInteger> {
 	
-	@Query("FROM CharacterEntity c GROUP BY c.nameCharacter")
+	@Query("FROM CharacterEntity c GROUP BY c.idCharacter")
 	public List<CharacterEntity> getCharactersListEntitysDistinctName();
 	
 }
