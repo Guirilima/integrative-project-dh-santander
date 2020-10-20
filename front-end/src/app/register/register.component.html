@@ -1,20 +1,66 @@
 <section id="register" class = "section-padding">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col-md-4 offset-md-4 form-register">
-        <form method="post">
-            <div class="form-row">
-                <div class="col-md-12 mb-3">
-                    <label for="exampleInputEmail1">E-mail</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@examplo.com" required>
+        <form  >
+            <div class="form-row pb-3">
+                <div class="col-md-4 mb-6">
+                    <label for="primeiroNome">Nome</label>
+                    <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Primeiro Nome" required>
+                    
                 </div>
+                <div class="col-md-4 mb-6">
+                 
+                  <label for="sobreNome">Sobrenome</label>
+                  <input type="name" class="form-control" id="exampleFormControlInput1" placeholder="Sobrenome" required>
               </div>
+
+              <div class="col-md-4 mb-6">
+                 
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Digite seu email" required>
+            </div>
+
+            </div>
+
             <div class="form-row">
-              <div class="col-md-8 mb-3">
-                <label for="validationDefault01">Usuário</label>
-                <input type="text" class="form-control" id="validationDefault01" placeholder="Nome"  required>
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">Nome de Usuário</label>
+                <input type="text" class="form-control" id="validationDefault01" placeholder="Nome de usuário"  required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">CPF</label>
+                <input type="text" class="form-control" id="validationDefault01" placeholder="Insira seu CPF"  required>
               </div>
             </div>
+
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">CEP(apenas números)</label>
+                <input type="text" class="form-control" id="cepInputID" placeholder="CEP"  required>
+              </div>
+              <div class="col-md-6 mb-3">
+                
+              <div class="col-md-6 d-flex justify-content-end">
+                  <a (click) = "buscarCEP()" class="btn button btn-primary my-sm-0 mt-6">Encontrar</a>
+              </div>
+
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">Estado</label>
+                <input type="text" class="form-control " readonly id="validationDefault01" placeholder="Aperte o botão 'encontrar' "  value = "{{ cidade }}" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">Cidade</label>
+                <input type="text" class="form-control" readonly id="validationDefault01" placeholder="Aperte o botão 'encontrar' " value = "{{ estado }}" required>
+              </div>
+            </div>
+
+
+
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="exampleInputPassword1">Senha</label>
@@ -33,12 +79,15 @@
                 </small>
               </div>
             </div>
+
+
+
             <div class="form-row">
                 <div class="col-md-6 d-flex justify-content-around">
                     <a href="#login">Já tenho uma conta!</a>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
-                    <button type= "submit" class="btn button btn-primary my-sm-0" routerLink="/login" routerLinkActive="active">Criar conta </button>
+                    <button type= "submit" class="btn button btn-primary my-sm-0" >Criar conta </button>
                 </div>
             </div>
             
