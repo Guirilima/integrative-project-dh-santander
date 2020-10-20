@@ -39,7 +39,7 @@ public class UserController {
     public ResponseEntity<HttpGenericResponse> criarNovoUsuarioCadastro(@RequestBody DadosUsuarioCadastramentoVO dadosNewUser) {
         try {
 
-            UserEntity newUser = userService.criarNovoUsuarioCadastro(dadosNewUser);
+            userService.criarNovoUsuarioCadastro(dadosNewUser);
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
