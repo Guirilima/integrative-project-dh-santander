@@ -12,30 +12,32 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "master")
-
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode (onlyExplicitlyIncluded = true)
+@Builder
 
 public class MasterEntity {
-	
-	@Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "idMaster",nullable = false)
-    private BigInteger idMaster;
 
-    @Column(name = "anos_experiencia",nullable = false)
-    private Integer yearsExperience;
-    
-    @Column(name = "campanhas_mestradas",nullable = false)
-    private Integer campanhasMestradas;
-	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@Column(name = "id_master", nullable = false)
+	@EqualsAndHashCode.Include
+	private BigInteger id;
+
+	@Column(name = "anos_experiencia", nullable = false)
+	private Integer yearsExperience;
+
+	@Column(name = "campanhas_mestradas", nullable = false)
+	private Integer campanhasMestradas;
 
 }
