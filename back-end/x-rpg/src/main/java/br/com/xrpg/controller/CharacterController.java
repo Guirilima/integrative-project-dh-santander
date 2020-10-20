@@ -30,7 +30,7 @@ public class CharacterController {
 
 	@ApiOperation(value = "API responsavel por listar todos os personagens listados no sistema.")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "lista de classes encontrada."),
-			@ApiResponse(code = 400, message = "Erro na listagem das classes.") })
+	@ApiResponse(code = 400, message = "Erro na listagem das classes.") })
 	@RequestMapping(value = "/listar-personagem", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<HttpGenericResponse> listCharacters() {
 		try {

@@ -1,6 +1,7 @@
 package br.com.xrpg.vo;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

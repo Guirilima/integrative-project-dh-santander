@@ -17,6 +17,9 @@ import br.com.xrpg.service.UserService;
 import br.com.xrpg.utils.Utils;
 import br.com.xrpg.vo.DadosUsuarioCadastramentoVO;
 
+import java.math.BigInteger;
+import java.util.HashMap;
+
 @Service
 public class UserServiceImpl implements UserService {
 
