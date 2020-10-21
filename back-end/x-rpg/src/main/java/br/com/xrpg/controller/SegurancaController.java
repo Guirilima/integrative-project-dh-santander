@@ -13,7 +13,7 @@ import br.com.xrpg.vo.HttpGenericResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/security")
+@RequestMapping("/api/securanca")
 @Slf4j
 public class SegurancaController {
 

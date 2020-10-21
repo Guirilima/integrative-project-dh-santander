@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/endereco")
+@RequestMapping("/api/endereco")
 @Slf4j
 public class EnderecoController {
 

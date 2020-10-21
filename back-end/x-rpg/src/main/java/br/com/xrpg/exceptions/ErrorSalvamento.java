@@ -1,13 +1,10 @@
 package br.com.xrpg.exceptions;
 
-public class ErrorSalvamento extends Exception{
+public class ErrorSalvamento extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
     public ErrorSalvamento(String errorMsg) { super(errorMsg); }
-
-
-
 
 
 
@@ -18,7 +15,6 @@ public class ErrorSalvamento extends Exception{
     }
 
     private static String formataMensagem(String errorMsg,String motivoMsg) {
-        String err = "Houve erro durante a tentativa de salvamento. MOTIVO: " + motivoMsg;
-        return err;
+        return "Houve erro durante a tentativa de salvamento. MOTIVO: " + motivoMsg;
     }
 }
