@@ -14,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,11 +37,7 @@ public class UserEntity {
 	@Column(name = "user_personal_iduser_personal", nullable = false)
 	private BigInteger IdUserPersonal;
 
-<<<<<<< Updated upstream
     @Column(name = "user_auth_iduser_auth",nullable = false)
     private BigInteger idUserAuth;
-=======
-	@Column(name = "user_auth_iduser_auth", nullable = false)
-	private BigInteger idUserAuth;
->>>>>>> Stashed changes
+
 }
