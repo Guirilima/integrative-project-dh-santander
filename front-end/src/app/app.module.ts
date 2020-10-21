@@ -9,6 +9,8 @@ import { ContactComponent } from './contact/contact.component';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { RegisterComponent } from './register/register.component';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -17,7 +19,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 @NgModule({
 	declarations: [
 		AppComponent,
-		ContactComponent
+		ContactComponent,
+		RegisterComponent
 ],
 	imports: [
 		NgxMaskModule.forRoot(),
@@ -25,6 +28,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		HttpClientModule,
+		ReactiveFormsModule,
+		FormsModule,
     NgbModule,
 	CommonModule,
     NgxBootstrapIconsModule.pick(allIcons),
