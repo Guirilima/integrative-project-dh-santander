@@ -10,7 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+<<<<<<< Updated upstream
 import lombok.Data;
+=======
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+>>>>>>> Stashed changes
 import lombok.NoArgsConstructor;
 
 
@@ -22,6 +28,7 @@ import lombok.NoArgsConstructor;
 
 
 
+<<<<<<< Updated upstream
 public class MasterEntity {
 	
 	@Id
@@ -37,4 +44,6 @@ public class MasterEntity {
 	
 	
 
+=======
+>>>>>>> Stashed changes
 }
