@@ -13,6 +13,7 @@ import br.com.xrpg.service.CepService;
 import br.com.xrpg.vo.HttpGenericResponse;
 import lombok.extern.slf4j.Slf4j;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/endereco")
 @Slf4j

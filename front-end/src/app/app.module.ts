@@ -7,23 +7,36 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContactComponent } from './contact/contact.component';
 import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { RegisterComponent } from './register/register.component';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+
+
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		ContactComponent
+		ContactComponent,
+		RegisterComponent
 ],
 	imports: [
+		NgxMaskModule.forRoot(),
 		BrowserModule,
 		BrowserAnimationsModule,
 		AppRoutingModule,
+		HttpClientModule,
+		ReactiveFormsModule,
+		FormsModule,
     NgbModule,
-    CommonModule,
+	CommonModule,
     NgxBootstrapIconsModule.pick(allIcons),
   ],
   exports: [
-    AppComponent
+	AppComponent,
+
   ],
 	providers: [],
 	bootstrap: [AppComponent]
