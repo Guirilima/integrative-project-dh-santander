@@ -1,28 +1,105 @@
 <section id="register" class = "section-padding">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row align-items-center">
       <div class="col-md-4 offset-md-4 form-register">
-        <form method="post">
-            <div class="form-row">
-                <div class="col-md-12 mb-3">
-                    <label for="exampleInputEmail1">E-mail</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@examplo.com" required>
+        <form method="post" >
+            <div class="form-row pb-3">
+                <div class="col-md-4 mb-6">
+                    <label for="primeiroNome">Nome</label>
+                    <input type="text" class="form-control" id="idInputNome" placeholder="Primeiro Nome" [formControl]="nome" required>
+                    
                 </div>
+                <div class="col-md-4 mb-6">
+                 
+                  <label for="sobreNome">Sobrenome</label>
+                  <input type="name" class="form-control" id="idInputSobrenome" placeholder="Sobrenome" [formControl]="sobrenome" required>
               </div>
+
+              <div class="col-md-4 mb-6">
+                 
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="idInputEmail" placeholder="Digite seu email"  [formControl]="email" required>
+            </div>
+
+            </div>
+
             <div class="form-row">
-              <div class="col-md-8 mb-3">
-                <label for="validationDefault01">Usuário</label>
-                <input type="text" class="form-control" id="validationDefault01" placeholder="Nome"  required>
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">Nome de Usuário</label>
+                <input type="text" class="form-control" id="idInputUser" placeholder="Nome de usuário" [formControl]="nomeUsuario" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">CPF</label>
+                <input type="text" class="form-control" id="idInputCPF" placeholder="Insira seu CPF"  [formControl]="cpf" required>
               </div>
             </div>
+
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">CEP(apenas números)</label>
+                <input type="text" class="form-control" id="idInputCep" placeholder="CEP" [formControl]="cep"  required>
+              </div>
+              <div class="col-md-6 mb-3">
+                
+              <div class="col-md-6 d-flex justify-content-end">
+                  <a (click) = "buscarCEP()" class="btn button btn-primary my-sm-0 mt-6">Encontrar</a>
+              </div>
+
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-md-2 mb-3">
+                <label for="validationDefault01">Estado</label>
+                <input type="text" class="form-control " readonly id="idInputEstado"  value = "{{ estado }}" required>
+              </div>
+              <div class="col-md-5 mb-3">
+                <label for="validationDefault01">Cidade</label>
+                <input type="text" class="form-control" readonly id="idInputCidade"  value = "{{ cidade }}" required>
+              </div>
+
+              <div class="col-md-5 mb-3">
+
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Gênero</label>
+                  <select class="form-control" id="idSelectGenero" [formControl]="genero">
+                    <option>M</option>
+                    <option>F</option>
+                    <option>Outro</option>
+                  </select>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label for="validationDefault01">Data de Nascimento</label>
+                <input type="text" class="form-control phone_with_ddd" mask="00/00/0000" id="idInputData"  [formControl]="dataNascimento" required>
+
+
+              </div>
+              <div class="col-md-6 mb-3">
+
+                <label for="validationDefault01">Telefone</label>
+                <input type="text" class="form-control phone_with_ddd" mask="(00) 00000-9999" id="idInputTelefone" [formControl]="telefone"  required>
+
+              </div>
+            </div>
+
+
+
+
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label for="exampleInputPassword1">Senha</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" required>
+                <input type="password" class="form-control" id="idInputSenha1"  [formControl]="senha" required>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="exampleInputPassword1">Confirmar</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" required>
+                <input type="password" class="form-control" id="idInputSenha2" required>
               </div>
             </div>
             <div class="form-group">
@@ -33,12 +110,15 @@
                 </small>
               </div>
             </div>
+
+
+
             <div class="form-row">
                 <div class="col-md-6 d-flex justify-content-around">
                     <a href="#login">Já tenho uma conta!</a>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
-                    <button type= "submit" class="btn button btn-primary my-sm-0" routerLink="/login" routerLinkActive="active">Criar conta </button>
+                    <button type= "submit" class="btn button btn-primary my-sm-0" (click) ="cadastrarUsuario()" >Criar conta </button>
                 </div>
             </div>
             
@@ -48,4 +128,5 @@
   </div>
   
 </section>
+
 
