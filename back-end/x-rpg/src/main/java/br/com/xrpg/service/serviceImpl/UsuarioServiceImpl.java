@@ -18,6 +18,7 @@ import br.com.xrpg.utils.Utils;
 import br.com.xrpg.vo.DadosUsuarioVO;
 
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         if (!Utils.isEmailValido(dadosNewUser.getEmailUsur()))  throw new ErrorSalvamento("Email não é valido");
         if (Utils.validaCPF(dadosNewUser.getCpfUsur()) == null) throw new ErrorSalvamento( "CPF não é valido");
+        if (dadosNewUser.getGeneroUsur().length() > 1) throw new ErrorSalvamento("O tamanho do gênero é maior que 1. Favor considere as alternativas : Masculino : 'M', Feminino : 'F' ou Outro : 'O' .");
         if (usuarioPessoalRepository.findByCpfPessoal(dadosNewUser.getCpfUsur()) != null) throw new ErrorSalvamento("Já existe esse CPF em nosso banco de registro.");
 
         //TODO | SALVAMENTO USER_AUTH
@@ -86,6 +88,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .idUsuarioAutenticacao(newUserAuth.getIdUsuarioAutenticacao())
                 .idUsuarioPessoal(newUserPersonal.getIdUsuarioPessoal())
                 .flagAtivo(new BigInteger("1")) //Usuario Ativo
+                .dataUltimoLogin(new Date())
                 .build();
 
         usuarioRepository.save(newUser);

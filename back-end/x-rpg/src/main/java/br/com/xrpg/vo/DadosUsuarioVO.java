@@ -52,7 +52,7 @@ public class DadosUsuarioVO {
     private String telefoneUsur;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @ApiModelProperty(name = "cpfUsur", value = "CPF Usuário",example = "36751751036",position = 7)
+    @ApiModelProperty(name = "cpfUsur", value = "CPF Usuário",example = "36751751036",position = 7,dataType = "String",allowableValues = "1,2,3")
     private String cpfUsur;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
