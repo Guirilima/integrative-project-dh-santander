@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, Validators } from '@angular/forms';
-import {NgForm} from '@angular/forms';
+import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -17,30 +17,56 @@ import {NgForm} from '@angular/forms';
 
 
 
+
 export class RegisterComponent implements OnInit {
 
   cidade;
   estado;
-  nome = new FormControl(null,[
-    Validators.required, Validators.minLength(4),]);
-  sobrenome = new FormControl('');
-  email = new FormControl('');
-  nomeUsuario = new FormControl('');
-  cpf = new FormControl('');
-  cep = new FormControl('');
-  dataNascimento = new FormControl('');
-  telefone = new FormControl('');
-  senha = new FormControl('');
-  genero = new FormControl('');
+  formRegistro = new FormGroup({
+  nome : new FormControl(null,[
+  Validators.required, Validators.minLength(4),]),
+  sobrenome : new FormControl(null, Validators.required),
+  email : new FormControl(null,[Validators.required,Validators.email]),
+  nomeUsuario : new FormControl(null, Validators.required),
+  cpf : new FormControl(null, [Validators.required,Validators.minLength(11)]),
+  cep : new FormControl(null,[Validators.required,Validators.minLength(8)]),
+  dataNascimento : new FormControl(null,Validators.minLength(8)),
+  telefone : new FormControl(null,Validators.minLength(10)),
+  senha : new FormControl(null,[Validators.required, Validators.minLength(8)]),
+  genero : new FormControl(null,Validators.required),
+
+}, {
+
+})
+
 
 
   ngOnInit(): void {
-    
+
+    this.formRegistro.addControl('confirmaSenha', new FormControl(null, [Validators.compose(
+      [Validators.required, this.validateAreEqual.bind(this)])]))
+   
+}
+
+  validateAreEqual(fieldControl: FormControl) {
+  return fieldControl.value === this.formRegistro.get("senha").value ? null : {
+      NotEqual: true
+  };
 }
 
 
-
 readonly apiURL : string; //url base 
+
+  passwordMatchValidator(control: FormControl) {
+  const password: string = control.get('senha').value; // get password from our password form control
+  const confirmPassword: string = control.get('confirmaSenha').value; // get password from our confirmPassword form control
+  // compare is the password math
+  return (password !== confirmPassword) ?  null : {
+    validatePassword: false,
+    
+    // if they don't match, set an error in our confirmPassword form control
+ 
+}}
 
 
 constructor(private http : HttpClient) {
@@ -64,27 +90,33 @@ return dataParse;
 
 }
 
+onSubmit() {
+  // aqui você pode implementar a logica para fazer seu formulário salvar
+  if(this.formRegistro.valid) console.log(this.formRegistro.value);
+  else console.log("O formulário contem erros")
+
+}
+
 cadastrarUsuario()
 {
-  console.log("Tetando cadastrar usuário")
+  console.log("Tentando cadastrar usuário")
   
 
   //this.parseDataNascimento(this.dataNascimento.value);
 
-  console.log(new Date(this.parseDataNascimento(this.dataNascimento.value)).toISOString())
    
   var usuario = { 
     
     cityUser : this.cidade,
-    cpfUser: this.cpf.value,
+    cpfUser: this.formRegistro.get('cep').value,
     dateOfBirth:  "2020-10-20T12:20:30.726Z",
-    emailUser: this.email.value,
-    genero: this.genero.value,
-    lastNameUser: this.sobrenome.value,
-    nameUser: this.nomeUsuario.value,
-    passwordUser: this.senha.value,
-    phoneNumber: this.telefone.value,
-    stateUser: this.estado
+    emailUser: this.formRegistro.get('email').value,
+    genero: this.formRegistro.get('genero').value,
+    lastNameUser: this.formRegistro.get('sobrenome').value,
+    nameUser: this.formRegistro.get('nomeUsuario').value,
+    passwordUser: this.formRegistro.get('senha').value,
+    phoneNumber: this.formRegistro.get('telefone').value,
+    stateUser: this.formRegistro.get('estado').value
 
   }; 
 
@@ -108,34 +140,16 @@ cadastrarUsuario()
 }
             
 
-    /*
-
-    {
-  "cityUser": "São Paulo",
-  "cpfUser": "21743682859",
-  "dateOfBirth": "2020-10-20T12:20:30.726Z",
-  "emailUser": "guilher@gmail.com",
-  "genero": "M",
-  "lastNameUser": "Lima",
-  "nameUser": "Guilherme",
-  "passwordUser": "1234@",
-  "phoneNumber": "11940445029",
-  "stateUser": "SP"
-}
-    */
-
-
 
 buscarCEP() {
 
-//  console.log(new Date(23111991));
 
 
   var produto = { nome : "" }; //TODO isso tem que ser um GET e não um post
   
-  console.log(this.cep.value);
+  console.log(this.formRegistro.get('cep').value);
 
-  this.http.post(`${ this.apiURL }/endereco/buscar-pelo-cep/${ this.cep.value }` , produto)
+  this.http.post(`${ this.apiURL }/endereco/buscar-pelo-cep/${ this.formRegistro.get('cep').value }` , produto)
             .subscribe(
               (resultado:any) => {
                 this.estado = resultado.response.state
