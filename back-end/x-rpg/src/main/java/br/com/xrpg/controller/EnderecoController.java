@@ -10,10 +10,10 @@ import br.com.xrpg.service.CepService;
 import br.com.xrpg.vo.HttpGenericResponse;
 import lombok.extern.slf4j.Slf4j;
 
-@CrossOrigin
+@Slf4j
 @RestController
 @RequestMapping("/api/endereco")
-@Slf4j
+@CrossOrigin(origins = "*") //Liberando acesso para todos os dominios acessarem
 public class EnderecoController {
 
     @Autowired
