@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { RegisterComponent } from './register/register.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { MainComponent } from './main/main.component';
+import { TopoComponent } from './main/topo/topo.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -20,7 +22,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 	declarations: [
 		AppComponent,
 		ContactComponent,
-		RegisterComponent
+		RegisterComponent,
+		MainComponent,
+		TopoComponent
 ],
 	imports: [
 		NgxMaskModule.forRoot(),
