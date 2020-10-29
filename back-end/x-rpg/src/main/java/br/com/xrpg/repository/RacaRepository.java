@@ -12,7 +12,7 @@ import br.com.xrpg.entity.RacaEntity;
 @Repository
 public interface RacaRepository extends CrudRepository<RacaEntity, BigInteger> {
 
+    @Query(value = "FROM RacaEntity r ")
+    public List<RacaEntity> getAllRaca();
 
-    @Query("FROM RacaEntity r ")
-    public List<RacaEntity> getTodasRacas();
 }

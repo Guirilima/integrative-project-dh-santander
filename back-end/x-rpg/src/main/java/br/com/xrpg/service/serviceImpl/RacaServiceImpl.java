@@ -18,8 +18,8 @@ public class RacaServiceImpl implements RacaService {
     RacaRepository racaRepository;
 
     @Override
-    public List<RacaEntity> getListaRacas() {
-        return racaRepository.getTodasRacas();
+    public Iterable<RacaEntity> getListaRacas() {
+        return racaRepository.findAll();
     }
 
     @Override

@@ -24,7 +24,7 @@ public class PersonagemController {
 	@Autowired
 	PersonagemService personagemService;
 
-	@ApiOperation(value = "API responsavel por listar todos os personagens listados no sistema.")
+	@ApiOperation(value = "API RESPONSÁVEL POR LISTAR TODOS OS PERSONAGENS EXISTENTE NO SISTEMA.")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "lista de classes encontrada."),
 	@ApiResponse(code = 400, message = "Erro na listagem das classes.") })
 	@RequestMapping(value = "/listar-personagem", method = RequestMethod.GET, produces = "application/json")
@@ -44,7 +44,7 @@ public class PersonagemController {
 		}
 	}
 
-	@ApiOperation(value = "API responsavel por criar um novo personagem.")
+	@ApiOperation(value = "API RESPONSÁVEL POR CRIAR UM NOVO PERSONAGEM.")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "criaçao concluída"),
 							@ApiResponse(code = 400, message = "Erro na criação da classe") })
 	@RequestMapping(value = "/inclusao-personagem", method = RequestMethod.POST, produces = "application/json")

@@ -1,5 +1,8 @@
 package br.com.xrpg.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,11 @@ public class EnderecoController {
     @Autowired
     CepService cepService;
 
+    @ApiOperation(value = "API RESPONSÁVEL POR CHAMAR UMA API EXTERNA DE CEP E RETORNAR OS DADOS.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Dados do endereço encontrado."),
+            @ApiResponse(code = 400, message = "Erro na buscar ou não encontrado.")
+    })
     @PostMapping(path = "/buscar-pelo-cep/{cepString}",produces = "application/json")
     public ResponseEntity<HttpGenericResponse> buscarPeloCep(@PathVariable(value = "cepString") String cepString) {
         try {
