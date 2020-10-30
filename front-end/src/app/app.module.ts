@@ -10,7 +10,7 @@ import { NgxBootstrapIconsModule, allIcons } from 'ngx-bootstrap-icons';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { RegisterComponent } from './register/register.component';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { TopoComponent } from './main/topo/topo.component';
 import { MestreComponent } from './mestre/mestre.component';
@@ -29,7 +29,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		TopoComponent,
 		MestreComponent,
 		PersonagemComponent
-],
+	],
 	imports: [
 		NgxMaskModule.forRoot(),
 		BrowserModule,
@@ -38,14 +38,14 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		HttpClientModule,
 		ReactiveFormsModule,
 		FormsModule,
-    NgbModule,
-	CommonModule,
-    NgxBootstrapIconsModule.pick(allIcons),
-  ],
-  exports: [
-	AppComponent,
+		NgbModule,
+		CommonModule,
+		NgxBootstrapIconsModule.pick(allIcons),
+	],
+	exports: [
+		AppComponent,
 
-  ],
+	],
 	providers: [],
 	bootstrap: [AppComponent]
 })

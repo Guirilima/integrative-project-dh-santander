@@ -1,0 +1,70 @@
+{
+  "personagens": [
+      {
+          "id": 1,
+          "nomePersonagem": "RubensMTCruel",
+          "idRaça": "Humano",
+          "idClasse": "Assassino",
+          "nivel:": 26,
+          "historiaPersonagem": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
+          "imagens": {
+            "url":"/assets/img/assassino.jpg"
+          }
+      },
+      {
+          "id": 2,
+          "nomePersonagem": "Trevozo1337",
+          "idRaça": "Humano",
+          "idClasse": "Guerreiro",
+          "nivel:": 8,
+          "historiaPersonagem": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
+          "imagens": {
+            "url":"/assets/img/guerreiro.jpg"
+          }
+      },
+      {
+          "id": 3,
+          "nomePersonagem": "DouglasDaSinuca",
+          "idRaça": "Elfo",
+          "idClasse": "Mago",
+          "nivel:": 3,
+          "historiaPersonagem": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
+          "imagens":{
+            "url": "/assets/img/mago.jpg"
+          }
+      }
+  ],
+
+  "mestres": [
+      {
+          "id": 1,
+          "nomeUsario": "Douglas",
+          "anosExperencia":8,
+          "campanhasMestradas": 150,
+          "comoMestro": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
+          "imagens": {
+            "url":"/assets/img/mestre-dado.jpg"
+          }
+      },
+      {
+          "id": 2,
+          "nomeUsario": "Roberto",
+          "anosExperencia":50,
+          "campanhasMestradas": 2,
+          "comoMestro": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
+          "imagens": {
+            "url":"/assets/img/mestre-mesa.jpg"
+          }
+      },
+      {
+          "id": 3,
+          "nomeUsario": "Samuel",
+          "anosExperencia":8,
+          "campanhasMestradas": 10,
+          "comoMestro": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
+          "imagens": {
+            "url":"/assets/img/mestre-mundo.jpg"
+          }
+      }
+  ]
+}
