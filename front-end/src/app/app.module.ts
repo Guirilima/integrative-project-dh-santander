@@ -13,6 +13,8 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MainComponent } from './main/main.component';
 import { TopoComponent } from './main/topo/topo.component';
+import { MestreComponent } from './mestre/mestre.component';
+import { PersonagemComponent } from './personagem/personagem.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -24,7 +26,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		ContactComponent,
 		RegisterComponent,
 		MainComponent,
-		TopoComponent
+		TopoComponent,
+		MestreComponent,
+		PersonagemComponent
 ],
 	imports: [
 		NgxMaskModule.forRoot(),
