@@ -1,47 +1,78 @@
 package br.com.xrpg.service.serviceImpl;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import br.com.xrpg.entity.PersonagemEntity;
+import br.com.xrpg.exceptions.ArgumentNotValid;
 import br.com.xrpg.exceptions.ErrorSalvamento;
+import br.com.xrpg.exceptions.ObjectNotFound;
 import br.com.xrpg.repository.PersonagemRepository;
 import br.com.xrpg.service.PersonagemService;
 
 @Service
 public class PersonagemServiceImpl implements PersonagemService {
 	
+	
 	@Autowired
 	PersonagemRepository personagemRepository;
+	
 
 	@Override
-	public PersonagemEntity criarPersonagem(PersonagemEntity newCharacter) throws ErrorSalvamento {
-		Optional
-		.ofNullable(newCharacter)
-		.orElseThrow( () -> new ErrorSalvamento("O nome do personagem não pode ser nulo"));
+	public PersonagemEntity criar(PersonagemEntity personagemEntity) throws ErrorSalvamento {
 		
-		Optional
-		.ofNullable(newCharacter.getIdUsuario())
-		.orElseThrow( () -> new ErrorSalvamento("O personagem precisa estar atrelado a um usuario"));
+		Optional.ofNullable(personagemEntity.getNomePersonagem()).orElseThrow( () -> new ErrorSalvamento("O nome do personagem nao pode ser nulo"));
+		Optional.ofNullable(personagemEntity.getIdRaca()).orElseThrow( () -> new ErrorSalvamento("A raca do personagem nao pode ser nula"));
+		Optional.ofNullable(personagemEntity.getIdClasse()).orElseThrow( () -> new ErrorSalvamento("A classe do personagem nao pode ser nula"));;
 		
-		Optional
-		.ofNullable(newCharacter.getIdRaca())
-		.orElseThrow( () -> new ErrorSalvamento("A raca do personagem não pode ser nula"));
-
-        if (newCharacter.getHistoriaPersonagem().length() > 450) throw new ErrorSalvamento("O backstory do personagem deve possuir, no maximo, 449 caracteres");
-        
-        this.personagemRepository.save(newCharacter);
-        
-        return newCharacter;
+		if (personagemEntity.getHistoriaPersonagem().length() > 400) throw new ErrorSalvamento ("A historia excede o limite de 400 caracteres");
+		
+		this.personagemRepository.save(personagemEntity);
+		return personagemEntity;
 	}
 
+
 	@Override
-	public List<PersonagemEntity> listCharacters(){
+	public PersonagemEntity encontrarPorId(BigInteger bigInteger) throws ObjectNotFound, ArgumentNotValid {
 		
-		return personagemRepository.getTodosPersonagem();
-	}}
+		Optional
+		.ofNullable(bigInteger)
+		.orElseThrow( () -> new ArgumentNotValid("O id informado nao e valido"));
+		
+		 return this.personagemRepository.findById(bigInteger)
+               .orElseThrow(() -> new ObjectNotFound("O personagem nao foi encontrado"));
+	}
+	
+	@Override
+	public List<PersonagemEntity> listar() {
+		return this.personagemRepository.findAll();
+	}
+
+
+	@Override
+	public void atualizar(PersonagemEntity personagemEntity){
+		
+		this.encontrarPorId(personagemEntity.getIdPersonagem());
+		this.personagemRepository.save(personagemEntity);
+	}
+
+
+	@Override
+	public void deletar(BigInteger bigInteger) {
+		this.encontrarPorId(bigInteger);
+		this.personagemRepository.deleteById(bigInteger);
+	}
+	
+}		
+	
+	
+
+
+
 
 
 
