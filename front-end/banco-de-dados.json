@@ -38,8 +38,8 @@
   "mestres": [
       {
           "id": 1,
-          "nome_usario": "Douglas",
-          "anos_experencia":8,
+          "nome_usuario": "Douglas",
+          "anos_experiencia":8,
           "campanhas_mestradas": 150,
           "como_mestro": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
           "imagens": {
@@ -48,8 +48,8 @@
       },
       {
           "id": 2,
-          "nome_usario": "Roberto",
-          "anos_experencia":50,
+          "nome_usuario": "Roberto",
+          "anos_experiencia":50,
           "campanhas_mestradas": 2,
           "como_mestro": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
           "imagens": {
@@ -58,8 +58,8 @@
       },
       {
           "id": 3,
-          "nome_usario": "Samuel",
-          "anos_experencia":8,
+          "nome_usuario": "Samuel",
+          "anos_experiencia":8,
           "campanhas_mestradas": 10,
           "como_mestro": "180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum",
           "imagens": {

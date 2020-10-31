@@ -1,26 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuariosService } from '../usuarios.service';
-import { Usuario} from '../shared/usuario.model';
+import { PersonagensService } from '../personagens.service';
+import { MestresService } from '../mestres.service';
+import { Personagem } from '../shared/personagem.model';
+import { Mestre } from '../shared/mestre.model';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
-  providers: [UsuariosService]
+  providers: [PersonagensService, MestresService]
 })
 export class MainComponent implements OnInit {
 
-  public usuarios: Usuario[];
+  public personagens: Personagem[];
+  public mestres: Mestre[];
 
-  constructor(private usuariosService: UsuariosService) { }
+  constructor(private personagensService: PersonagensService, private mestresService: MestresService) { }
 
   ngOnInit() {
-    this.usuariosService.getPersonagens()
-      .then((personagens: Usuario[]) =>{
-        this.usuarios = personagens;
+    this.personagensService.getPersonagens()
+      .then((personagens: Personagem[]) => {
+        this.personagens = personagens;
       })
-      .catch((param: any)=>{
+      .catch((param: any) => {
         console.log(param);
+      })
+
+    this.mestresService.getMestres()
+      .then((mestres: Mestre[]) => {
+        this.mestres = mestres;
+      })
+      .catch((param: any) => {
+        console.log(param)
       })
   }
 

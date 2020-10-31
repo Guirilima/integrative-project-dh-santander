@@ -1,18 +1,18 @@
 <app-topo></app-topo>
 <div class="container">
 
-  <div class="card mb-3" style="max-width: 540px;" *ngFor="let usuario of usuarios">
+  <div class="card mb-3" style="max-width: 540px;" *ngFor="let personagem of personagens">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img [src]="usuario.imagens.url" class="card-img"  alt="..." >
+        <img [src]="personagem.imagens.url" class="card-img"  alt="..." >
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{usuario.nomePersonagem}}</h5>
-          <p class="card-text"><small class="text-muted">Raça: {{usuario.id_raca}}</small></p>
-          <p class="card-text"><small class="text-muted">Classe: {{usuario.id_classe}}</small></p>
-          <p class="card-text"><small class="text-muted">Nível: {{usuario.nivel}}</small></p>
-          <p class="card-text historia">{{usuario.historia_personagem}}</p>
+          <h5 class="card-title">{{personagem.nomePersonagem}}</h5>
+          <p class="card-text"><small class="text-muted">Raça: {{personagem.id_raca}}</small></p>
+          <p class="card-text"><small class="text-muted">Classe: {{personagem.id_classe}}</small></p>
+          <p class="card-text"><small class="text-muted">Nível: {{personagem.nivel}}</small></p>
+          <p class="card-text historia">{{personagem.historia_personagem}}</p>
           <button type="button" class="btn btn-dark ">Chamar</button>
         </div>
       </div>
@@ -20,54 +20,18 @@
   </div>
 
   
-  <div class="card mb-3" style="max-width: 540px;">
+  <div class="card mb-3" style="max-width: 540px;" *ngFor="let mestre of mestres">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img src="../../assets/img/mestre-dado.jpg" class="card-img"  alt="..." >
+        <img [src]="mestre.imagens.url" class="card-img"  alt="..." >
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">Mestre dos magos nome do usuário</h5>
-          <p class="card-text"><small class="text-muted">Experiencia: 8 anos</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 150</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 150</small></p>
-          <p class="card-text historia"></p>
-          <button type="button" class="btn btn-dark ">Chamar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../../assets/img/mestre-mundo.jpg" class="card-img"  alt="..." >
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Mestre dos magos nome do usuário</h5>
-          <p class="card-text"><small class="text-muted">Experiencia: 8 anos</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 150</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 150</small></p>
-          <p class="card-text historia">180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum</p>
-          <button type="button" class="btn btn-dark ">Chamar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../../assets/img/mestre-mesa.jpg" class="card-img"  alt="..." >
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Mestre dos magos nome do usuário</h5>
-          <p class="card-text"><small class="text-muted">Experiencia: 8 anos</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 150</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 150</small></p>
-          <p class="card-text historia">180 caracteres orem ipsum dolor sit amet consectetur adipisicing elit. Quis vitae quidem ex iusto enim! Distinctio dicta iure voluptates nam id dolore unde, praesentium beatae. Cum</p>
+          <h5 class="card-title">{{mestre.nome_usuario}}</h5>
+          <p class="card-text"><small class="text-muted">Experiencia: {{mestre.anos_experiencia}} anos</small></p>
+          <p class="card-text"><small class="text-muted">Campanhas mestradas: {{mestre.campanhas_mestradas}}</small></p>
+          <p class="card-text"><small class="text-muted">Tem que tirar</small></p>
+          <p class="card-text historia">{{mestre.como_mestro}}</p>
           <button type="button" class="btn btn-dark ">Chamar</button>
         </div>
       </div>
@@ -75,99 +39,5 @@
   </div>
 
   
-<!-- 
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img  alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Trevozo1337</h5>
-          <p class="card-text"><small class="text-muted">Raça: Humano</small></p>
-          <p class="card-text"><small class="text-muted">Classe: Guerreiro</small></p>
-          <p class="card-text"><small class="text-muted">Nível: 8</small></p>
-          <p class="card-text">Historia Lorem,o Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-            beatae blanditiis dolore dolorem. Dolor dignissimos nisi enim pariatur quia deserunt tempora enim pariatur
-          </p><button type="button" class="btn btn-dark ">Chamar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../../assets/img/mago.png" class="card-img" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">DouglasDaSinuca</h5>
-          <p class="card-text"><small class="text-muted">Raça: Elfo</small></p>
-          <p class="card-text"><small class="text-muted">Classe: Mago</small></p>
-          <p class="card-text"><small class="text-muted">Nível: 3</small></p>
-          <p class="card-text">Historia Lorem,o Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-            beatae blanditiis dolore dolorem. Dolor dignissimos nisi enim pariatur quia deserunt tempora enim pariatur
-          </p>
-          <button type="button" class="btn btn-dark ">Chamar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../../assets/img/mestre-mesa.jpg" class="card-img" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Mestre dos magos nome do usuário</h5>
-          <p class="card-text"><small class="text-muted">Experiencia: 15 anos</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 20</small></p>
-          <p class="card-text">Gosto de mestra companhas de danger
-          </p>
-          <button type="button" class="btn btn-dark ">Chamar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../../assets/img/mestre-dado.jpg" class="card-img" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Mestre Yoda</h5>
-          <p class="card-text"><small class="text-muted">Experiencia: 5 anos</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 3</small></p>
-          <p class="card-text">Gosto de mestra companhas de danger
-          </p>
-          <button type="button" class="btn btn-dark ">Chamar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row no-gutters">
-      <div class="col-md-4">
-        <img src="../../assets/img/mestre-mundo.jpg" class="card-img" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Mestre dos magos nome do usuário</h5>
-          <p class="card-text"><small class="text-muted">Experiencia: 8 anos</small></p>
-          <p class="card-text"><small class="text-muted">Campanhas mestradas: 150</small></p>
-          <p class="card-text">Gosto de mestra companhas de danger
-          </p>
-          <button type="button" class="btn btn-dark ">Chamar</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
 </div>
   
