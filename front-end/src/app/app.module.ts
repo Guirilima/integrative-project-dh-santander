@@ -15,6 +15,8 @@ import { MainComponent } from './main/main.component';
 import { TopoComponent } from './main/topo/topo.component';
 import { MestreComponent } from './mestre/mestre.component';
 import { PersonagemComponent } from './personagem/personagem.component';
+import { TopoHomeComponent } from './topo-home/topo-home.component';
+import { RodapeComponent } from './rodape/rodape.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -28,7 +30,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		MainComponent,
 		TopoComponent,
 		MestreComponent,
-		PersonagemComponent
+		PersonagemComponent,
+		TopoHomeComponent,
+		RodapeComponent
 	],
 	imports: [
 		NgxMaskModule.forRoot(),

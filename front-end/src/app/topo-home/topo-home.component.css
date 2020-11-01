@@ -1,0 +1,24 @@
+.bg-purple {
+    background-color: #21212E;
+}
+.logo {
+    width: 200px;
+    height: auto;
+}
+.nav-menu .nav-item .nav-link{
+    color: white;
+}
+.botao{
+    width: 150px;
+    padding: 10px;
+    background-image: linear-gradient(to right, #BD11FA, #46C2FF);
+    outline: unset;
+}
+.botao-hover {
+    width: 150px;
+    padding: 10px;
+    outline: unset;
+}
+.example-spacer {
+    flex: 1 1 auto;
+}
