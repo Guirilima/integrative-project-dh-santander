@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-
-
-
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -12,16 +9,15 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   
-  
 })
-
-
-
 
 export class RegisterComponent implements OnInit {
 
   cidade;
   estado;
+  @ViewChild('modalConfirma') modalConfirma;
+  tituloModal;
+  mensagemModal;
   formRegistro = new FormGroup({
   nome : new FormControl(null,[
   Validators.required, Validators.minLength(4),]),
@@ -48,6 +44,10 @@ export class RegisterComponent implements OnInit {
    
 }
 
+open(content) {
+  this.modalService.open(content);
+}
+
   validateAreEqual(fieldControl: FormControl) {
   return fieldControl.value === this.formRegistro.get("senha").value ? null : {
       NotEqual: true
@@ -69,9 +69,9 @@ readonly apiURL : string; //url base
 }}
 
 
-constructor(private http : HttpClient) {
+constructor(private http : HttpClient,config: NgbModalConfig, private modalService: NgbModal) {
 
-  this.apiURL = 'http://localhost:8080';
+  this.apiURL = 'http://localhost:8080/api';
   this.cidade = '';
   this.estado = '';
 
@@ -92,8 +92,34 @@ return dataParse;
 
 onSubmit() {
   // aqui você pode implementar a logica para fazer seu formulário salvar
-  if(this.formRegistro.valid) console.log(this.formRegistro.value);
-  else console.log("O formulário contem erros")
+  if(this.formRegistro.valid)
+  {
+
+   // console.log(this.formRegistro.value);
+    var request = this.cadastrarUsuario();
+    console.log(request);
+    /*
+    if(request.tipo == 0)
+    {
+      this.tituloModal = "Sucesso !";
+      this.mensagemModal = request.content.reponse.mensagem;
+      this.open(this.modalConfirma);
+    }
+    else if(request.tipo == 1){
+      this.tituloModal = "Erro !";
+      this.mensagemModal = request.content;
+      this.open(this.modalConfirma);
+    }
+    */
+  } 
+  else
+  {
+    this.tituloModal = "Erro ! ";
+    this.mensagemModal = "Formulário Contém Erros !";
+    console.log(this.formRegistro.value);
+    this.open(this.modalConfirma);
+    console.log("O formulário contem erros")
+}
 
 }
 
@@ -107,36 +133,43 @@ cadastrarUsuario()
    
   var usuario = { 
     
-    cityUser : this.cidade,
-    cpfUser: this.formRegistro.get('cep').value,
-    dateOfBirth:  "2020-10-20T12:20:30.726Z",
-    emailUser: this.formRegistro.get('email').value,
-    genero: this.formRegistro.get('genero').value,
-    lastNameUser: this.formRegistro.get('sobrenome').value,
-    nameUser: this.formRegistro.get('nomeUsuario').value,
-    passwordUser: this.formRegistro.get('senha').value,
-    phoneNumber: this.formRegistro.get('telefone').value,
-    stateUser: this.formRegistro.get('estado').value
+    cidadeUsur : this.cidade,
+    cpfUsur: this.formRegistro.get('cpf').value,
+    nascimentoUsur:  "2020-10-20T12:20:30.726Z",
+    emailUsur: this.formRegistro.get('email').value,
+    generoUsur: this.formRegistro.get('genero').value,
+    sobrenomeUsur: this.formRegistro.get('sobrenome').value,
+    nomeUsur: this.formRegistro.get('nomeUsuario').value,
+    senhaUsur: this.formRegistro.get('senha').value,
+    telefoneUsur: this.formRegistro.get('telefone').value,
+    estadoUsur: this.estado,
 
   }; 
 
-  console.log(usuario);
+  //console.log(usuario);
 
+  var respostaReq = {
+      tipo: null,
+      content: null
+  }
 
-
-  this.http.post(`${ this.apiURL }/user/cadastro-criar-usuario` , usuario)
+   this.http.post(`${ this.apiURL }/usuario` , usuario)
             .subscribe(
               (resultado:any) => {
-                
-                console.log(resultado.response)
+                respostaReq.tipo = 0;
+                respostaReq.content = "Usuário salvo com sucesso";
+               // console.log(resultado);
+                return resultado;
               },
               erro => {
+                respostaReq.tipo = 1;
                 if(erro.status == 400) {
-                  console.log(erro);
+                 // console.log(erro);
+                  respostaReq.content = "Erro durante o salvamento e/ou manipulação dos dados";
+                  return erro;             
                 }
               }
             );
-
 }
             
 
