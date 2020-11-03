@@ -98,19 +98,13 @@ onSubmit() {
    // console.log(this.formRegistro.value);
     var request = this.cadastrarUsuario();
     console.log(request);
-    /*
-    if(request.tipo == 0)
-    {
-      this.tituloModal = "Sucesso !";
-      this.mensagemModal = request.content.reponse.mensagem;
-      this.open(this.modalConfirma);
-    }
-    else if(request.tipo == 1){
-      this.tituloModal = "Erro !";
-      this.mensagemModal = request.content;
-      this.open(this.modalConfirma);
-    }
-    */
+    
+    this.tituloModal = "Confirma  ! ";
+    this.mensagemModal = "Usuário Cadastrado ! ";
+    console.log(this.formRegistro.value);
+    this.open(this.modalConfirma);
+    console.log("Formulário Correto")
+
   } 
   else
   {

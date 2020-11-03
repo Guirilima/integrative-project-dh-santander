@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { RegisterComponent } from './register/register.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -20,7 +21,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 	declarations: [
 		AppComponent,
 		ContactComponent,
-		RegisterComponent
+		RegisterComponent,
+		LoginComponent
 ],
 	imports: [
 		NgxMaskModule.forRoot(),
