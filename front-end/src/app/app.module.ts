@@ -12,6 +12,9 @@ import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { RegisterComponent } from './register/register.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { MainComponent } from './main/main.component';
+import { MestreComponent } from './mestre/mestre.component';
+import { PersonagemComponent } from './personagem/personagem.component';
 
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -22,8 +25,14 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		AppComponent,
 		ContactComponent,
 		RegisterComponent,
-		LoginComponent
-],
+		LoginComponent,
+		MainComponent,
+	//	TopoComponent,
+		MestreComponent,
+		PersonagemComponent,
+	//	TopoHomeComponent,
+	//	RodapeComponent
+	],
 	imports: [
 		NgxMaskModule.forRoot(),
 		BrowserModule,
@@ -32,14 +41,14 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		HttpClientModule,
 		ReactiveFormsModule,
 		FormsModule,
-    NgbModule,
-	CommonModule,
-    NgxBootstrapIconsModule.pick(allIcons),
-  ],
-  exports: [
-	AppComponent,
+		NgbModule,
+		CommonModule,
+		NgxBootstrapIconsModule.pick(allIcons),
+	],
+	exports: [
+		AppComponent,
 
-  ],
+	],
 	providers: [],
 	bootstrap: [AppComponent]
 })

@@ -24,7 +24,7 @@ public class ClasseController {
     @Autowired
     ClasseService classeService;
 
-    @ApiOperation(value = "API responsavel por lista todas as classes registradas no sistema.")
+    @ApiOperation(value = "API RESPONSÁVEL POR LISTA TODAS AS CLASSES REGISTRADAS NO SISTEMA.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "lista de classes encontrada."),
             @ApiResponse(code = 400, message = "Erro na listagem das classes.")
@@ -33,7 +33,7 @@ public class ClasseController {
     public ResponseEntity<HttpGenericResponse> listarClassePersonagem() {
         try {
 
-            List<ClasseEntity> listaClassesPersonagem = classeService.getListaClasses();
+            Iterable<ClasseEntity> listaClassesPersonagem = classeService.getListaClasses();
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
@@ -47,7 +47,7 @@ public class ClasseController {
         }
     }
 
-    @ApiOperation(value = "API responsavel por criar uma nova classe.")
+    @ApiOperation(value = "API RESPONSÁVEL POR CRIAR UMA NOVA CLASSE.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "criaçaõ concluída"),
             @ApiResponse(code = 400, message = "Erro na criação da classe")

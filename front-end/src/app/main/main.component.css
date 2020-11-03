@@ -1,0 +1,15 @@
+.card-img{
+    max-width: 180px;
+    
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.card-body{
+    height: 280px;
+}
+
+.historia{
+    height:75px ;
+}
+

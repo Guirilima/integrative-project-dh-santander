@@ -24,7 +24,7 @@ public class RacaController {
     @Autowired
     RacaService racaService;
 
-    @ApiOperation(value = "API responsavel por lista todas as raças registradas no sistema.")
+    @ApiOperation(value = "API RESPONSÁVEL POR LISTAR TODAS AS RAÇAS EXISTENTES NO SISTEMA.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "lista de raça encontrada."),
             @ApiResponse(code = 400, message = "Erro na listagem das raças.")
@@ -33,7 +33,7 @@ public class RacaController {
     public ResponseEntity<HttpGenericResponse> listarRacas() {
         try {
 
-            List<RacaEntity> listaRacasPersonagem = racaService.getListaRacas();
+            Iterable<RacaEntity> listaRacasPersonagem = racaService.getListaRacas();
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
@@ -47,7 +47,7 @@ public class RacaController {
         }
     }
 
-    @ApiOperation(value = "API responsavel por criar uma nova raça.")
+    @ApiOperation(value = "API RESPONSÁVEL POR CRIAR UMA NOVA RAÇA.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "criaçaõ concluída"),
             @ApiResponse(code = 400, message = "Erro na criação da raça")

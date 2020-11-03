@@ -10,7 +10,7 @@ import br.com.xrpg.exceptions.ErrorSalvamento;
 @Service
 public interface ClasseService {
 
-    List<ClasseEntity> getListaClasses();
+    Iterable<ClasseEntity> getListaClasses();
 
     ClasseEntity inclusaoClasse(ClasseEntity newClass) throws ErrorSalvamento;
 }

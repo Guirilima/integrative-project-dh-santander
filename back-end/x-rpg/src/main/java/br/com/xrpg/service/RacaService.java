@@ -10,7 +10,7 @@ import br.com.xrpg.exceptions.ErrorSalvamento;
 @Service
 public interface RacaService {
 
-    List<RacaEntity> getListaRacas();
+    Iterable<RacaEntity> getListaRacas();
 
     RacaEntity inclusaoRaca(RacaEntity newRaca) throws ErrorSalvamento;
 }

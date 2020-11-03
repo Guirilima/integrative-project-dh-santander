@@ -18,9 +18,9 @@ public class ClasseServiceImpl implements ClasseService {
     ClasseRepository classeRepository;
 
     @Override
-    public List<ClasseEntity> getListaClasses() {
+    public Iterable<ClasseEntity> getListaClasses() {
 
-        return classeRepository.getTodasClasses();
+        return classeRepository.findAll();
     }
 
     @Override

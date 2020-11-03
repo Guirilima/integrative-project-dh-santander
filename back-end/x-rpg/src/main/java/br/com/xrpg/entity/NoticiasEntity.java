@@ -35,7 +35,7 @@ public class NoticiasEntity {
 	private String resumoNoticia;
 	
 	@Column(name = "dataNoticia",nullable = false)
-	private Date dataNoticia;
+	private String dataNoticia;
 	
 	@Column(name = "tituloNoticia",nullable = false)
 	private String tituloNoticia;
@@ -45,7 +45,5 @@ public class NoticiasEntity {
 	
 	@Column(name = "categoriaNoticia")
 	private String categoriaNoticia;
-	
-	
 
 }
