@@ -29,7 +29,7 @@ public class UsuarioEntity {
 	private BigInteger idUsuario;
 
 	@Column(name = "flagAtivo", nullable = false)
-	private BigInteger flagAtivo;
+	private BigInteger flagAtivo;						//0 = false | 1 = true
 
 	@Column(name = "idMestre")
 	private BigInteger idMestre;

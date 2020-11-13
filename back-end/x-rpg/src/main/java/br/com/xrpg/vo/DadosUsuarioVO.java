@@ -68,7 +68,7 @@ public class DadosUsuarioVO {
     private BigInteger idUsuarioPessoal;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @ApiModelProperty(name = "flagAtivoUsur", value = "1",position = 11)
+    @ApiModelProperty(name = "flagAtivoUsur", value = "1",example = "1",position = 11)
     private BigInteger flagAtivoUsur;
 
 //    private UserEntity newUser;
