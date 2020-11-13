@@ -11,9 +11,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { RegisterComponent } from './register/register.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
-import { TopoComponent } from './main/topo/topo.component';
-
+import { MestreComponent } from './mestre/mestre.component';
+import { PersonagemComponent } from './personagem/personagem.component';
+import {TopoHomeComponent} from './topo-home/topo-home.component'
+import {RodapeComponent} from './rodape/rodape.component'
+import {TopoComponent} from './main/topo/topo.component'
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -23,9 +27,14 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		AppComponent,
 		ContactComponent,
 		RegisterComponent,
+		LoginComponent,
 		MainComponent,
-		TopoComponent
-],
+		TopoHomeComponent,
+		MestreComponent,
+		PersonagemComponent,
+		TopoComponent,
+		RodapeComponent
+	],
 	imports: [
 		NgxMaskModule.forRoot(),
 		BrowserModule,
@@ -34,14 +43,14 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		HttpClientModule,
 		ReactiveFormsModule,
 		FormsModule,
-    NgbModule,
-	CommonModule,
-    NgxBootstrapIconsModule.pick(allIcons),
-  ],
-  exports: [
-	AppComponent,
+		NgbModule,
+		CommonModule,
+		NgxBootstrapIconsModule.pick(allIcons),
+	],
+	exports: [
+		AppComponent,
 
-  ],
+	],
 	providers: [],
 	bootstrap: [AppComponent]
 })

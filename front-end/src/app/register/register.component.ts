@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, Validators } from '@angular/forms';
-import {NgForm} from '@angular/forms';
-
-
-
+import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
+import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -12,40 +9,69 @@ import {NgForm} from '@angular/forms';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   
-  
 })
-
-
 
 export class RegisterComponent implements OnInit {
 
   cidade;
   estado;
-  nome = new FormControl(null,[
-    Validators.required, Validators.minLength(4),]);
-  sobrenome = new FormControl('');
-  email = new FormControl('');
-  nomeUsuario = new FormControl('');
-  cpf = new FormControl('');
-  cep = new FormControl('');
-  dataNascimento = new FormControl('');
-  telefone = new FormControl('');
-  senha = new FormControl('');
-  genero = new FormControl('');
+  @ViewChild('modalConfirma') modalConfirma;
+  tituloModal;
+  mensagemModal;
+  formRegistro = new FormGroup({
+  nome : new FormControl(null,[
+  Validators.required, Validators.minLength(4),]),
+  sobrenome : new FormControl(null, Validators.required),
+  email : new FormControl(null,[Validators.required,Validators.email]),
+  nomeUsuario : new FormControl(null, Validators.required),
+  cpf : new FormControl(null, [Validators.required,Validators.minLength(11)]),
+  cep : new FormControl(null,[Validators.required,Validators.minLength(8)]),
+  dataNascimento : new FormControl(null,Validators.minLength(8)),
+  telefone : new FormControl(null,Validators.minLength(10)),
+  senha : new FormControl(null,[Validators.required, Validators.minLength(8)]),
+  genero : new FormControl(null,Validators.required),
+
+}, {
+
+})
+
 
 
   ngOnInit(): void {
-    
+
+    this.formRegistro.addControl('confirmaSenha', new FormControl(null, [Validators.compose(
+      [Validators.required, this.validateAreEqual.bind(this)])]))
+   
 }
 
+open(content) {
+  this.modalService.open(content);
+}
+
+  validateAreEqual(fieldControl: FormControl) {
+  return fieldControl.value === this.formRegistro.get("senha").value ? null : {
+      NotEqual: true
+  };
+}
 
 
 readonly apiURL : string; //url base 
 
+  passwordMatchValidator(control: FormControl) {
+  const password: string = control.get('senha').value; // get password from our password form control
+  const confirmPassword: string = control.get('confirmaSenha').value; // get password from our confirmPassword form control
+  // compare is the password math
+  return (password !== confirmPassword) ?  null : {
+    validatePassword: false,
+    
+    // if they don't match, set an error in our confirmPassword form control
+ 
+}}
 
-constructor(private http : HttpClient) {
 
-  this.apiURL = 'http://localhost:8080';
+constructor(private http : HttpClient,config: NgbModalConfig, private modalService: NgbModal) {
+
+  this.apiURL = 'http://localhost:8080/api';
   this.cidade = '';
   this.estado = '';
 
@@ -64,78 +90,93 @@ return dataParse;
 
 }
 
+onSubmit() {
+  // aqui você pode implementar a logica para fazer seu formulário salvar
+  if(this.formRegistro.valid)
+  {
+
+   // console.log(this.formRegistro.value);
+    var request = this.cadastrarUsuario();
+    console.log(request);
+    
+    this.tituloModal = "Confirma  ! ";
+    this.mensagemModal = "Usuário Cadastrado ! ";
+    console.log(this.formRegistro.value);
+    this.open(this.modalConfirma);
+    console.log("Formulário Correto")
+
+  } 
+  else
+  {
+    this.tituloModal = "Erro ! ";
+    this.mensagemModal = "Formulário Contém Erros !";
+    console.log(this.formRegistro.value);
+    this.open(this.modalConfirma);
+    console.log("O formulário contem erros")
+}
+
+}
+
 cadastrarUsuario()
 {
-  console.log("Tetando cadastrar usuário")
+  console.log("Tentando cadastrar usuário")
   
 
   //this.parseDataNascimento(this.dataNascimento.value);
 
-  console.log(new Date(this.parseDataNascimento(this.dataNascimento.value)).toISOString())
    
   var usuario = { 
     
-    cityUser : this.cidade,
-    cpfUser: this.cpf.value,
-    dateOfBirth:  "2020-10-20T12:20:30.726Z",
-    emailUser: this.email.value,
-    genero: this.genero.value,
-    lastNameUser: this.sobrenome.value,
-    nameUser: this.nomeUsuario.value,
-    passwordUser: this.senha.value,
-    phoneNumber: this.telefone.value,
-    stateUser: this.estado
+    cidadeUsur : this.cidade,
+    cpfUsur: this.formRegistro.get('cpf').value,
+    nascimentoUsur:  "2020-10-20T12:20:30.726Z",
+    emailUsur: this.formRegistro.get('email').value,
+    generoUsur: this.formRegistro.get('genero').value,
+    sobrenomeUsur: this.formRegistro.get('sobrenome').value,
+    nomeUsur: this.formRegistro.get('nomeUsuario').value,
+    senhaUsur: this.formRegistro.get('senha').value,
+    telefoneUsur: this.formRegistro.get('telefone').value,
+    estadoUsur: this.estado,
 
   }; 
 
-  console.log(usuario);
+  //console.log(usuario);
 
+  var respostaReq = {
+      tipo: null,
+      content: null
+  }
 
-
-  this.http.post(`${ this.apiURL }/user/cadastro-criar-usuario` , usuario)
+   this.http.post(`${ this.apiURL }/usuario` , usuario)
             .subscribe(
               (resultado:any) => {
-                
-                console.log(resultado.response)
+                respostaReq.tipo = 0;
+                respostaReq.content = "Usuário salvo com sucesso";
+               // console.log(resultado);
+                return resultado;
               },
               erro => {
+                respostaReq.tipo = 1;
                 if(erro.status == 400) {
-                  console.log(erro);
+                 // console.log(erro);
+                  respostaReq.content = "Erro durante o salvamento e/ou manipulação dos dados";
+                  return erro;             
                 }
               }
             );
-
 }
             
-
-    /*
-
-    {
-  "cityUser": "São Paulo",
-  "cpfUser": "21743682859",
-  "dateOfBirth": "2020-10-20T12:20:30.726Z",
-  "emailUser": "guilher@gmail.com",
-  "genero": "M",
-  "lastNameUser": "Lima",
-  "nameUser": "Guilherme",
-  "passwordUser": "1234@",
-  "phoneNumber": "11940445029",
-  "stateUser": "SP"
-}
-    */
-
 
 
 buscarCEP() {
 
-//  console.log(new Date(23111991));
 
 
   var produto = { nome : "" }; //TODO isso tem que ser um GET e não um post
   
-  console.log(this.cep.value);
+  console.log(this.formRegistro.get('cep').value);
 
-  this.http.post(`${ this.apiURL }/endereco/buscar-pelo-cep/${ this.cep.value }` , produto)
+  this.http.post(`${ this.apiURL }/endereco/buscar-pelo-cep/${ this.formRegistro.get('cep').value }` , produto)
             .subscribe(
               (resultado:any) => {
                 this.estado = resultado.response.state

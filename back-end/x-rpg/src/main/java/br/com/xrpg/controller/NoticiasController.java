@@ -4,10 +4,10 @@ import java.math.BigInteger;
 import java.net.URI;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,22 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.xrpg.entity.NoticiasEntity;
 import br.com.xrpg.entity.PersonagemEntity;
-import br.com.xrpg.service.PersonagemService;
-import br.com.xrpg.vo.HttpGenericResponse;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import lombok.extern.slf4j.Slf4j;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import br.com.xrpg.entity.PersonagemEntity;
+import br.com.xrpg.service.NoticiasService;
 import br.com.xrpg.service.PersonagemService;
 import br.com.xrpg.vo.HttpGenericResponse;
 import io.swagger.annotations.ApiOperation;
@@ -40,25 +27,25 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/personagem")
+@RequestMapping("/api/noticias")
 @CrossOrigin(origins = "*") //Liberando acesso para todos os dominios acessarem
-public class PersonagemController {
-
+public class NoticiasController {
+	
 	@Autowired
-	PersonagemService personagemService;
+	NoticiasService noticiasService;
 
-	@ApiOperation(value = "API responsavel por criar um novo personagem.")
+	@ApiOperation(value = "API responsavel por criar uma nova notícia.")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "criaçao concluída"),
-							@ApiResponse(code = 400, message = "Erro na criação do personagem") })
+							@ApiResponse(code = 400, message = "Erro na criação da notícia") })
 	
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<HttpGenericResponse> criarPersonagem(@RequestBody PersonagemEntity personagem) {
+	public ResponseEntity<HttpGenericResponse> criarNoticia(@RequestBody NoticiasEntity noticias) {
 		try {
 
-			PersonagemEntity novoPersonagem = personagemService.criar(personagem);
+			NoticiasEntity novaNoticia = noticiasService.criar(noticias);
 			
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idPersonagem}").buildAndExpand(novoPersonagem.getIdPersonagem())
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idNoticias}").buildAndExpand(novaNoticia.getIdNoticias())
 					.toUri();
 			
 			return new ResponseEntity<HttpGenericResponse>(
@@ -77,16 +64,16 @@ public class PersonagemController {
 		}
 	} 	
 	
-	@ApiOperation(value = "API responsavel por listar todos os personagens do sistema.")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "lista de personagens encontrada."),
-	@ApiResponse(code = 400, message = "Erro na listagem das classes.") })
+	@ApiOperation(value = "API responsavel por listar todas as noticias do sistema.")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "lista de noticias encontrada."),
+	@ApiResponse(code = 400, message = "Erro na listagem das noticias.") })
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	
-	public ResponseEntity<HttpGenericResponse> listarPersonagem() {
+	public ResponseEntity<HttpGenericResponse> listarNoticias() {
 		
 		try {
 
-			List<PersonagemEntity> lista = personagemService.listar();
+			List<NoticiasEntity> lista = noticiasService.listar();
 
 			return new ResponseEntity<HttpGenericResponse>(
 					new HttpGenericResponse().builder()
@@ -107,16 +94,16 @@ public class PersonagemController {
 	}
 
 
-	@ApiOperation(value = "API responsavel por encontrar personagem pelo ID.")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "personagem encontrado com sucesso."),
-	@ApiResponse(code = 400, message = "personagem nao encontrado") })
-	@RequestMapping(value ="/{idPersonagem}",method = RequestMethod.GET, produces = "application/json")
+	@ApiOperation(value = "API responsavel por encontrar noticia pelo ID.")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Noticia encontrada com sucesso."),
+	@ApiResponse(code = 400, message = "Noticia nao encontrada") })
+	@RequestMapping(value ="/{idNoticias}",method = RequestMethod.GET, produces = "application/json")
 	
-	public ResponseEntity<HttpGenericResponse> encontrarPersonagem(@PathVariable BigInteger idPersonagem) {
+	public ResponseEntity<HttpGenericResponse> encontrarPersonagem(@PathVariable BigInteger idNoticias) {
 		
 		try {
 
-			PersonagemEntity resultado = personagemService.encontrarPorId(idPersonagem);
+			NoticiasEntity resultado = noticiasService.encontrarPorId(idNoticias);
 
 			return new ResponseEntity<HttpGenericResponse>(
 					new HttpGenericResponse().builder()
@@ -136,21 +123,21 @@ public class PersonagemController {
 		}
 	}
 
-	@ApiOperation(value = "API responsavel por excluir personagem do sistema pelo ID.")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "personagem excluido sucesso."),
-	@ApiResponse(code = 400, message = "personagem nao encontrado") })
-	@RequestMapping(value ="/{idPersonagem}",method = RequestMethod.DELETE, produces = "application/json")
+	@ApiOperation(value = "API responsavel por excluir noticia do sistema pelo ID.")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Noticia excluida com sucesso."),
+	@ApiResponse(code = 400, message = "Noticia nao encontrado") })
+	@RequestMapping(value ="/{idNoticias}",method = RequestMethod.DELETE, produces = "application/json")
 	
-	public ResponseEntity<HttpGenericResponse> deletarPersonagem(@PathVariable BigInteger idPersonagem) {
+	public ResponseEntity<HttpGenericResponse> deletarPersonagem(@PathVariable BigInteger idNoticias) {
 		
 		try {
 
-			personagemService.deletar(idPersonagem);
+			noticiasService.deletar(idNoticias);
 
 			return new ResponseEntity<HttpGenericResponse>(
 					new HttpGenericResponse().builder()
 					.status("OK")
-					.mensagem("Personagem excluido com sucesso")
+					.mensagem("Noticia excluida com sucesso")
 					.response(null).build(),HttpStatus.OK);
 			
 		} catch (Exception e) {
@@ -165,23 +152,23 @@ public class PersonagemController {
 		}
 	}
 
-	@ApiOperation(value = "API responsavel por atualizar personagem no sistema pelo ID.")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "dados do personagem atualizados com sucesso."),
+	@ApiOperation(value = "API responsavel por editar a noticia sistema pelo ID.")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Informações da notícia atualizadas com sucesso."),
 	@ApiResponse(code = 400, message = "personagem nao encontrado") })
-	@RequestMapping(value ="/{idPersonagem}",method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(value ="/{idNoticias}",method = RequestMethod.PUT, produces = "application/json")
 	
-	public ResponseEntity<HttpGenericResponse> atualizarPersonagem(@PathVariable("idPersonagem") BigInteger idPersonagem, @RequestBody PersonagemEntity personagemEntity) {
+	public ResponseEntity<HttpGenericResponse> editarNoticia(@PathVariable("idNoticias") BigInteger idNoticias, @RequestBody NoticiasEntity noticiasEntity) {
 		
 		try {
 			
-			personagemEntity.setIdPersonagem(idPersonagem);
+			noticiasEntity.setIdNoticias(idNoticias);
 
-			personagemService.atualizar(personagemEntity);
+			noticiasService.editar(noticiasEntity);
 
 			return new ResponseEntity<HttpGenericResponse>(
 					new HttpGenericResponse().builder()
 					.status("OK")
-					.mensagem("Personagem atualizado com sucesso")
+					.mensagem("Noticia atualizada com sucesso")
 					.response(null).build(),HttpStatus.OK);
 			
 		} catch (Exception e) {
@@ -195,4 +182,5 @@ public class PersonagemController {
 					HttpStatus.BAD_REQUEST);
 		}
 	}
+
 }
