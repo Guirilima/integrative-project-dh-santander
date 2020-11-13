@@ -1,0 +1,82 @@
+<section id="register" class = "section-padding">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-4 offset-md-4 form-register">
+            <p>Cadastro de Personagem</p>
+            <form method="post" [formGroup]= "formRegistroPersonagem">
+                <div class="form-row pb-3">
+                    <div class="col-md-12 mb-12">
+                        <label for="primeiroNome">Nome do Personagem</label>
+                        <input type="text" class="form-control" id="idInputNome"  placeholder="Insira o nome do seu personagem" formControlName = "nomePersonagem" required>
+    
+                        <div *ngIf="formRegistroPersonagem.get('nomePersonagem').invalid && (formRegistroPersonagem.get('nomePersonagem').dirty || formRegistroPersonagem.get('nomePersonagem').touched)"
+                            class="alert alert-danger">
+                          <div *ngIf="formRegistroPersonagem.get('nomePersonagem').errors.required">
+                            Campo obrigatório.
+                          </div>
+                          <div *ngIf="formRegistroPersonagem.get('nomePersonagem').errors.minlength">
+                            O nome precisa ter pelo menos 4 caracteres.
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row pb-3">
+                    <div class="col-md-6 mb-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Raça</label>
+                            <select class="form-control" id="idSelectGenero" formControlName ="genero">
+                              <option>Anão</option>
+                              <option>Elfo</option>
+                              <option>Meio-elfo</option>
+                              <option>Halfling</option>
+                              <option>Humano</option>
+                              <option>Draconato</option>
+                              <option>Gnomo</option>
+                              <option>Meio-orc</option>
+                              <option>Tiefling</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 mb-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Classe</label>
+                            <select class="form-control" id="idSelectGenero" formControlName ="genero">
+                              <option>Bárbaro</option>
+                              <option>Bardo</option>
+                              <option>Clérigo</option>
+                              <option>Druida</option>
+                              <option>Lutador</option>
+                              <option>Monge</option>
+                              <option>Paladino</option>
+                              <option>Ranger</option>
+                              <option>Feiticeiro</option>
+                              <option>Bruxo</option>
+                              <option>Mago</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row pb-3">
+                    <div class="col-md-12 mb-12">
+                    <div class="form-group">
+                        <label for="idHistoriaPersonagem">Example textarea</label>
+                        <textarea class="form-control" id="idHistoriaPersonagem" rows="3"></textarea>
+                    </div>
+                    </div>
+                
+                </div>
+                
+            </form>
+          </div>
+        </div>
+      </div>
+    
+    
+
+  </section>
+  
+  
+  
