@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild('modalConfirma') modalConfirma;
   tituloModal;
   mensagemModal;
+  
   formRegistro = new FormGroup({
   nome : new FormControl(null,[
   Validators.required, Validators.minLength(4),]),

@@ -19,6 +19,7 @@ import {TopoHomeComponent} from './topo-home/topo-home.component';
 import {RodapeComponent} from './rodape/rodape.component';
 import {TopoComponent} from './main/topo/topo.component';
 import { ConviteComponent } from './convite/convite.component';
+import { RegisterCharacterComponent } from './register-character/register-character.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -35,6 +36,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		PersonagemComponent,
 		TopoComponent,
 		RodapeComponent,
+		RegisterCharacterComponent,
 		ConviteComponent
 	],
 	imports: [
