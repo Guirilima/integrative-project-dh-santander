@@ -1,0 +1,13 @@
+<app-topo></app-topo>
+<div class="container">
+    <form action="" *ngFor="let convite of convites">
+        <div class="row">
+            <div class="col-1"><img src="../../assets/img/teste4k.jpg"></div>
+            <div class="col-sm"><h5 class="card-title"> {{convite.nome_anfitriao}} quer convidar você para jogar </h5></div>
+            <div class="col-sm descricao"><p class="card-text historia"> {{convite.descricao}}</p></div>
+            <div class="col-2"><button type="button" class="btn btn-info">Detalhe</button></div>
+        </div>
+    </form>
+
+    
+</div>

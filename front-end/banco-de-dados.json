@@ -66,5 +66,32 @@
             "url":"/assets/img/mestre-mundo.jpg"
           }
       }
+  ],
+
+  "convites":[
+    {
+      "id":1,
+      "img":{
+        "url":""
+      },
+      "nome_anfitriao": "João",
+      "descricao": "Ola Miranda voce gostaria de jogar comigo dia 25/10?"
+    },
+    {
+      "id":2,
+      "img":{
+        "url":""
+      },
+      "nome_anfitriao": "Maicon",
+      "descricao": "Ola ciclano voce gostaria de jogar comigo?"
+    },
+    {
+      "id":3,
+      "img":{
+        "url":""
+      },
+      "nome_anfitriao": "Felipe",
+      "descricao": "Ola Jonas voce gostaria de jogar comigo online hoje?"
+    }
   ]
 }
