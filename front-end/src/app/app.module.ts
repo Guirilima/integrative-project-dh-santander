@@ -15,9 +15,10 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { MestreComponent } from './mestre/mestre.component';
 import { PersonagemComponent } from './personagem/personagem.component';
-import {TopoHomeComponent} from './topo-home/topo-home.component'
-import {RodapeComponent} from './rodape/rodape.component'
-import {TopoComponent} from './main/topo/topo.component'
+import {TopoHomeComponent} from './topo-home/topo-home.component';
+import {RodapeComponent} from './rodape/rodape.component';
+import {TopoComponent} from './main/topo/topo.component';
+import { ConviteComponent } from './convite/convite.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -33,7 +34,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		MestreComponent,
 		PersonagemComponent,
 		TopoComponent,
-		RodapeComponent
+		RodapeComponent,
+		ConviteComponent
 	],
 	imports: [
 		NgxMaskModule.forRoot(),

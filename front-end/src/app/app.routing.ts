@@ -11,6 +11,7 @@ import { CongratulationsComponent } from './congratulations/congratulations.comp
 import { ContactComponent } from './contact/contact.component';
 import {MestreComponent} from './mestre/mestre.component';
 import {PersonagemComponent} from './personagem/personagem.component';
+import {ConviteComponent} from './convite/convite.component';
 
 const APP_ROUTES: Routes = [
     { path: '', component: HomeComponent },
@@ -22,7 +23,8 @@ const APP_ROUTES: Routes = [
     { path: 'congratulations', component: CongratulationsComponent},
     { path: 'contact', component: ContactComponent},
     { path: 'mestre', component: MestreComponent},
-    { path: 'personagem', component: PersonagemComponent}
+    { path: 'personagem', component: PersonagemComponent},
+    { path: 'convite', component: ConviteComponent}
 ];
 
 const config: ExtraOptions = {
