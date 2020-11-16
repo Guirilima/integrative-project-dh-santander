@@ -25,7 +25,7 @@ public class AvaliaçãoEntity {
 	
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)
-        @Column(name = "character_id",nullable = false)
+        @Column(name = "idAvaliacao",nullable = false)
         private BigInteger idAvaliação;
 
         @Column(name = "dataAvaliação",nullable = false)

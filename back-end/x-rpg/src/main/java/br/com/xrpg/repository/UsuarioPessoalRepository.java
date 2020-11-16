@@ -24,13 +24,10 @@ public interface UsuarioPessoalRepository extends CrudRepository<UsuarioPessoalE
             "WHERE ue.flagAtivo = :flagAtivo ") //0 = INATIVO | 1 = ATIVO
     public List<UsuarioPessoalEntity> getAllUsuariosAtivos(@Param("flagAtivo") BigInteger flagAtivo );
 
-
     //TODO | TESTE RETORNA MEDIA IDADE
-//    @Query(value = "SELECT AVG(up.dataNascimento) FROM UsuarioPessoalEntity up")
-//    @Query(value = "SELECT trunc((months_between(sysdate, to_date(up.dataNascimento ,'dd/mm/yyyy')))/12) " +
-//            "AS IDADE FROM UsuarioPessoalEntity up INNER JOIN UsuarioEntity ue ON ue.idUsuarioPessoal = up.idUsuarioPessoal  " +
-//            "WHERE ue.flagAtivo = :flagAtivo ")
-    //public BigInteger getIdadeMediaUsuarios(@Param("flagAtivo") BigInteger flagAtivo );
+    @Query(value = "SELECT round(avg((year(current_date()) - year(up.data_nascimento)))) FROM usuario_pessoal up " +
+            "INNER JOIN usuario u ON u.id_usuario_pessoal = up.id_usuario_pessoal WHERE u.flag_ativo = :flagAtivo ",nativeQuery = true)
+    public BigInteger getIdadeMediaUsuarios(@Param("flagAtivo") BigInteger flagAtivo );
 
     @Query(value = "SELECT up.estadoPessoal AS ESTADO, count(up) " +
             "FROM UsuarioPessoalEntity up GROUP BY up.estadoPessoal ")

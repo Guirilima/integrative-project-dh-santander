@@ -30,11 +30,19 @@ public class AdministradorServiceImpl implements AdministradorService {
     public HashMap<String,Object> getResumoDashBoardAdm() {
         HashMap<String,Object> dadosReturn = new HashMap<>();
 
-        List<UsuarioPessoalEntity> usuariosAtivos = usuarioPessoalRepository.getAllUsuariosAtivos(new BigInteger("1"));//1 = ATIVOS
+        List<UsuarioPessoalEntity> usuariosAtivos = usuarioPessoalRepository.getAllUsuariosAtivos(new BigInteger("1"));//1 = ATIVOS - 0 = INATIVOS
+        List<UsuarioPessoalEntity> usuariosInativos = usuarioPessoalRepository.getAllUsuariosAtivos(new BigInteger("0"));//0 = INATIVOS
+
         if (usuariosAtivos != null && !usuariosAtivos.isEmpty()) {
-            dadosReturn.put("TotalUsuariosAtivos",usuariosAtivos.size());
+            dadosReturn.put("TotalUsuariosAtivos",usuariosAtivos.size()); //FIXME - QUEBRAR POR UMA QUERY ByAllUsers
+            dadosReturn.put("TotalUsuariosInativos",usuariosInativos.size());
+            dadosReturn.put("UsuariosInativos",usuariosInativos);
             dadosReturn.put("UsuariosAtivos",usuariosAtivos);
             //TRAZER MÈDIA IDADE USUARIOS
+            BigInteger mediaIdade = usuarioPessoalRepository.getIdadeMediaUsuarios(new BigInteger("1"));
+            if (mediaIdade != null && mediaIdade.intValue() > 0 ) {
+                dadosReturn.put("MediaIdadeUsuarios",mediaIdade);
+            }
         }
         //FIND BY RAÇA
         List<RacaEntity> racasBD = racaRepository.getAllRaca();
@@ -58,4 +66,7 @@ public class AdministradorServiceImpl implements AdministradorService {
 
         return dadosReturn;
     }
+
+
+
 }
