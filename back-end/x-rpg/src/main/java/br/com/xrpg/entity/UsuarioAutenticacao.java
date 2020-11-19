@@ -1,5 +1,6 @@
 package br.com.xrpg.entity;
 
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,10 +23,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "UsuarioAutenticacao")
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Usuario implements UserDetails {
+public class UsuarioAutenticacao implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,7 +34,7 @@ public class Usuario implements UserDetails {
     @GeneratedValue
     @Getter
     @Setter
-    private Long id;
+    private BigInteger id;
 
     @Column(length=60, nullable = false, unique = true)
     @Getter
@@ -46,10 +47,10 @@ public class Usuario implements UserDetails {
     private String senha;
 
 
-    private int role;
+    private BigInteger role;
 
     @Builder
-    public Usuario(Long id, String username, String senha, TipoUsuarioEnum role) {
+    public UsuarioAutenticacao(BigInteger id, String username, String senha, TipoUsuarioEnum role) {
         this.id = id;
         this.username = username;
         this.senha =senha;

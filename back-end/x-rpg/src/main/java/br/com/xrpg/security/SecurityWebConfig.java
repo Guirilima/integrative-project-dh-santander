@@ -23,9 +23,12 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/csrf", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
                         "/configuration/**", "/swagger-ui.html", "/webjars/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/clientes").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/clientes").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
-                .antMatchers(HttpMethod.POST, "/api/gerentes").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
+                .antMatchers(HttpMethod.GET, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
+                .antMatchers(HttpMethod.DELETE, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
+                .antMatchers(HttpMethod.PUT, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
+
+                .antMatchers(HttpMethod.POST, "/api/securanca").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().cors().disable().csrf().disable()

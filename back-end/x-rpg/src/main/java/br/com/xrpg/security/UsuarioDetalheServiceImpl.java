@@ -1,6 +1,6 @@
 package br.com.xrpg.security;
 
-import br.com.xrpg.repository.UsuarioDetailsRepository;
+import br.com.xrpg.repository.UsuarioAutenticacaoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UsuarioDetalheServiceImpl implements UserDetailsService {
 
-    private UsuarioDetailsRepository usuarioRepository;
+    private UsuarioAutenticacaoRepository usuarioRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
