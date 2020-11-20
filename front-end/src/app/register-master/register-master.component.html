@@ -1,0 +1,87 @@
+<section id="register" class = "section-padding">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-4 offset-md-4 form-register">
+            <p>Cadastro de perfil de Mestre</p>
+            <form method="post" [formGroup]= "formRegistroMestre">
+               
+
+                <div class="form-row pb-3">
+                    <div class="col-md-6 mb-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Anos de Experiência</label>
+                            <select class="form-control" id="idSelectAnos" formControlName ="anosExperiencia">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                              <option>6</option>
+                              <option>7</option>
+                              <option>8</option>
+                              <option>9</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 mb-6">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Campanhas Mestradas</label>
+                            <select class="form-control" id="idSelectCampanhas" formControlName ="qtdCampanhas">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                            
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row pb-3">
+                    <div class="col-md-12 mb-12">
+                    <div class="form-group">
+                        <label for="idHistoriaPersonagem">Conte-nos como você é como Mestre</label>
+                        <textarea class="form-control" id="idResumoMestre" rows="3" formControlName = "resumoMestre"></textarea>
+                    </div>
+
+                    <div *ngIf="formRegistroMestre.get('resumoMestre').invalid && (formRegistroMestre.get('resumoMestre').dirty || formRegistroMestre.get('resumoMestre').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="formRegistroMestre.get('resumoMestre').errors.required">
+                    Campo obrigatório.
+                  </div>
+                  <div *ngIf="formRegistroMestre.get('resumoMestre').errors.minlength">
+                    A resumo está muito curto
+                  </div>
+                </div>
+
+                    </div>
+                
+                </div>
+
+                <div class="form-row pb-3">
+                  <div class="col-md-6 mb-6">
+
+                    <div class="col-md-6 d-flex center">
+                      <button type= "submit" class="btn button btn-primary my-sm-1"  >Criar </button>
+                    </div>
+
+                  </div>
+                </div>
+                
+            </form>
+          </div>
+        </div>
+      </div>
+    
+    
+
+  </section>
+  
+  
+  

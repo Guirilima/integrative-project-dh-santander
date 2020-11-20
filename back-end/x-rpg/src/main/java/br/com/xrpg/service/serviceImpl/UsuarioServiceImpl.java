@@ -102,8 +102,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<DadosUsuarioVO> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound {
-        return null;
+    public Iterable<UsuarioEntity> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound {
+        return usuarioRepository.findAll();
     }
 
     @Override

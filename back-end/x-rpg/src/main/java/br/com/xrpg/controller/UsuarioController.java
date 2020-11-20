@@ -64,7 +64,7 @@ public class UsuarioController {
     public ResponseEntity<HttpGenericResponse> getTodosUsuariosSemDadosSensiveis() {
         try {
 
-            List<DadosUsuarioVO> objectsUsuarios = usuarioService.getTodosUsuariosSemDadosSensiveis();
+        	Iterable<UsuarioEntity> objectsUsuarios = usuarioService.getTodosUsuariosSemDadosSensiveis();
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")

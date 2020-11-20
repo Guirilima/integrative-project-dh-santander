@@ -17,7 +17,7 @@ public interface UsuarioService {
 
     DadosUsuarioVO getUsuarioPorId(BigInteger idUsuario) throws ObjectNotFound;
 
-    List<DadosUsuarioVO> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound;
+    Iterable<UsuarioEntity> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound;
 
     DadosUsuarioVO editarDadosBasicosUsuario(BigInteger idUsuario,DadosUsuarioVO dadosUsuario) throws ObjectNotFound;
 }

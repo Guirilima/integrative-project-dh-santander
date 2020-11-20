@@ -3,7 +3,7 @@
         <div class="row align-items-center">
           <div class="col-md-4 offset-md-4 form-register">
             <p>Cadastro de Personagem</p>
-            <form method="post" [formGroup]= "formRegistroPersonagem">
+            <form method="post" [formGroup]= "formRegistroPersonagem" (ngSubmit)="onSubmit()">
                 <div class="form-row pb-3">
                     <div class="col-md-12 mb-12">
                         <label for="primeiroNome">Nome do Personagem</label>
@@ -25,36 +25,26 @@
                     <div class="col-md-6 mb-6">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Raça</label>
-                            <select class="form-control" id="idSelectGenero" formControlName ="genero">
-                              <option>Anão</option>
-                              <option>Elfo</option>
-                              <option>Meio-elfo</option>
-                              <option>Halfling</option>
-                              <option>Humano</option>
-                              <option>Draconato</option>
-                              <option>Gnomo</option>
-                              <option>Meio-orc</option>
-                              <option>Tiefling</option>
+                            <select class="form-control" id="idSelectRaca" formControlName ="racaPersonagem">
+                              <option *ngFor="let raca of RACAS" value= {{raca.idRaca}} >
+
+                                {{raca.nomeRaca}}
+
+                              </option>
                             </select>
                         </div>
                     </div>
 
-
                     <div class="col-md-6 mb-6">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Classe</label>
-                            <select class="form-control" id="idSelectGenero" formControlName ="genero">
-                              <option>Bárbaro</option>
-                              <option>Bardo</option>
-                              <option>Clérigo</option>
-                              <option>Druida</option>
-                              <option>Lutador</option>
-                              <option>Monge</option>
-                              <option>Paladino</option>
-                              <option>Ranger</option>
-                              <option>Feiticeiro</option>
-                              <option>Bruxo</option>
-                              <option>Mago</option>
+                            <select class="form-control" id="idSelectClasse" formControlName ="classePersonagem">
+                              <option *ngFor="let classe of CLASSES" value = {{classe.idClasse}} >
+
+                                {{classe.nomeClasse}}
+
+                              </option>
+                              
                             </select>
                         </div>
                     </div>
@@ -62,11 +52,32 @@
                 <div class="form-row pb-3">
                     <div class="col-md-12 mb-12">
                     <div class="form-group">
-                        <label for="idHistoriaPersonagem">Example textarea</label>
-                        <textarea class="form-control" id="idHistoriaPersonagem" rows="3"></textarea>
+                        <label for="idHistoriaPersonagem">História do personagem</label>
+                        <textarea class="form-control" id="idHistoriaPersonagem" rows="3" formControlName = "historiaPersonagem"></textarea>
                     </div>
+
+                    <div *ngIf="formRegistroPersonagem.get('historiaPersonagem').invalid && (formRegistroPersonagem.get('historiaPersonagem').dirty || formRegistroPersonagem.get('historiaPersonagem').touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="formRegistroPersonagem.get('historiaPersonagem').errors.required">
+                    Campo obrigatório.
+                  </div>
+                  <div *ngIf="formRegistroPersonagem.get('historiaPersonagem').errors.minlength">
+                    A história está muito curta
+                  </div>
+                </div>
+
                     </div>
                 
+                </div>
+
+                <div class="form-row pb-3">
+                  <div class="col-md-6 mb-6">
+
+                    <div class="col-md-6 d-flex center">
+                      <button type= "submit" class="btn button btn-primary my-sm-1"  >Criar </button>
+                    </div>
+
+                  </div>
                 </div>
                 
             </form>
@@ -74,6 +85,8 @@
         </div>
       </div>
     
+
+      <app-personagem></app-personagem>
     
 
   </section>
