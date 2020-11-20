@@ -74,4 +74,7 @@ public class DadosUsuarioVO {
 //    private UserEntity newUser;
 //    private UserAuthEntity newUserAuth;
 //    private UserPersonalEntity newUserPersonal;
+
+    @ApiModelProperty(name = "tipoUsuario", value = "0",example = "0",position = 12)
+    private BigInteger tipoUsuario;
 }

@@ -1,13 +1,11 @@
 package br.com.xrpg.repository;
 
-import java.math.BigInteger;
+import br.com.xrpg.entity.UsuarioAutenticacao;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
-import br.com.xrpg.entity.UsuarioAutenticacaoEntity;
+public interface UsuarioAutenticacaoRepository extends JpaRepository<UsuarioAutenticacao, Long> {
 
-@Repository
-public interface UsuarioAutenticacaoRepository extends CrudRepository<UsuarioAutenticacaoEntity, BigInteger> {
-
+    Optional<UsuarioAutenticacao> findByUsername(String username);
 }

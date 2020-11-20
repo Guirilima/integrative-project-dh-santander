@@ -1,6 +1,7 @@
 package br.com.xrpg.service;
 
 import br.com.xrpg.exceptions.ObjectNotFound;
+import br.com.xrpg.vo.UsuarioApresentacaoVO;
 import org.springframework.stereotype.Service;
 
 import br.com.xrpg.entity.UsuarioEntity;
@@ -15,9 +16,11 @@ public interface UsuarioService {
 
     UsuarioEntity criarNovoUsuarioCadastro(DadosUsuarioVO dadosNewUser) throws ErrorSalvamento;
 
-    DadosUsuarioVO getUsuarioPorId(BigInteger idUsuario) throws ObjectNotFound;
+    UsuarioApresentacaoVO getUsuarioPorId(BigInteger idUsuario) throws ObjectNotFound;
 
-    Iterable<UsuarioEntity> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound;
+    List<UsuarioApresentacaoVO> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound;
 
     DadosUsuarioVO editarDadosBasicosUsuario(BigInteger idUsuario,DadosUsuarioVO dadosUsuario) throws ObjectNotFound;
+
+    void inativaUsuario (BigInteger idUsuario) throws ObjectNotFound;
 }

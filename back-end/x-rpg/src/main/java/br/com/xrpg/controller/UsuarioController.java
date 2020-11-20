@@ -1,6 +1,7 @@
 package br.com.xrpg.controller;
 
 import br.com.xrpg.entity.UsuarioEntity;
+import br.com.xrpg.vo.UsuarioApresentacaoVO;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -64,7 +65,7 @@ public class UsuarioController {
     public ResponseEntity<HttpGenericResponse> getTodosUsuariosSemDadosSensiveis() {
         try {
 
-        	Iterable<UsuarioEntity> objectsUsuarios = usuarioService.getTodosUsuariosSemDadosSensiveis();
+            List<UsuarioApresentacaoVO> objectsUsuarios = usuarioService.getTodosUsuariosSemDadosSensiveis();
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
@@ -87,7 +88,7 @@ public class UsuarioController {
     public ResponseEntity<HttpGenericResponse> getUsuarioPorId(@PathVariable("idUsuario") BigInteger idUsuario) {
         try {
 
-            DadosUsuarioVO objectUsuario = usuarioService.getUsuarioPorId(idUsuario);
+            UsuarioApresentacaoVO objectUsuario = usuarioService.getUsuarioPorId(idUsuario);
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
@@ -117,12 +118,12 @@ public class UsuarioController {
     public ResponseEntity<HttpGenericResponse> apagarUsuario(@PathVariable("idUsuario") BigInteger idUsuario) {
         try {
 
-            DadosUsuarioVO objectUsuario = usuarioService.getUsuarioPorId(idUsuario);
+            usuarioService.inativaUsuario(idUsuario);
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
-                    .mensagem("")
-                    .response(objectUsuario).build(), HttpStatus.OK);
+                    .mensagem("Inativação concluída.")
+                    .response(null).build(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("NOK")
