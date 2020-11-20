@@ -12,6 +12,8 @@ import { ContactComponent } from './contact/contact.component';
 import {MestreComponent} from './mestre/mestre.component';
 import {PersonagemComponent} from './personagem/personagem.component';
 import {ConviteComponent} from './convite/convite.component';
+import {RegisterCharacterComponent} from './register-character/register-character.component';
+import {RegisterMasterComponent} from './register-master/register-master.component';
 
 const APP_ROUTES: Routes = [
     { path: '', component: HomeComponent },
@@ -24,7 +26,9 @@ const APP_ROUTES: Routes = [
     { path: 'contact', component: ContactComponent},
     { path: 'mestre', component: MestreComponent},
     { path: 'personagem', component: PersonagemComponent},
-    { path: 'convite', component: ConviteComponent}
+    { path: 'convite', component: ConviteComponent},
+    { path: 'register-character', component: RegisterCharacterComponent},
+    { path: 'register-master', component: RegisterMasterComponent}
 ];
 
 const config: ExtraOptions = {
