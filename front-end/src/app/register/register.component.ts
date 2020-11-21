@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router'; 
+import {UsuarioService} from '../usuario.service';
+import {CepService} from '../cep.service';
 
 
 @Component({
@@ -42,8 +44,6 @@ export class RegisterComponent implements OnInit {
 
 })
 
-
-
   ngOnInit(): void {
 
     this.formRegistro.addControl('confirmaSenha', new FormControl(null, [Validators.compose(
@@ -76,7 +76,7 @@ readonly apiURL : string; //url base
 }}
 
 
-constructor(private http : HttpClient,config: NgbModalConfig, private modalService: NgbModal, private router:Router) {
+constructor(private cepService: CepService,private usuarioService: UsuarioService,private http : HttpClient,config: NgbModalConfig, private modalService: NgbModal, private router:Router) {
 
   this.apiURL = 'http://localhost:8080/api';
   this.cidade = '';
@@ -173,42 +173,15 @@ cadastrarUsuario()
 
   }; 
 
-  //console.log(usuario);
+  return this.usuarioService.postUsuario(usuario,this.apiURL);
 
-
-  return this.http.post(`${ this.apiURL }/usuario` , usuario).toPromise();
-
-   /*
-            .subscribe(
-              (resultado:any) => {
-                respostaReq.tipo = 0;
-                respostaReq.content = "Usuário salvo com sucesso";
-               // console.log(resultado);
-                return resultado;
-              },
-              erro => {
-                respostaReq.tipo = 1;
-                if(erro.status == 400) {
-                 // console.log(erro);
-                  respostaReq.content = "Erro durante o salvamento e/ou manipulação dos dados";
-                  return erro;             
-                }
-              }
-            );
-            */
 }
             
-
-
 buscarCEP() {
-
-
 
   var produto = { nome : "" }; //TODO isso tem que ser um GET e não um post
   
-  console.log(this.formRegistro.get('cep').value);
-
-  var promise = this.http.post(`${ this.apiURL }/endereco/buscar-pelo-cep/${ this.formRegistro.get('cep').value }` , produto).toPromise()
+  var promise = this.cepService.getCep(this.apiURL,this.formRegistro.get('cep').value,produto)
   
   promise.then((data)=>{
     var jsonInfo = JSON.stringify(data);
@@ -230,22 +203,6 @@ buscarCEP() {
   }).catch((error)=>{
     console.log("Promise rejected with " + JSON.stringify(error));
   });
-
-  /*
-            .subscribe(
-              (resultado:any) => {
-                this.estado = resultado.response.state
-                this.cidade = resultado.response.city
-                if(this.cidade == "null" || this.estado == "null") console.log("CEP inválido !");
-
-                console.log(this.estado)
-              },
-              erro => {
-                if(erro.status == 400) {
-                  console.log(erro);
-                }
-              }
-            );
-       */     
+  
 }}
 
