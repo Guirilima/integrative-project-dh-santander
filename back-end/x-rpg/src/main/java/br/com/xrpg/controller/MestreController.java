@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.List;
 
 import br.com.xrpg.entity.UsuarioEntity;
+import br.com.xrpg.vo.HttpGenericPageableResponse;
 import br.com.xrpg.vo.HttpGenericResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -105,10 +106,11 @@ public class MestreController {
 							@ApiResponse(code = 400, message = "Erro durante a busca e/ou mestre não encontrado.")
 	})
 	@GetMapping
-	public ResponseEntity<HttpGenericResponse> findAll() {
+	public ResponseEntity<HttpGenericResponse> findAll(@RequestParam(value = "pagina",defaultValue = "0",required = false) int pagina,
+													   @RequestParam(value = "qtdPagina",defaultValue = "6",required = false) int qtdPagina) {
 		try {
 
-			List<MestreEntity> allMasters = this.service.findAll();
+			HttpGenericPageableResponse allMasters = this.service.findAll(pagina,qtdPagina);
 
 			return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
 					.status("OK")

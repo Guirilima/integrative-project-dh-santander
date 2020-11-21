@@ -5,6 +5,7 @@ import java.net.URI;
 import java.util.List;
 
 
+import br.com.xrpg.vo.HttpGenericPageableResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,11 +83,12 @@ public class PersonagemController {
 	@ApiResponse(code = 400, message = "Erro na listagem das classes.") })
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	
-	public ResponseEntity<HttpGenericResponse> listarPersonagem() {
+	public ResponseEntity<HttpGenericResponse> listarPersonagem(@RequestParam(value = "pagina",defaultValue = "0",required = false) int pagina,
+																@RequestParam(value = "qtdPagina",defaultValue = "6",required = false) int qtdPagina) {
 		
 		try {
 
-			List<PersonagemEntity> lista = personagemService.listar();
+			HttpGenericPageableResponse lista = personagemService.listar(pagina,qtdPagina);
 
 			return new ResponseEntity<HttpGenericResponse>(
 					new HttpGenericResponse().builder()

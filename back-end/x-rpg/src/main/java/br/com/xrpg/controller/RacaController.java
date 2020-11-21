@@ -2,6 +2,7 @@ package br.com.xrpg.controller;
 
 import java.util.List;
 
+import br.com.xrpg.vo.HttpGenericPageableResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +31,11 @@ public class RacaController {
             @ApiResponse(code = 400, message = "Erro na listagem das raças.")
     })
     @RequestMapping(value = "/listar-racas",method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<HttpGenericResponse> listarRacas() {
+    public ResponseEntity<HttpGenericResponse> listarRacas(@RequestParam(value = "pagina",defaultValue = "0",required = false) int pagina,
+                                                           @RequestParam(value = "qtdPagina",defaultValue = "6",required = false) int qtdPagina) {
         try {
 
-            Iterable<RacaEntity> listaRacasPersonagem = racaService.getListaRacas();
+            HttpGenericPageableResponse listaRacasPersonagem = racaService.getListaRacas(pagina,qtdPagina);
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")

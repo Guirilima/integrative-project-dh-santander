@@ -24,7 +24,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/", "/csrf", "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
                         "/configuration/**", "/swagger-ui.html", "/webjars/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
+                .antMatchers(HttpMethod.POST, "/api/usuario").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
                 .antMatchers(HttpMethod.DELETE, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
                 .antMatchers(HttpMethod.PUT, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
@@ -35,7 +35,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/endereco/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/noticias/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/raca/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/denuncias/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/denuncias/**").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
                 .antMatchers(HttpMethod.GET, "/seguranca-controller/criarNovoUsuarioCadastroUsingPOST").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

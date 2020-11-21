@@ -7,8 +7,11 @@ import br.com.xrpg.entity.UsuarioAutenticacao;
 import br.com.xrpg.enumber.TipoUsuarioEnum;
 import br.com.xrpg.exceptions.ArgumentNotValid;
 import br.com.xrpg.repository.UsuarioAutenticacaoRepository;
-import br.com.xrpg.vo.UsuarioApresentacaoVO;
+import br.com.xrpg.vo.*;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,6 @@ import br.com.xrpg.exceptions.ObjectNotFound;
 import br.com.xrpg.repository.UsuarioRepository;
 import br.com.xrpg.service.UsuarioService;
 import br.com.xrpg.utils.Utils;
-import br.com.xrpg.vo.DadosUsuarioVO;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -100,13 +102,25 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<UsuarioApresentacaoVO> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound {
+    public HttpGenericPageableResponse getTodosUsuariosSemDadosSensiveis(int pagina, int qtdPagina) throws ObjectNotFound {
         List<UsuarioApresentacaoVO> listaUsuariosVO = new ArrayList<>();
 
-        for (UsuarioEntity usu : usuarioRepository.findAll()) {
-            listaUsuariosVO.add( usuarioConverter.entityToApresentacaoVO( usu ) );
+        PageRequest pageable = PageRequest.of(pagina,qtdPagina, Sort.by("nomePessoal").ascending());
+
+        Page<List<Object>> usuarios = usuarioRepository.getUsuariosAtivos(pageable);
+
+        for (Object obj : usuarios.getContent()) {
+            listaUsuariosVO.add(usuarioConverter.entityToApresentacaoVO( (UsuarioEntity) obj ));
         }
-        return listaUsuariosVO;
+
+        HttpGenericPageableResponse resp = new HttpGenericPageableResponse();
+        GenericPageRequestResponse pageRequest = new GenericPageRequestResponse(usuarios.getNumber(),
+                usuarios.getSize(),usuarios.getTotalElements(),usuarios.getTotalPages(),
+                usuarios.getSort().toString());
+        resp.setPageRequestResponse(pageRequest);
+        resp.setData(listaUsuariosVO);
+
+        return resp;
     }
 
     @Override

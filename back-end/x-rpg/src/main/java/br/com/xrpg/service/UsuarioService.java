@@ -1,6 +1,7 @@
 package br.com.xrpg.service;
 
 import br.com.xrpg.exceptions.ObjectNotFound;
+import br.com.xrpg.vo.HttpGenericPageableResponse;
 import br.com.xrpg.vo.UsuarioApresentacaoVO;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public interface UsuarioService {
 
     UsuarioApresentacaoVO getUsuarioPorId(BigInteger idUsuario) throws ObjectNotFound;
 
-    List<UsuarioApresentacaoVO> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound;
+    HttpGenericPageableResponse getTodosUsuariosSemDadosSensiveis(int pagina, int qtdPagina) throws ObjectNotFound;
 
     DadosUsuarioVO editarDadosBasicosUsuario(BigInteger idUsuario,DadosUsuarioVO dadosUsuario) throws ObjectNotFound;
 
