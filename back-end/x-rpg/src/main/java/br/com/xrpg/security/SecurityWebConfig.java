@@ -27,8 +27,8 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
                 .antMatchers(HttpMethod.DELETE, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
                 .antMatchers(HttpMethod.PUT, "/api/usuario").hasRole(TipoUsuarioEnum.ADMINISTRADOR.getName())
-
-                .antMatchers(HttpMethod.POST, "/api/securanca").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/seguranca/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/seguranca-controller/criarNovoUsuarioCadastroUsingPOST").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().cors().disable().csrf().disable()
