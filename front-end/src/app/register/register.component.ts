@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router'; 
 
 
 @Component({
@@ -31,6 +32,11 @@ export class RegisterComponent implements OnInit {
   telefone : new FormControl(null,Validators.minLength(10)),
   senha : new FormControl(null,[Validators.required, Validators.minLength(8)]),
   genero : new FormControl(null,Validators.required),
+
+ 
+  
+
+
 
 }, {
 
@@ -70,7 +76,7 @@ readonly apiURL : string; //url base
 }}
 
 
-constructor(private http : HttpClient,config: NgbModalConfig, private modalService: NgbModal) {
+constructor(private http : HttpClient,config: NgbModalConfig, private modalService: NgbModal, private router:Router) {
 
   this.apiURL = 'http://localhost:8080/api';
   this.cidade = '';
@@ -98,24 +104,50 @@ onSubmit() {
 
    // console.log(this.formRegistro.value);
     var request = this.cadastrarUsuario();
-    console.log(request);
+
     
-    this.tituloModal = "Confirma  ! ";
-    this.mensagemModal = "Usuário Cadastrado ! ";
+  request.then((data)=>{
+
+    var jsonInfo = JSON.stringify(data);
+    //console.log(jsonInfo);
+    var Info = JSON.parse(jsonInfo);
+    console.log(Info.response.status)
+
+    this.tituloModal = "Sucesso ! ";
+    this.mensagemModal = "Usuário Cadastrado !";
     console.log(this.formRegistro.value);
     this.open(this.modalConfirma);
-    console.log("Formulário Correto")
+    console.log("O formulário foi ensiado com sucesso");
 
-  } 
-  else
-  {
+     
+  this.formRegistro.get('nome').setValue('');
+  this.formRegistro.get('sobrenome').setValue('');
+  this.formRegistro.get('email').setValue('');
+  this.formRegistro.get('nomeUsuario').setValue('');
+  this.formRegistro.get('cpf').setValue('');
+  this.formRegistro.get('cep').setValue('');
+  this.formRegistro.get('dataNascimento').setValue('');
+  this.formRegistro.get('telefone').setValue('');
+  this.formRegistro.get('senha').setValue('');
+  this.formRegistro.get('genero').setValue('');
+
+  this.router.navigate(['/login']); 
+
+  }).catch((error)=>{
+    
+    console.log("Promise rejected with " + JSON.stringify(error));
+    var Info = JSON.parse(JSON.stringify(error));
     this.tituloModal = "Erro ! ";
-    this.mensagemModal = "Formulário Contém Erros !";
+
+    this.mensagemModal = Info.error.mensagem;
     console.log(this.formRegistro.value);
     this.open(this.modalConfirma);
     console.log("O formulário contem erros")
-}
+  })
+    
 
+   
+  }
 }
 
 cadastrarUsuario()
@@ -143,12 +175,10 @@ cadastrarUsuario()
 
   //console.log(usuario);
 
-  var respostaReq = {
-      tipo: null,
-      content: null
-  }
 
-   this.http.post(`${ this.apiURL }/usuario` , usuario)
+  return this.http.post(`${ this.apiURL }/usuario` , usuario).toPromise();
+
+   /*
             .subscribe(
               (resultado:any) => {
                 respostaReq.tipo = 0;
@@ -165,6 +195,7 @@ cadastrarUsuario()
                 }
               }
             );
+            */
 }
             
 
@@ -177,7 +208,30 @@ buscarCEP() {
   
   console.log(this.formRegistro.get('cep').value);
 
-  this.http.post(`${ this.apiURL }/endereco/buscar-pelo-cep/${ this.formRegistro.get('cep').value }` , produto)
+  var promise = this.http.post(`${ this.apiURL }/endereco/buscar-pelo-cep/${ this.formRegistro.get('cep').value }` , produto).toPromise()
+  
+  promise.then((data)=>{
+    var jsonInfo = JSON.stringify(data);
+    var Info = JSON.parse(jsonInfo);
+    this.estado = Info.response.state
+    this.cidade = Info.response.city
+    console.log(this.cidade);
+    if(this.cidade == null || this.estado == null) 
+    {
+      console.log("CEP inválido !");
+      this.tituloModal = "Erro ! ";
+      this.mensagemModal = "CEP Inválido !";
+      console.log(this.formRegistro.value);
+      this.open(this.modalConfirma);
+      this.formRegistro.get('cep').setValue('');
+
+    }
+
+  }).catch((error)=>{
+    console.log("Promise rejected with " + JSON.stringify(error));
+  });
+
+  /*
             .subscribe(
               (resultado:any) => {
                 this.estado = resultado.response.state
@@ -192,6 +246,6 @@ buscarCEP() {
                 }
               }
             );
-            
+       */     
 }}
 
