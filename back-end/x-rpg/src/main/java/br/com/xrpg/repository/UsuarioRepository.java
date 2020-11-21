@@ -31,4 +31,6 @@ public interface UsuarioRepository extends CrudRepository<UsuarioEntity, BigInte
     @Query(value = "SELECT u.estadoPessoal AS ESTADO, count(u) " +
             "FROM UsuarioEntity u GROUP BY u.estadoPessoal ")
     public List<Object> getCountUsuariosPorEstados();
+
+    public UsuarioEntity findByEmailUsuAutenticacao(String email);
 }

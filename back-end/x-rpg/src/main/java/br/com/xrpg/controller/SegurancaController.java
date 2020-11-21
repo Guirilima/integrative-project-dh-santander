@@ -15,9 +15,11 @@ import br.com.xrpg.service.MetodosValidadores;
 import br.com.xrpg.vo.HttpGenericResponse;
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigInteger;
+
 @Slf4j
 @RestController
-@RequestMapping("/api/securanca")
+@RequestMapping("/api/seguranca")
 @CrossOrigin(origins = "*") //Liberando acesso para todos os dominios acessarem
 @AllArgsConstructor
 public class SegurancaController {
@@ -52,7 +54,7 @@ public class SegurancaController {
             @ApiResponse(code = 201, message = "Criação concluída."),
             @ApiResponse(code = 400, message = "Erro durante o salvamento e/ou manipulação dos dados.")
     })
-    @PostMapping(produces = "application/json")
+    @PostMapping(path = "/efetuar-login",produces = "application/json")
     public ResponseEntity<HttpGenericResponse> criarNovoUsuarioCadastro(@RequestBody UsuarioAutenticacao newUsuario) {
         try {
 
@@ -64,6 +66,37 @@ public class SegurancaController {
                     .status("OK")
                     .mensagem("Usuário criado com sucesso.")
                     .response( newUsuario ).build(), HttpStatus.CREATED);
+        }catch (Exception e) {
+            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                    .status("NOK")
+                    .mensagem("Erro durante o Salvamento do novo Usúario: " + e.getMessage())
+                    .response(null).build(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @ApiOperation(value = "API RESPONSÀVEL POR EFETUAR O LOGIN NO FRONT-END")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Combinação perfeita."),
+            @ApiResponse(code = 400, message = "Erro na combinação recebida.")
+    })
+    @PostMapping(produces = "application/json")
+    public ResponseEntity<HttpGenericResponse> efetuarLogin(@RequestParam("email") String email,
+                                                            @RequestParam("senha") String senha) {
+        try {
+
+            BigInteger idUsuario = metodosValidadores.validarDadosLogin(email, senha);
+
+            if (idUsuario != null) {
+                return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                        .status("OK")
+                        .mensagem("Combinação bem sucedida.")
+                        .response(idUsuario).build(), HttpStatus.CREATED);
+            }else {
+                return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                        .status("NOK")
+                        .mensagem("Combinação invalida.")
+                        .response(null).build(), HttpStatus.BAD_REQUEST);
+            }
         }catch (Exception e) {
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("NOK")
