@@ -4,32 +4,35 @@ import br.com.xrpg.entity.UsuarioAutenticacao;
 import br.com.xrpg.entity.UsuarioEntity;
 import br.com.xrpg.repository.UsuarioAutenticacaoRepository;
 import br.com.xrpg.repository.UsuarioRepository;
-import br.com.xrpg.vo.Credential;
+import br.com.xrpg.security.AuthResponse;
+import br.com.xrpg.security.Credential;
+import br.com.xrpg.security.JwtUtil;
 import javassist.tools.rmi.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.xrpg.service.MetodosValidadores;
-import br.com.xrpg.utils.Utils;
+import br.com.xrpg.service.AuthService;
 
 import java.math.BigInteger;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class MetodosValidadoresImpl implements MetodosValidadores {
+public class AuthServiceImpl implements AuthService {
 
     private final BCryptPasswordEncoder pEnconder;
 
     private final UsuarioRepository usuarioRepository;
 
+    private final UsuarioAutenticacaoRepository usuarioAutenticacaoRepository;
+
     private final AuthenticationManager authenticationManager;
 
-    private final UsuarioAutenticacaoRepository usuarioAutenticacaoRepository;
+    private final JwtUtil jwtUtil;
 
     @Override
     public BigInteger validarDadosLogin(Credential credential) throws ObjectNotFoundException {
@@ -45,16 +48,25 @@ public class MetodosValidadoresImpl implements MetodosValidadores {
         //EMAIL OR NOME
         UsuarioEntity usuarioDados = usuarioRepository.findByNomePessoalOrEmailUsuario(credential.getUsername(),credential.getUsername());
 
-//        SecurityContextHolder.getContext().setAuthentication(authenticate);
-//
-//        Usuario usuario = this.usuarioService.findByUsername(credential.getUsername());
-//
-//
-//        String jwt = this.jwtUtil.generateToken(usuario);
-//
-//        return AuthResponse.builder()
-//                .jwt(jwt)
-//                .build();
         return usuarioDados.getIdUsuario();
+    }
+
+
+    public AuthResponse login(Credential credential) {
+
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(credential.getUsername(), credential.getSenha());
+
+        Authentication authenticate = this.authenticationManager.authenticate(authenticationToken );
+
+        SecurityContextHolder.getContext().setAuthentication(authenticate);
+
+        UsuarioAutenticacao usuario = this.usuarioAutenticacaoRepository.findByUsername(credential.getUsername()).get();
+
+        String jwt = this.jwtUtil.generateToken(usuario);
+
+        return AuthResponse.builder()
+                .jwt(jwt)
+                .build();
+
     }
 }

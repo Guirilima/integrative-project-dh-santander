@@ -2,7 +2,8 @@ package br.com.xrpg.controller;
 
 import br.com.xrpg.entity.UsuarioAutenticacao;
 import br.com.xrpg.repository.UsuarioAutenticacaoRepository;
-import br.com.xrpg.vo.Credential;
+import br.com.xrpg.security.AuthResponse;
+import br.com.xrpg.security.Credential;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -13,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import br.com.xrpg.service.MetodosValidadores;
+import br.com.xrpg.service.AuthService;
 import br.com.xrpg.vo.HttpGenericResponse;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,9 +25,9 @@ import java.math.BigInteger;
 @RequestMapping("/api/seguranca")
 @CrossOrigin(origins = "*") //Liberando acesso para todos os dominios acessarem
 @AllArgsConstructor
-public class SegurancaController {
+public class AuthController {
 
-    private final MetodosValidadores metodosValidadores;
+    private final AuthService authService;
 
     private final UsuarioAutenticacaoRepository usuarioDetailsRepository;
 
@@ -67,7 +68,7 @@ public class SegurancaController {
     public ResponseEntity<HttpGenericResponse> login( @RequestBody Credential credential) throws ObjectNotFoundException {
 
         try {
-            BigInteger idUsuario = this.metodosValidadores.validarDadosLogin(credential);
+            BigInteger idUsuario = this.authService.validarDadosLogin(credential);
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
@@ -79,5 +80,20 @@ public class SegurancaController {
                     .mensagem(ee.getMessage())
                     .response(null).build(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+
+
+    @ApiOperation(value = "API RESPONSÀVEL POR EFETUAR O LOGIN NO FRONT-END")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Combinação perfeita."),
+            @ApiResponse(code = 400, message = "Erro na combinação recebida.")
+    })
+    @PostMapping("/loginJWT")
+    public ResponseEntity<AuthResponse> loginJWT(@RequestBody Credential credential){
+
+        AuthResponse login = this.authService.login(credential);
+
+        return ResponseEntity.ok(login);
     }
 }

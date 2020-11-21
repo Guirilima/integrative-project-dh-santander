@@ -1,4 +1,4 @@
-package br.com.xrpg.vo;
+package br.com.xrpg.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Credential {
+public class AuthResponse {
 
-    private String username;
-
-    private String senha;
-
+    private String jwt;
 }
