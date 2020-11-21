@@ -2,9 +2,11 @@ package br.com.xrpg.controller;
 
 import br.com.xrpg.entity.UsuarioAutenticacao;
 import br.com.xrpg.repository.UsuarioAutenticacaoRepository;
+import br.com.xrpg.vo.Credential;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import javassist.tools.rmi.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,24 +32,6 @@ public class SegurancaController {
 
     private final BCryptPasswordEncoder pEnconder;
 
-    @PostMapping(path = "/codificar-string",produces = "application/json")
-    public ResponseEntity<HttpGenericResponse> validacaoPassword(@RequestParam("valor") String valor,
-                                                                 @RequestParam("tipo") String tipo) {
-        try {
-
-            valor = metodosValidadores.filtroCodificacao(valor,tipo);
-
-            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
-                    .status("OK")
-                    .mensagem("")
-                    .response(valor).build(), HttpStatus.OK);
-        }catch (Exception e) {
-            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
-                    .status("NOK")
-                    .mensagem(e.getMessage())
-                    .response(null).build(), HttpStatus.BAD_REQUEST);
-        }
-    }
 
     @ApiOperation(value = "API TESTE PARA CRIAÇÂO DO USUARIO COM SPRING SECURITY")
     @ApiResponses(value = {
@@ -79,28 +63,20 @@ public class SegurancaController {
             @ApiResponse(code = 200, message = "Combinação perfeita."),
             @ApiResponse(code = 400, message = "Erro na combinação recebida.")
     })
-    @PostMapping(produces = "application/json")
-    public ResponseEntity<HttpGenericResponse> efetuarLogin(@RequestParam("email") String email,
-                                                            @RequestParam("senha") String senha) {
+    @PostMapping("/login")
+    public ResponseEntity<HttpGenericResponse> login( @RequestBody Credential credential) throws ObjectNotFoundException {
+
         try {
+            BigInteger idUsuario = this.metodosValidadores.validarDadosLogin(credential);
 
-            BigInteger idUsuario = metodosValidadores.validarDadosLogin(email, senha);
-
-            if (idUsuario != null) {
-                return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
-                        .status("OK")
-                        .mensagem("Combinação bem sucedida.")
-                        .response(idUsuario).build(), HttpStatus.CREATED);
-            }else {
-                return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
-                        .status("NOK")
-                        .mensagem("Combinação invalida.")
-                        .response(null).build(), HttpStatus.BAD_REQUEST);
-            }
-        }catch (Exception e) {
+            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                    .status("OK")
+                    .mensagem("Combinação bem sucedida.")
+                    .response(idUsuario).build(), HttpStatus.OK);
+        }catch (Exception ee) {
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("NOK")
-                    .mensagem("Erro durante o Salvamento do novo Usúario: " + e.getMessage())
+                    .mensagem(ee.getMessage())
                     .response(null).build(), HttpStatus.BAD_REQUEST);
         }
     }

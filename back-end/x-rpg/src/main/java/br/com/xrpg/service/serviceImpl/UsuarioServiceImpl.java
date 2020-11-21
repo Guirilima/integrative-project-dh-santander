@@ -60,12 +60,13 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (Utils.validaCPF(dadosNewUser.getCpfUsur()) == null) throw new ErrorSalvamento( "CPF não é valido");
         if (dadosNewUser.getGeneroUsur().length() > 1) throw new ErrorSalvamento("O tamanho do gênero é maior que 1. Favor considere as alternativas : Masculino : 'M', Feminino : 'F' ou Outro : 'O' .");
         if (usuarioRepository.findByCpfPessoal(dadosNewUser.getCpfUsur()) != null) throw new ErrorSalvamento("Já existe esse CPF em nosso banco de registro.");
+        if (usuarioRepository.findByEmailUsuario(dadosNewUser.getEmailUsur()) != null) throw new ErrorSalvamento("Esse email foi encontrado em nosso sistema. Por favor faça o login.");
 
         //TODO | SALVANDO USUARIO AUTENTICAÇÂO
         UsuarioAutenticacao newUserAu = new UsuarioAutenticacao().builder()
                 .role(TipoUsuarioEnum.fromId(dadosNewUser.getTipoUsuario()))
                 .senha( this.pEnconder.encode(dadosNewUser.getSenhaUsur()) )
-                .username(dadosNewUser.getNomeUsur())
+                .username(dadosNewUser.getEmailUsur())
                 .build();
         usuarioAutenticacaoRepository.save(newUserAu);
 
@@ -82,7 +83,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .genero(dadosNewUser.getGeneroUsur())
                 .telefone(dadosNewUser.getTelefoneUsur())
                 .tipoUsuarioEnum(dadosNewUser.getTipoUsuario())
-                .emailUsuAutenticacao(dadosNewUser.getEmailUsur())
+                .emailUsuario(dadosNewUser.getEmailUsur())
                 .idUsuarioAutenticacao(newUserAu.getId())
                 .build();
         usuarioRepository.save(newUser);
@@ -121,7 +122,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioEntity.get().setGenero( (!usuarioEntity.get().getGenero().equals(dadosUsuario.getGeneroUsur())) ? dadosUsuario.getGeneroUsur() : usuarioEntity.get().getGenero() );
             usuarioEntity.get().setCidadePessoal( (!usuarioEntity.get().getCidadePessoal().equals(dadosUsuario.getCidadeUsur())) ? dadosUsuario.getCidadeUsur() : usuarioEntity.get().getCidadePessoal() );
             usuarioEntity.get().setDataNascimento( (!usuarioEntity.get().getDataNascimento().equals(dadosUsuario.getNascimentoUsur())) ? dadosUsuario.getNascimentoUsur() : usuarioEntity.get().getDataNascimento() );
-            usuarioEntity.get().setEmailUsuAutenticacao( (!usuarioEntity.get().getEmailUsuAutenticacao().equals(dadosUsuario.getEmailUsur())) ? dadosUsuario.getEmailUsur() : usuarioEntity.get().getEmailUsuAutenticacao() );
+            usuarioEntity.get().setEmailUsuario( (!usuarioEntity.get().getEmailUsuario().equals(dadosUsuario.getEmailUsur())) ? dadosUsuario.getEmailUsur() : usuarioEntity.get().getEmailUsuario() );
             usuarioEntity.get().setNomePessoal( (!usuarioEntity.get().getNomePessoal().equals(dadosUsuario.getNomeUsur())) ? dadosUsuario.getNomeUsur() : usuarioEntity.get().getNomePessoal() );
             usuarioEntity.get().setSobrenomePessoal( (!usuarioEntity.get().getSobrenomePessoal().equals(dadosUsuario.getSobrenomeUsur())) ? dadosUsuario.getSobrenomeUsur() : usuarioEntity.get().getSobrenomePessoal() );
             usuarioEntity.get().setTelefone( (!usuarioEntity.get().getTelefone().equals(dadosUsuario.getTelefoneUsur())) ? dadosUsuario.getTelefoneUsur() : usuarioEntity.get().getTelefone() );

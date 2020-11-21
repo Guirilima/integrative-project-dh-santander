@@ -70,11 +70,11 @@ public class UsuarioEntity {
 
 
 
-	@Column(name = "emailUsuAutenticacao",nullable = false)
-	private String emailUsuAutenticacao;
+	@Column(name = "emailUsuario",nullable = false)
+	private String emailUsuario;
 
 
-	@Column(name = "usuarioAutenticacao",nullable = false)
+	@Column(name = "idUsuarioAutenticacao",nullable = false)
 	private BigInteger idUsuarioAutenticacao;
 
 }
