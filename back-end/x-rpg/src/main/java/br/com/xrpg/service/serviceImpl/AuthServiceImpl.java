@@ -62,6 +62,8 @@ public class AuthServiceImpl implements AuthService {
 
         return AuthResponse.builder()
                 .jwt(jwt)
+                .idUsuario(usuario.getIdUsuario())
+                .email(usuario.getEmailUsuario())
                 .build();
 
     }

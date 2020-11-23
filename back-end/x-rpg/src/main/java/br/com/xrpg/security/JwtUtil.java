@@ -40,7 +40,6 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes())
                 .addClaims(claims)
                 .compact();
-
     }
 
     public boolean tokenValido(String token) {
