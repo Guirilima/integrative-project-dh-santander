@@ -2,9 +2,9 @@ package br.com.xrpg.repository;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -41,4 +41,6 @@ public interface UsuarioRepository extends CrudRepository<UsuarioEntity, BigInte
 
     @Query("FROM UsuarioEntity u WHERE u.flagAtivo <> 0 ")
     Page<List<Object>> getUsuariosAtivos(Pageable pageable);
+
+    Optional<UsuarioEntity> findByUsername(String username);
 }

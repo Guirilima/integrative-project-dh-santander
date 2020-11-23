@@ -3,10 +3,10 @@ package br.com.xrpg.service.serviceImpl;
 import javax.transaction.Transactional;
 
 import br.com.xrpg.converter.UsuarioConverter;
-import br.com.xrpg.entity.UsuarioAutenticacao;
+import br.com.xrpg.entity.Role;
 import br.com.xrpg.enumber.TipoUsuarioEnum;
 import br.com.xrpg.exceptions.ArgumentNotValid;
-import br.com.xrpg.repository.UsuarioAutenticacaoRepository;
+import br.com.xrpg.repository.RoleRepository;
 import br.com.xrpg.vo.*;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,11 +31,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    private final UsuarioAutenticacaoRepository usuarioAutenticacaoRepository;
-
     private final BCryptPasswordEncoder pEnconder;
 
     private final UsuarioConverter usuarioConverter;
+
+    private final RoleRepository roleRepository;
 
     @Override
     //@Transactional(rollbackOn = ErrorSalvamento.class)
@@ -64,13 +64,8 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (usuarioRepository.findByCpfPessoal(dadosNewUser.getCpfUsur()) != null) throw new ErrorSalvamento("Já existe esse CPF em nosso banco de registro.");
         if (usuarioRepository.findByEmailUsuario(dadosNewUser.getEmailUsur()) != null) throw new ErrorSalvamento("Esse email foi encontrado em nosso sistema. Por favor faça o login.");
 
-        //TODO | SALVANDO USUARIO AUTENTICAÇÂO
-        UsuarioAutenticacao newUserAu = new UsuarioAutenticacao().builder()
-                .role(TipoUsuarioEnum.fromId(dadosNewUser.getTipoUsuario()))
-                .senha( this.pEnconder.encode(dadosNewUser.getSenhaUsur()) )
-                .username(dadosNewUser.getEmailUsur())
-                .build();
-        usuarioAutenticacaoRepository.save(newUserAu);
+        Set<Role> roles = new HashSet<>();
+        roles.add( roleRepository.findById(dadosNewUser.getRole()).get() );
 
         //TODO | REUNINDO OS ID'S CRIADOS E SALVANDO O USER
         UsuarioEntity newUser = new UsuarioEntity().builder()
@@ -84,10 +79,13 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .dataNascimento(dadosNewUser.getNascimentoUsur())
                 .genero(dadosNewUser.getGeneroUsur())
                 .telefone(dadosNewUser.getTelefoneUsur())
-                .tipoUsuarioEnum(dadosNewUser.getTipoUsuario())
                 .emailUsuario(dadosNewUser.getEmailUsur())
-                .idUsuarioAutenticacao(newUserAu.getId())
+
+                .senha( this.pEnconder.encode(dadosNewUser.getSenhaUsur()) )
+                .username( dadosNewUser.getEmailUsur() )
+                .roles( roles )
                 .build();
+
         usuarioRepository.save(newUser);
         return newUser;
     }

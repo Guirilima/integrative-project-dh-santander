@@ -1,7 +1,7 @@
 package br.com.xrpg.service;
 
-import br.com.xrpg.security.AuthResponse;
-import br.com.xrpg.security.Credential;
+import br.com.xrpg.security.model.AuthResponse;
+import br.com.xrpg.security.model.Credential;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 

@@ -24,7 +24,7 @@ public class UsuarioConverterImpl implements UsuarioConverter {
                 .genero(usuarioEntity.getGenero())
                 .nomePessoal(usuarioEntity.getNomePessoal())
                 .sobrenomePessoal(usuarioEntity.getSobrenomePessoal())
-                .tipoUsuarioEnum(usuarioEntity.getTipoUsuarioEnum()).build();
+                .roles(usuarioEntity.getRoles()).build();
     }
 
     @Override
@@ -45,7 +45,6 @@ public class UsuarioConverterImpl implements UsuarioConverter {
                 .senhaUsur(usuarioEntity.getCidadePessoal())
                 .sobrenomeUsur(usuarioEntity.getSobrenomePessoal())
                 .telefoneUsur(usuarioEntity.getTelefone())
-                .tipoUsuario(usuarioEntity.getIdUsuario())
-                .build();
+                .roles(usuarioEntity.getRoles()).build();
     }
 }

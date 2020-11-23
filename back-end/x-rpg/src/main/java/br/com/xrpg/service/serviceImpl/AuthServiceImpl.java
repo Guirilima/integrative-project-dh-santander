@@ -1,11 +1,9 @@
 package br.com.xrpg.service.serviceImpl;
 
-import br.com.xrpg.entity.UsuarioAutenticacao;
 import br.com.xrpg.entity.UsuarioEntity;
-import br.com.xrpg.repository.UsuarioAutenticacaoRepository;
 import br.com.xrpg.repository.UsuarioRepository;
-import br.com.xrpg.security.AuthResponse;
-import br.com.xrpg.security.Credential;
+import br.com.xrpg.security.model.AuthResponse;
+import br.com.xrpg.security.model.Credential;
 import br.com.xrpg.security.JwtUtil;
 import javassist.tools.rmi.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
@@ -27,8 +25,6 @@ public class AuthServiceImpl implements AuthService {
     private final BCryptPasswordEncoder pEnconder;
 
     private final UsuarioRepository usuarioRepository;
-
-    private final UsuarioAutenticacaoRepository usuarioAutenticacaoRepository;
 
     private final AuthenticationManager authenticationManager;
 
@@ -60,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(authenticate);
 
-        UsuarioAutenticacao usuario = this.usuarioAutenticacaoRepository.findByUsername(credential.getUsername()).get();
+        UsuarioEntity usuario = this.usuarioRepository.findByUsername(credential.getUsername()).get();
 
         String jwt = this.jwtUtil.generateToken(usuario);
 

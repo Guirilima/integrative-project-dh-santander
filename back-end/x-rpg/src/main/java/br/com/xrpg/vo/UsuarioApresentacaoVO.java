@@ -1,9 +1,11 @@
 package br.com.xrpg.vo;
 
+import br.com.xrpg.entity.Role;
 import lombok.*;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +22,7 @@ public class UsuarioApresentacaoVO {
 
     private Date dataUltimoLogin;
 
-    private BigInteger tipoUsuarioEnum;
+    private Set<Role> roles;
 
     private String nomePessoal;
 

@@ -1,4 +1,4 @@
-package br.com.xrpg.security;
+package br.com.xrpg.security.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
