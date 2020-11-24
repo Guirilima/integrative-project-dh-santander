@@ -2,15 +2,12 @@ package br.com.xrpg.entity;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import br.com.xrpg.enumber.TipoUsuarioEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,12 +35,6 @@ public class UsuarioEntity {
 	@Column(name = "ultimoLogin",nullable = false)
 	private Date dataUltimoLogin;
 
-
-	@Column(name = "tipoUsuario",nullable = false)
-	private BigInteger tipoUsuarioEnum;
-
-
-
 	@Column(name = "nomePessoal",nullable = false)
 	private String nomePessoal;
 
@@ -70,11 +61,49 @@ public class UsuarioEntity {
 
 
 
-	@Column(name = "emailUsuAutenticacao",nullable = false)
-	private String emailUsuAutenticacao;
+	@Column(name = "emailUsuario",nullable = false)
+	private String emailUsuario;
+
+	@Column( nullable = false)
+	private String username;
+
+	@Column( nullable = false)
+	private String senha;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "usuarios_roles",
+			joinColumns = @JoinColumn(name="usuario_id"),
+			inverseJoinColumns  = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idUsuario == null) ? 0 : idUsuario.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UsuarioEntity other = (UsuarioEntity) obj;
+		if (idUsuario == null) {
+			if (other.idUsuario != null)
+				return false;
+		} else if (!idUsuario.equals(other.idUsuario))
+			return false;
+		return true;
+	}
 
 
-	@Column(name = "usuarioAutenticacao",nullable = false)
-	private BigInteger idUsuarioAutenticacao;
-
+	public List<String> getSimpleRoles() {
+		return this.roles.stream().map(role -> role.getName()).collect(Collectors.toList());
+	}
 }

@@ -18,13 +18,13 @@ public class UsuarioConverterImpl implements UsuarioConverter {
                 .cidadePessoal(usuarioEntity.getCidadePessoal())
                 .dataNascimento(usuarioEntity.getDataNascimento())
                 .dataUltimoLogin(usuarioEntity.getDataUltimoLogin())
-                .emailUsuAutenticacao(usuarioEntity.getEmailUsuAutenticacao())
+                .emailUsuAutenticacao(usuarioEntity.getEmailUsuario())
                 .estadoPessoal(usuarioEntity.getEstadoPessoal())
                 .flagAtivo(usuarioEntity.getFlagAtivo())
                 .genero(usuarioEntity.getGenero())
                 .nomePessoal(usuarioEntity.getNomePessoal())
                 .sobrenomePessoal(usuarioEntity.getSobrenomePessoal())
-                .tipoUsuarioEnum(usuarioEntity.getTipoUsuarioEnum()).build();
+                .roles(usuarioEntity.getRoles()).build();
     }
 
     @Override
@@ -33,7 +33,7 @@ public class UsuarioConverterImpl implements UsuarioConverter {
         return DadosUsuarioVO.builder()
                 .cidadeUsur(usuarioEntity.getCidadePessoal())
                 .cpfUsur(usuarioEntity.getCpfPessoal())
-                .emailUsur(usuarioEntity.getEmailUsuAutenticacao())
+                .emailUsur(usuarioEntity.getEmailUsuario())
                 .estadoUsur(usuarioEntity.getEstadoPessoal())
                 .flagAtivoUsur(usuarioEntity.getFlagAtivo())
                 .generoUsur(usuarioEntity.getGenero())
@@ -45,7 +45,6 @@ public class UsuarioConverterImpl implements UsuarioConverter {
                 .senhaUsur(usuarioEntity.getCidadePessoal())
                 .sobrenomeUsur(usuarioEntity.getSobrenomePessoal())
                 .telefoneUsur(usuarioEntity.getTelefone())
-                .tipoUsuario(usuarioEntity.getIdUsuario())
-                .build();
+                .roles(usuarioEntity.getRoles()).build();
     }
 }

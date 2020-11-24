@@ -1,6 +1,7 @@
 package br.com.xrpg.controller;
 
 import br.com.xrpg.entity.UsuarioEntity;
+import br.com.xrpg.vo.HttpGenericPageableResponse;
 import br.com.xrpg.vo.UsuarioApresentacaoVO;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +63,11 @@ public class UsuarioController {
             @ApiResponse(code = 400, message = "Erro durante a buscar e/ou nenhum usuário encontrado.")
     })
     @GetMapping(produces = "application/json")
-    public ResponseEntity<HttpGenericResponse> getTodosUsuariosSemDadosSensiveis() {
+    public ResponseEntity<HttpGenericResponse> getTodosUsuariosSemDadosSensiveis(@RequestParam(value = "pagina",defaultValue = "0",required = false) int pagina,
+                                                                                 @RequestParam(value = "qtdPagina",defaultValue = "6",required = false) int qtdPagina) {
         try {
 
-            List<UsuarioApresentacaoVO> objectsUsuarios = usuarioService.getTodosUsuariosSemDadosSensiveis();
+            HttpGenericPageableResponse objectsUsuarios = usuarioService.getTodosUsuariosSemDadosSensiveis(pagina, qtdPagina);
 
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")

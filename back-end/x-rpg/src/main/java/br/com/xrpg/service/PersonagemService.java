@@ -1,6 +1,7 @@
 package br.com.xrpg.service;
 
 
+import br.com.xrpg.vo.HttpGenericPageableResponse;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -16,8 +17,8 @@ public interface PersonagemService {
 	public PersonagemEntity criar(PersonagemEntity personagemEntity) throws ErrorSalvamento;
 	
 	public PersonagemEntity encontrarPorId (BigInteger bigInteger) throws ObjectNotFound;
-	
-	public List<PersonagemEntity> listar();
+
+	HttpGenericPageableResponse listar(int pagina,int qtdPagina);
 	
 	public void atualizar(PersonagemEntity personagemEntity);
 	

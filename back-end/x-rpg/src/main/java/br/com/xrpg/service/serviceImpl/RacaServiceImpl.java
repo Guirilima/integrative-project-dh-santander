@@ -1,9 +1,13 @@
 package br.com.xrpg.service.serviceImpl;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.xrpg.vo.GenericPageRequestResponse;
+import br.com.xrpg.vo.HttpGenericPageableResponse;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.xrpg.entity.RacaEntity;
@@ -12,14 +16,26 @@ import br.com.xrpg.repository.RacaRepository;
 import br.com.xrpg.service.RacaService;
 
 @Service
+@AllArgsConstructor
 public class RacaServiceImpl implements RacaService {
 
-    @Autowired
-    RacaRepository racaRepository;
+    private final RacaRepository racaRepository;
 
     @Override
-    public Iterable<RacaEntity> getListaRacas() {
-        return racaRepository.findAll();
+    public HttpGenericPageableResponse getListaRacas(int pagina,int qtdPagina) {
+
+        PageRequest pageable = PageRequest.of(pagina,qtdPagina, Sort.by("nomeRaca").ascending());
+
+        Page<RacaEntity> racas = racaRepository.findAll(pageable);
+
+        HttpGenericPageableResponse resp = new HttpGenericPageableResponse();
+        GenericPageRequestResponse pageRequest = new GenericPageRequestResponse(racas.getNumber(),
+                racas.getSize(),racas.getTotalElements(),racas.getTotalPages(),
+                racas.getSort().toString());
+        resp.setPageRequestResponse(pageRequest);
+        resp.setData(racas.getContent());
+
+        return resp;
     }
 
     @Override

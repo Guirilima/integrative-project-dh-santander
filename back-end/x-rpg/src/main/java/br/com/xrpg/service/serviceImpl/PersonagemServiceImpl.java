@@ -3,7 +3,13 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.xrpg.entity.MestreEntity;
+import br.com.xrpg.vo.GenericPageRequestResponse;
+import br.com.xrpg.vo.HttpGenericPageableResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -48,8 +54,20 @@ public class PersonagemServiceImpl implements PersonagemService {
 	}
 	
 	@Override
-	public List<PersonagemEntity> listar() {
-		return this.personagemRepository.findAll();
+	public HttpGenericPageableResponse listar(int pagina,int qtdPagina) {
+
+		PageRequest pageable = PageRequest.of(pagina,qtdPagina, Sort.by("nomePersonagem").ascending());
+
+		Page<PersonagemEntity> personagens = personagemRepository.findAll(pageable);
+
+		HttpGenericPageableResponse resp = new HttpGenericPageableResponse();
+		GenericPageRequestResponse pageRequest = new GenericPageRequestResponse(personagens.getNumber(),
+				personagens.getSize(),personagens.getTotalElements(),personagens.getTotalPages(),
+				personagens.getSort().toString());
+		resp.setPageRequestResponse(pageRequest);
+		resp.setData(personagens.getContent());
+
+		return resp;
 	}
 
 

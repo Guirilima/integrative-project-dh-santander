@@ -2,7 +2,9 @@ package br.com.xrpg.vo;
 
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.Set;
 
+import br.com.xrpg.entity.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import io.swagger.annotations.ApiModel;
@@ -75,6 +77,13 @@ public class DadosUsuarioVO {
 //    private UserAuthEntity newUserAuth;
 //    private UserPersonalEntity newUserPersonal;
 
-    @ApiModelProperty(name = "tipoUsuario", value = "0",example = "0",position = 12)
-    private BigInteger tipoUsuario;
+//    @ApiModelProperty(name = "tipoUsuario", value = "0",example = "0",position = 12)
+//    private BigInteger tipoUsuario;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long role;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @ApiModelProperty(hidden = true)
+    private Set<Role> roles;
 }

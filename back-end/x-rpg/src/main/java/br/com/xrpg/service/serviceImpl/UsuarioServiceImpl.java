@@ -3,12 +3,15 @@ package br.com.xrpg.service.serviceImpl;
 import javax.transaction.Transactional;
 
 import br.com.xrpg.converter.UsuarioConverter;
-import br.com.xrpg.entity.UsuarioAutenticacao;
+import br.com.xrpg.entity.Role;
 import br.com.xrpg.enumber.TipoUsuarioEnum;
 import br.com.xrpg.exceptions.ArgumentNotValid;
-import br.com.xrpg.repository.UsuarioAutenticacaoRepository;
-import br.com.xrpg.vo.UsuarioApresentacaoVO;
+import br.com.xrpg.repository.RoleRepository;
+import br.com.xrpg.vo.*;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,6 @@ import br.com.xrpg.exceptions.ObjectNotFound;
 import br.com.xrpg.repository.UsuarioRepository;
 import br.com.xrpg.service.UsuarioService;
 import br.com.xrpg.utils.Utils;
-import br.com.xrpg.vo.DadosUsuarioVO;
 
 import java.math.BigInteger;
 import java.util.*;
@@ -29,11 +31,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    private final UsuarioAutenticacaoRepository usuarioAutenticacaoRepository;
-
     private final BCryptPasswordEncoder pEnconder;
 
     private final UsuarioConverter usuarioConverter;
+
+    private final RoleRepository roleRepository;
 
     @Override
     //@Transactional(rollbackOn = ErrorSalvamento.class)
@@ -60,14 +62,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (Utils.validaCPF(dadosNewUser.getCpfUsur()) == null) throw new ErrorSalvamento( "CPF não é valido");
         if (dadosNewUser.getGeneroUsur().length() > 1) throw new ErrorSalvamento("O tamanho do gênero é maior que 1. Favor considere as alternativas : Masculino : 'M', Feminino : 'F' ou Outro : 'O' .");
         if (usuarioRepository.findByCpfPessoal(dadosNewUser.getCpfUsur()) != null) throw new ErrorSalvamento("Já existe esse CPF em nosso banco de registro.");
+        if (usuarioRepository.findByEmailUsuario(dadosNewUser.getEmailUsur()) != null) throw new ErrorSalvamento("Esse email foi encontrado em nosso sistema. Por favor faça o login.");
 
-        //TODO | SALVANDO USUARIO AUTENTICAÇÂO
-        UsuarioAutenticacao newUserAu = new UsuarioAutenticacao().builder()
-                .role(TipoUsuarioEnum.fromId(dadosNewUser.getTipoUsuario()))
-                .senha( this.pEnconder.encode(dadosNewUser.getSenhaUsur()) )
-                .username(dadosNewUser.getNomeUsur())
-                .build();
-        usuarioAutenticacaoRepository.save(newUserAu);
+        Set<Role> roles = new HashSet<>();
+        roles.add( roleRepository.findById(dadosNewUser.getRole()).get() );
 
         //TODO | REUNINDO OS ID'S CRIADOS E SALVANDO O USER
         UsuarioEntity newUser = new UsuarioEntity().builder()
@@ -81,10 +79,13 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .dataNascimento(dadosNewUser.getNascimentoUsur())
                 .genero(dadosNewUser.getGeneroUsur())
                 .telefone(dadosNewUser.getTelefoneUsur())
-                .tipoUsuarioEnum(dadosNewUser.getTipoUsuario())
-                .emailUsuAutenticacao(dadosNewUser.getEmailUsur())
-                .idUsuarioAutenticacao(newUserAu.getId())
+                .emailUsuario(dadosNewUser.getEmailUsur())
+
+                .senha( this.pEnconder.encode(dadosNewUser.getSenhaUsur()) )
+                .username( dadosNewUser.getEmailUsur() )
+                .roles( roles )
                 .build();
+
         usuarioRepository.save(newUser);
         return newUser;
     }
@@ -99,13 +100,25 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<UsuarioApresentacaoVO> getTodosUsuariosSemDadosSensiveis() throws ObjectNotFound {
+    public HttpGenericPageableResponse getTodosUsuariosSemDadosSensiveis(int pagina, int qtdPagina) throws ObjectNotFound {
         List<UsuarioApresentacaoVO> listaUsuariosVO = new ArrayList<>();
 
-        for (UsuarioEntity usu : usuarioRepository.findAll()) {
-            listaUsuariosVO.add( usuarioConverter.entityToApresentacaoVO( usu ) );
+        PageRequest pageable = PageRequest.of(pagina,qtdPagina, Sort.by("nomePessoal").ascending());
+
+        Page<List<Object>> usuarios = usuarioRepository.getUsuariosAtivos(pageable);
+
+        for (Object obj : usuarios.getContent()) {
+            listaUsuariosVO.add(usuarioConverter.entityToApresentacaoVO( (UsuarioEntity) obj ));
         }
-        return listaUsuariosVO;
+
+        HttpGenericPageableResponse resp = new HttpGenericPageableResponse();
+        GenericPageRequestResponse pageRequest = new GenericPageRequestResponse(usuarios.getNumber(),
+                usuarios.getSize(),usuarios.getTotalElements(),usuarios.getTotalPages(),
+                usuarios.getSort().toString());
+        resp.setPageRequestResponse(pageRequest);
+        resp.setData(listaUsuariosVO);
+
+        return resp;
     }
 
     @Override
@@ -121,7 +134,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             usuarioEntity.get().setGenero( (!usuarioEntity.get().getGenero().equals(dadosUsuario.getGeneroUsur())) ? dadosUsuario.getGeneroUsur() : usuarioEntity.get().getGenero() );
             usuarioEntity.get().setCidadePessoal( (!usuarioEntity.get().getCidadePessoal().equals(dadosUsuario.getCidadeUsur())) ? dadosUsuario.getCidadeUsur() : usuarioEntity.get().getCidadePessoal() );
             usuarioEntity.get().setDataNascimento( (!usuarioEntity.get().getDataNascimento().equals(dadosUsuario.getNascimentoUsur())) ? dadosUsuario.getNascimentoUsur() : usuarioEntity.get().getDataNascimento() );
-            usuarioEntity.get().setEmailUsuAutenticacao( (!usuarioEntity.get().getEmailUsuAutenticacao().equals(dadosUsuario.getEmailUsur())) ? dadosUsuario.getEmailUsur() : usuarioEntity.get().getEmailUsuAutenticacao() );
+            usuarioEntity.get().setEmailUsuario( (!usuarioEntity.get().getEmailUsuario().equals(dadosUsuario.getEmailUsur())) ? dadosUsuario.getEmailUsur() : usuarioEntity.get().getEmailUsuario() );
             usuarioEntity.get().setNomePessoal( (!usuarioEntity.get().getNomePessoal().equals(dadosUsuario.getNomeUsur())) ? dadosUsuario.getNomeUsur() : usuarioEntity.get().getNomePessoal() );
             usuarioEntity.get().setSobrenomePessoal( (!usuarioEntity.get().getSobrenomePessoal().equals(dadosUsuario.getSobrenomeUsur())) ? dadosUsuario.getSobrenomeUsur() : usuarioEntity.get().getSobrenomePessoal() );
             usuarioEntity.get().setTelefone( (!usuarioEntity.get().getTelefone().equals(dadosUsuario.getTelefoneUsur())) ? dadosUsuario.getTelefoneUsur() : usuarioEntity.get().getTelefone() );

@@ -5,7 +5,13 @@ import br.com.xrpg.exceptions.ArgumentNotValid;
 import br.com.xrpg.exceptions.ObjectNotFound;
 import br.com.xrpg.repository.MestreRepository;
 import br.com.xrpg.service.MestreService;
+import br.com.xrpg.vo.GenericPageRequestResponse;
+import br.com.xrpg.vo.HttpGenericPageableResponse;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -13,10 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@NoArgsConstructor
+@AllArgsConstructor
 public class MestreServiceImpl implements MestreService {
 
-    private MestreRepository repository;
+    private final MestreRepository repository;
 
     public MestreEntity create(MestreEntity master) {
 
@@ -37,8 +43,20 @@ public class MestreServiceImpl implements MestreService {
                 .orElseThrow(() -> new ObjectNotFound("Não foi possivel encontrar o mestre de id: " + id));
     }
 
-    public List<MestreEntity> findAll() {
-        return this.repository.findAll();
+    public HttpGenericPageableResponse findAll(int pagina,int qtdPagina) {
+
+        PageRequest pageable = PageRequest.of(pagina,qtdPagina, Sort.by("idMestre").ascending());
+
+        Page<MestreEntity> mestres = repository.findAll(pageable);
+
+        HttpGenericPageableResponse resp = new HttpGenericPageableResponse();
+        GenericPageRequestResponse pageRequest = new GenericPageRequestResponse(mestres.getNumber(),
+                mestres.getSize(),mestres.getTotalElements(),mestres.getTotalPages(),
+                mestres.getSort().toString());
+        resp.setPageRequestResponse(pageRequest);
+        resp.setData(mestres.getContent());
+
+        return resp;
     }
 
     public void delete(BigInteger id) {
