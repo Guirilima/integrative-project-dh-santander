@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-4 offset-md-4 form-login">
-        <form  [formGroup]="formLogin">
+        <form  [formGroup]="formLogin" (ngSubmit)="onSubmit()" >
           <div class="form-group">
             <label for="exampleInputEmail1">E-mail</label>
             <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nome@examplo.com" formControlName = "email" required>
