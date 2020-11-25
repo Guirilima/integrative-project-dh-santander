@@ -45,13 +45,17 @@ export class LoginComponent implements OnInit {
     }
 
    var request =  this.authService.auth(loginData,this.apiURL);
-
-   request.then((data) =>{
+   request.then((data: any) =>{
 
     var jsonInfo = JSON.stringify(data);
     //console.log(jsonInfo);
-    var Info = JSON.parse(jsonInfo);
-    console.log(Info.response.status)
+   /// var Info = JSON.parse(jsonInfo);
+
+    //console.log(Info);
+
+    sessionStorage.setItem('user', jsonInfo);
+
+    console.log(JSON.parse(sessionStorage.getItem('user')))
 
 
    }).catch((error) =>{
