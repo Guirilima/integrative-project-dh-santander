@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core';
-import { Usuario } from './shared/usuario.model';
+import { Usuario } from '../shared/usuario.model';
+import {URL_API} from '../app.api';
 
 // import 'rxjs/add/operator/toPromise';
 
@@ -12,7 +13,7 @@ export class UsuariosService {
 
   // public getPersonagens(): Promise<Usuario[]> {
     
-  //   return this.http.get('http://localhost:3000/personagens')
+  //   return this.http.get(`${URL_API}/personagens`)
   //     .toPromise()
   //     .then((resposta: any) => resposta)
   // }

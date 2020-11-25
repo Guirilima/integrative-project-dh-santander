@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MestresService} from '../mestres.service';
+import {MestresService} from '../services/mestres.service';
 import { Mestre } from '../shared/mestre.model';
 
 @Component({

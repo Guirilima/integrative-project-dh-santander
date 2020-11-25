@@ -9,6 +9,8 @@ export class TopoHomeComponent implements OnInit {
 
   constructor() { }
 
+  mostrarHomeLogin: boolean = false;
+
   ngOnInit(): void {
   }
 

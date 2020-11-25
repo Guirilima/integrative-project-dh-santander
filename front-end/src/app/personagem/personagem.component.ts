@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonagensService } from '../personagens.service';
+import { PersonagensService } from '../services/personagens.service';
 import { Personagem } from '../shared/personagem.model';
 
 

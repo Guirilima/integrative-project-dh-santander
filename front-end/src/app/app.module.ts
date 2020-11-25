@@ -21,6 +21,8 @@ import {TopoComponent} from './main/topo/topo.component';
 import { ConviteComponent } from './convite/convite.component';
 import { RegisterCharacterComponent } from './register-character/register-character.component';
 import { RegisterMasterComponent } from './register-master/register-master.component';
+import { FeedComponent } from './feed/feed.component';
+import { ConvidarComponent } from './convidar/convidar.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -35,11 +37,12 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		TopoHomeComponent,
 		MestreComponent,
 		PersonagemComponent,
-		TopoComponent,
 		RodapeComponent,
 		RegisterCharacterComponent,
 		ConviteComponent,
-		RegisterMasterComponent
+		RegisterMasterComponent,
+		FeedComponent,
+		ConvidarComponent
 	],
 	imports: [
 		NgxMaskModule.forRoot(),
