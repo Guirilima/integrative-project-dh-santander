@@ -18,4 +18,5 @@ public class AuthResponse {
     private BigInteger idUsuario;
 
     private String email;
+
 }

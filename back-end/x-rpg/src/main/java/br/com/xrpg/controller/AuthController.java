@@ -24,29 +24,6 @@ public class AuthController {
 
     private final BCryptPasswordEncoder pEnconder;
 
-//    @ApiOperation(value = "API RESPONSÀVEL POR EFETUAR O LOGIN NO FRONT-END")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Combinação perfeita."),
-//            @ApiResponse(code = 400, message = "Erro na combinação recebida.")
-//    })
-//    @PostMapping("/login")
-//    public ResponseEntity<HttpGenericResponse> login( @RequestBody Credential credential) throws ObjectNotFoundException {
-//
-//        try {
-//            BigInteger idUsuario = this.authService.validarDadosLogin(credential);
-//
-//            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
-//                    .status("OK")
-//                    .mensagem("Combinação bem sucedida.")
-//                    .response(idUsuario).build(), HttpStatus.OK);
-//        }catch (Exception ee) {
-//            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
-//                    .status("NOK")
-//                    .mensagem(ee.getMessage())
-//                    .response(null).build(), HttpStatus.BAD_REQUEST);
-//        }
-//    }
-
     @ApiOperation(value = "API RESPONSÀVEL POR EFETUAR O LOGIN NO FRONT-END")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Combinação perfeita."),

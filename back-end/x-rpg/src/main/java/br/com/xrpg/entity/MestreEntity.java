@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,6 +33,9 @@ public class MestreEntity {
 	@EqualsAndHashCode.Include
 	private BigInteger idMestre;
 
+	@Min(0)
+	@Max(10)
+	@PositiveOrZero
 	@Column(name = "anosExperiencia", nullable = false)
 	private BigInteger anosExperiencia;
 
