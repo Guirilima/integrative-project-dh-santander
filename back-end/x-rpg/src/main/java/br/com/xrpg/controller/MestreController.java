@@ -2,9 +2,7 @@ package br.com.xrpg.controller;
 
 import java.math.BigInteger;
 import java.net.URI;
-import java.util.List;
 
-import br.com.xrpg.entity.UsuarioEntity;
 import br.com.xrpg.vo.HttpGenericPageableResponse;
 import br.com.xrpg.vo.HttpGenericResponse;
 import io.swagger.annotations.ApiOperation;
@@ -18,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.xrpg.entity.MestreEntity;
 import br.com.xrpg.service.MestreService;
 import lombok.AllArgsConstructor;
+
 
 @RestController
 @AllArgsConstructor

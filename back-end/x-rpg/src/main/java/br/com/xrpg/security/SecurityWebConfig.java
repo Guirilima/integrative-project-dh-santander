@@ -33,6 +33,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/seguranca/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/classe/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/mestre/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/mestre/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/personagem/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/endereco/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/noticias/**").permitAll()
@@ -41,7 +42,7 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/seguranca-controller/criarNovoUsuarioCadastroUsingPOST").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().cors().disable().csrf().disable()
+                .and().cors().and().csrf().disable()
                 //.httpBasic() SEM REGRA DO FILTER
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtUtil));
     }
