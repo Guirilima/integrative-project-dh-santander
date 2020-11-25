@@ -32,10 +32,7 @@ public class MestreEntity {
 	@Column(name = "idMestre", nullable = false)
 	@EqualsAndHashCode.Include
 	private BigInteger idMestre;
-
-	@Min(0)
-	@Max(10)
-	@PositiveOrZero
+	
 	@Column(name = "anosExperiencia", nullable = false)
 	private BigInteger anosExperiencia;
 

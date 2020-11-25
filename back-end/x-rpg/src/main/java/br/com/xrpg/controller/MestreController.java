@@ -2,9 +2,7 @@ package br.com.xrpg.controller;
 
 import java.math.BigInteger;
 import java.net.URI;
-import java.util.List;
 
-import br.com.xrpg.entity.UsuarioEntity;
 import br.com.xrpg.vo.HttpGenericPageableResponse;
 import br.com.xrpg.vo.HttpGenericResponse;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +17,6 @@ import br.com.xrpg.entity.MestreEntity;
 import br.com.xrpg.service.MestreService;
 import lombok.AllArgsConstructor;
 
-import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
@@ -35,7 +32,7 @@ public class MestreController {
 	})
 
 	@PostMapping()
-	public ResponseEntity<HttpGenericResponse> create(@Valid @RequestBody MestreEntity master) {
+	public ResponseEntity<HttpGenericResponse> create(@RequestBody MestreEntity master) {
 		try {
 			//return ResponseEntity.created(uri).build();
 			MestreEntity masterCreated = this.service.create(master);
@@ -147,15 +144,5 @@ public class MestreController {
 					.response(null).build(), HttpStatus.BAD_REQUEST);
 		}
 
-	}
-
-	@GetMapping("/testException")
-	public void testException() {
-		Integer x = 2 / 0;
-	}
-
-	@PostMapping("/show")
-	public ResponseEntity<MestreEntity> create2(@Valid @RequestBody MestreEntity mestreEntity) {
-		return new ResponseEntity<MestreEntity>(this.service.create(mestreEntity), HttpStatus.CREATED);
 	}
 }
