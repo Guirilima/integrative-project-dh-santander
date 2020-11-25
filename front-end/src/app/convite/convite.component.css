@@ -1,8 +1,9 @@
-form{
-    background: whitesmoke;
-    padding:10px;
-    border:1px solid black;
-    
+#convite{
+    padding:1vh;
+    background-image: linear-gradient(to right, #46C2FF, #BD11FA);
+}
+.alert{
+    background:whitesmoke;
 }
 .row{
     padding:10px;
@@ -26,4 +27,7 @@ img {
 
 h5{
     font-size: 25px;
+}
+.btn{
+    width: 100px;
 }
