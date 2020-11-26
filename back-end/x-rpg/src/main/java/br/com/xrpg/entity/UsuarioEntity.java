@@ -7,11 +7,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Data
 @NoArgsConstructor
@@ -22,51 +24,78 @@ import lombok.NoArgsConstructor;
 public class UsuarioEntity {
 
 	@Id
+	@Min(0)
+	@PositiveOrZero
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "idUsuario", nullable = false)
 	private BigInteger idUsuario;
 
+	@Min(0)
+	@Max(1)
+	@PositiveOrZero
 	@Column(name = "flagAtivo", nullable = false)
 	private BigInteger flagAtivo;						//0 = false | 1 = true
 
+	@Min(0)
+	@PositiveOrZero
 	@Column(name = "idMestre")
 	private BigInteger idMestre;
 
 	@Column(name = "ultimoLogin",nullable = false)
 	private Date dataUltimoLogin;
 
+	@NotNull
+	@NotBlank
 	@Column(name = "nomePessoal",nullable = false)
 	private String nomePessoal;
 
+	@NotNull
+	@NotBlank
 	@Column(name = "sobrenomePessoal")
 	private String sobrenomePessoal;
 
+	@NotNull
+	@NotBlank
 	@Column(name = "estado",nullable = false,length = 2)
 	private String estadoPessoal;
 
+	@NotNull
+	@NotBlank
 	@Column(name = "cidade",nullable = false)
 	private String cidadePessoal;
 
+	@NotNull
+	@NotBlank
+	@CPF
 	@Column(name = "cpfPessoal",nullable = false,length = 20)
 	private String cpfPessoal;
 
 	@Column(name = "dataNascimento", nullable = false )
 	private Date dataNascimento;
 
+	@NotNull
+	@NotBlank
 	@Column(name = "telefonePessoal", nullable = false,length = 14)
 	private String telefone;
 
+	@NotNull
+	@NotBlank
 	@Column(name = "genero", nullable = false,length = 1) //F=Feminino/M=Masculino/O=Outro
 	private String genero;
 
-
-
+	@Email
+	@NotNull
+	@NotBlank
 	@Column(name = "emailUsuario",nullable = false)
 	private String emailUsuario;
 
+	@NotNull
+	@NotBlank
 	@Column( nullable = false)
 	private String username;
 
+	@NotNull
+	@NotBlank
 	@Column( nullable = false)
 	private String senha;
 
