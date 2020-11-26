@@ -31,13 +31,30 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.PUT, "/api/usuario").hasRole("ADMINISTRADOR")
 
                 .antMatchers(HttpMethod.POST, "/api/seguranca/**").permitAll()
+
                 .antMatchers(HttpMethod.POST, "/api/classe/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/classe/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/classe/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/classe/**").hasRole("ADMINISTRADOR")
+
                 .antMatchers(HttpMethod.POST, "/api/mestre/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/mestre/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/mestre/**").permitAll()
+
                 .antMatchers(HttpMethod.POST, "/api/personagem/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/personagem/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/personagem/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/personagem/**").hasRole("ADMINISTRADOR")
+
                 .antMatchers(HttpMethod.POST, "/api/endereco/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/noticias/**").permitAll()
+
+                .antMatchers(HttpMethod.POST, "/api/noticias/**").hasRole("ADMINISTRADOR")
+                .antMatchers(HttpMethod.GET, "/api/noticias/**").permitAll()
+
                 .antMatchers(HttpMethod.POST, "/api/raca/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/raca/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/raca/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/raca/**").hasRole("ADMINISTRADOR")
 
                 .antMatchers(HttpMethod.GET, "/api/notificacao/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/notificacao/**").permitAll()
@@ -45,7 +62,11 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/notificacao").permitAll()
 
                 .antMatchers(HttpMethod.POST, "/api/denuncias/**").hasRole("ADMINISTRADOR")
-                .antMatchers(HttpMethod.GET, "/seguranca-controller/criarNovoUsuarioCadastroUsingPOST").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/denuncias/**").hasRole("ADMINISTRADOR")
+                .antMatchers(HttpMethod.PUT, "/api/denuncias/**").hasRole("ADMINISTRADOR")
+                .antMatchers(HttpMethod.DELETE, "/api/denuncias/**").hasRole("ADMINISTRADOR")
+
+                //.antMatchers(HttpMethod.GET, "/seguranca-controller/criarNovoUsuarioCadastroUsingPOST").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().cors().and().csrf().disable()
