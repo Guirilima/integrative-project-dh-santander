@@ -2,7 +2,7 @@
     background-color: #21212E;
 }
 .logo {
-    width: 200px;
+    width: 120px;
     height: auto;
 }
 .nav-menu .nav-item .nav-link{
@@ -21,4 +21,17 @@
 }
 .example-spacer {
     flex: 1 1 auto;
+}
+
+
+.form-inline{
+    width:65%;
+    justify-content: center;
+}
+.form-control{
+    width: 40%;
+}
+
+.navbar-nav .nav-item .nav-link{
+    color:white;
 }
