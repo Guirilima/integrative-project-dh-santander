@@ -38,6 +38,12 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/endereco/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/noticias/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/raca/**").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/api/notificacao/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/notificacao/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/api/notificacao/**").hasRole("ADMINISTRADOR")
+                .antMatchers(HttpMethod.POST, "/api/notificacao").permitAll()
+
                 .antMatchers(HttpMethod.POST, "/api/denuncias/**").hasRole("ADMINISTRADOR")
                 .antMatchers(HttpMethod.GET, "/seguranca-controller/criarNovoUsuarioCadastroUsingPOST").permitAll()
                 .anyRequest().authenticated()
