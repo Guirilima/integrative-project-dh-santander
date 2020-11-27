@@ -37,7 +37,7 @@ public class CampanhaServiceImpl implements CampanhaService {
 	public CampanhaEntity encontrarPorId(BigInteger bigInteger) throws ObjectNotFound {
 		Optional
 		.ofNullable(bigInteger)
-		.orElseThrow( () -> new ArgumentNotValid("O id informado nao e valido"));
+		.orElseThrow( () -> new ArgumentNotValid("O id informado não é valido"));
 		
 		 return this.campanhaRepository.findById(bigInteger)
                .orElseThrow(() -> new ObjectNotFound("Campanha não encontrada"));
