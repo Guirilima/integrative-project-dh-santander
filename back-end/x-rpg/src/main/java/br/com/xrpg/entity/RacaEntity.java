@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,13 +24,19 @@ import lombok.NoArgsConstructor;
 public class RacaEntity {
 
     @Id
+    @Min(0)
+    @PositiveOrZero
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "idRaca",nullable = false)
     private BigInteger idRaca;
 
+    @NotNull
+    @NotBlank
     @Column(name = "nomeRaca",length = 44,nullable = false)
     private String nomeRaca;
 
+    @NotNull
+    @NotBlank
     @Column(name = "descricaoRaca",length = 449,nullable = false)
     private String descricaoRaca;
 }

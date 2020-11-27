@@ -28,14 +28,22 @@ import lombok.Setter;
 public class MestreEntity {
 
 	@Id
+	@Min(0)
+	@PositiveOrZero
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "idMestre", nullable = false)
 	@EqualsAndHashCode.Include
 	private BigInteger idMestre;
-	
+
+	@NotNull
+	@Min(0)
+	@PositiveOrZero
 	@Column(name = "anosExperiencia", nullable = false)
 	private BigInteger anosExperiencia;
 
+	@NotNull
+	@Min(0)
+	@PositiveOrZero
 	@Column(name = "campanhasMestradas", nullable = false)
 	private BigInteger campanhasMestradas;
 

@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.PositiveOrZero;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +26,8 @@ import lombok.NoArgsConstructor;
 public class AvaliaçãoEntity {
 	
         @Id
+        @Min(0)
+        @PositiveOrZero
         @GeneratedValue(strategy = GenerationType.SEQUENCE)
         @Column(name = "idAvaliacao",nullable = false)
         private BigInteger idAvaliação;
@@ -31,12 +35,13 @@ public class AvaliaçãoEntity {
         @Column(name = "dataAvaliação",nullable = false)
         private Date dataAvaliação;
 
-        //@Column(name = "time")
-        //private String time;
-
+        @Min(0)
+        @PositiveOrZero
         @Column (name = "idUsuarioAvaliou",nullable = false)
         private BigInteger idUsuarioAvaliou;
 
+        @Min(0)
+        @PositiveOrZero
         @Column (name = "idUsuario",nullable = false)
         private BigInteger idUsuario;
 

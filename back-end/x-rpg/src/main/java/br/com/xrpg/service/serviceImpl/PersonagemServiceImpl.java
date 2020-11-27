@@ -84,7 +84,27 @@ public class PersonagemServiceImpl implements PersonagemService {
 		this.encontrarPorId(bigInteger);
 		this.personagemRepository.deleteById(bigInteger);
 	}
-	
+
+	@Override
+	public HttpGenericPageableResponse buscarPersonagemPorUsuario(BigInteger idUsuario, int pagina, int qtdPagina) {
+		try {
+			PageRequest pageable = PageRequest.of(pagina, qtdPagina, Sort.by("nomePersonagem").ascending());
+
+			Page<List<PersonagemEntity>> personagens = personagemRepository.findAllByIdUsuario(idUsuario, pageable);
+
+			HttpGenericPageableResponse resp = new HttpGenericPageableResponse();
+			GenericPageRequestResponse pageRequest = new GenericPageRequestResponse(personagens.getNumber(),
+					personagens.getSize(), personagens.getTotalElements(), personagens.getTotalPages(),
+					personagens.getSort().toString());
+			resp.setPageRequestResponse(pageRequest);
+			resp.setData(personagens.getContent());
+
+			return resp;
+		}catch (Exception ee) {
+			throw new RuntimeException("Erro durante a manipulacao dos dados para a buscar.");
+		}
+	}
+
 }		
 	
 	

@@ -23,6 +23,8 @@ public interface PersonagemService {
 	public void atualizar(PersonagemEntity personagemEntity);
 	
 	public void deletar(BigInteger bigInteger);
+
+	public HttpGenericPageableResponse buscarPersonagemPorUsuario(BigInteger idUsuario,int pagina,int qtdPagina);
 	
 }
 

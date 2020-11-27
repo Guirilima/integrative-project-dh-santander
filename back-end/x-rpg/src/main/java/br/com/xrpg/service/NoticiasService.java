@@ -6,10 +6,12 @@ import java.util.List;
 import br.com.xrpg.entity.NoticiasEntity;
 import br.com.xrpg.exceptions.ErrorSalvamento;
 import br.com.xrpg.exceptions.ObjectNotFound;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface NoticiasService {
 	
-public NoticiasEntity criar(NoticiasEntity noticiasEntity) throws ErrorSalvamento;
+	public NoticiasEntity criar(NoticiasEntity noticiasEntity) throws ErrorSalvamento;
 	
 	public NoticiasEntity encontrarPorId (BigInteger bigInteger) throws ObjectNotFound;
 	

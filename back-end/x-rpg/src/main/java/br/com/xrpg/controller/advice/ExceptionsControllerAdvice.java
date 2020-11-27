@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ExceptionsControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    //@ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<HttpGenericResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 
-        return ex.getBindingResult().getFieldError().getField() + " - " + ex.getBindingResult().getFieldError().getDefaultMessage();
+        //return ex.getBindingResult().getFieldError().getField() + " - " + ex.getBindingResult().getFieldError().getDefaultMessage();
+        return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                .status("NOK")
+                .mensagem( ex.getBindingResult().getFieldError().getField() + " - " +
+                        ex.getBindingResult().getFieldError().getDefaultMessage() )
+                .response( null ).build(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

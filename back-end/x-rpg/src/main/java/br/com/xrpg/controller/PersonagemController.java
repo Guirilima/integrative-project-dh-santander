@@ -169,9 +169,9 @@ public class PersonagemController {
 
 	@ApiOperation(value = "API responsavel por atualizar personagem no sistema pelo ID.")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "dados do personagem atualizados com sucesso."),
-	@ApiResponse(code = 400, message = "personagem nao encontrado") })
+	@ApiResponse(code = 400, message = "personagem nao encontrado")
+	})
 	@RequestMapping(value ="/{idPersonagem}",method = RequestMethod.PUT, produces = "application/json")
-	
 	public ResponseEntity<HttpGenericResponse> atualizarPersonagem(@PathVariable("idPersonagem") BigInteger idPersonagem, @RequestBody PersonagemEntity personagemEntity) {
 		
 		try {
@@ -195,6 +195,29 @@ public class PersonagemController {
 					.response(null)
 					.build(),
 					HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@ApiOperation(value = "API responsavel por buscar uma lista de personagem por usuario .")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "operacao feita com sucesso."),
+			@ApiResponse(code = 400, message = "erro durante a listagem.")
+	})
+	@RequestMapping(value ="/buscarPorUsuario/{idUsuario}",method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<HttpGenericResponse> buscarListaPersonagemPorUsuario(@PathVariable("idUsuario") BigInteger idUsuario,
+																			   @RequestParam(value = "pagina",defaultValue = "0",required = false) int pagina,
+																			   @RequestParam(value = "qtdPagina",defaultValue = "6",required = false) int qtdPagina) {
+
+		try {
+			HttpGenericPageableResponse resp = personagemService.buscarPersonagemPorUsuario(idUsuario,pagina,qtdPagina);
+
+			return new ResponseEntity<HttpGenericResponse>(
+					new HttpGenericResponse().builder()
+							.status("OK").mensagem("").response(resp).build(),HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<HttpGenericResponse>(
+					new HttpGenericResponse().builder().status("NOK")
+							.mensagem(e.getMessage()).response(null)
+							.build(),HttpStatus.BAD_REQUEST);
 		}
 	}
 }
