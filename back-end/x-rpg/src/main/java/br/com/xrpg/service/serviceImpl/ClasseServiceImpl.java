@@ -1,8 +1,12 @@
 package br.com.xrpg.service.serviceImpl;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.xrpg.entity.RacaEntity;
+import br.com.xrpg.exceptions.ArgumentNotValid;
+import br.com.xrpg.exceptions.ObjectNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +42,31 @@ public class ClasseServiceImpl implements ClasseService {
         classeRepository.save(newClass);
 
         return newClass;
+    }
+
+    @Override
+    public ClasseEntity encontrarPorId(BigInteger idClasse) throws ObjectNotFound {
+        Optional
+                .ofNullable(idClasse)
+                .orElseThrow( () -> new ArgumentNotValid("O id informado não é valido"));
+
+        return this.classeRepository.findById(idClasse)
+                .orElseThrow(() -> new ObjectNotFound("Classe não encontrada"));
+    }
+
+    @Override
+    public List<ClasseEntity> getListaClassesSemPaginacao() {
+        return this.classeRepository.getAllClasses();
+    }
+
+    @Override
+    public void deletar(BigInteger idClasse) {
+
+        Optional
+                .ofNullable( this.encontrarPorId(idClasse) )
+                .orElseThrow( () -> new ArgumentNotValid("O id informado não é valido"));
+
+        this.classeRepository.deleteById(idClasse);
+
     }
 }

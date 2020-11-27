@@ -1,7 +1,12 @@
 package br.com.xrpg.service.serviceImpl;
 
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Optional;
 
+import br.com.xrpg.entity.CampanhaEntity;
+import br.com.xrpg.exceptions.ArgumentNotValid;
+import br.com.xrpg.exceptions.ObjectNotFound;
 import br.com.xrpg.vo.GenericPageRequestResponse;
 import br.com.xrpg.vo.HttpGenericPageableResponse;
 import lombok.AllArgsConstructor;
@@ -53,5 +58,31 @@ public class RacaServiceImpl implements RacaService {
         racaRepository.save(newRaca);
 
         return newRaca;
+    }
+
+    @Override
+    public RacaEntity encontrarPorId(BigInteger idRaca) throws ObjectNotFound {
+        Optional
+                .ofNullable(idRaca)
+                .orElseThrow( () -> new ArgumentNotValid("O id informado não é valido"));
+
+        return this.racaRepository.findById(idRaca)
+                .orElseThrow(() -> new ObjectNotFound("Raca não encontrada"));
+    }
+
+    @Override
+    public List<RacaEntity> getListaRacasSemPaginacao() {
+        return this.racaRepository.getAllRaca();
+    }
+
+    @Override
+    public void deletar(BigInteger idRaca) {
+
+        Optional
+                .ofNullable( this.encontrarPorId(idRaca) )
+                .orElseThrow( () -> new ArgumentNotValid("O id informado não é valido"));
+
+        this.racaRepository.deleteById(idRaca);
+
     }
 }
