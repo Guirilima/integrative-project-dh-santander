@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/integrative-project-dh-santander.iml" filepath="$PROJECT_DIR$/.idea/integrative-project-dh-santander.iml" />
-      <module fileurl="file://$PROJECT_DIR$/back-end/x-rpg/xrpg.iml" filepath="$PROJECT_DIR$/back-end/x-rpg/xrpg.iml" />
-    </modules>
-  </component>
-</project>
