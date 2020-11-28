@@ -1,7 +1,6 @@
-<section id="register" class = "section-padding">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-          <div class="col-md-4 offset-md-4 form-register">
+<section id="register" >
+    <div class="container-fluid pt-4 pb-4">
+          <div class="col-md-12 offset-md-12 form-register">
             <p>Cadastro de Personagem</p>
             <form method="post" [formGroup]= "formRegistroPersonagem" (ngSubmit)="onSubmit()">
                 <div class="form-row pb-3">
@@ -53,7 +52,7 @@
                     <div class="col-md-12 mb-12">
                     <div class="form-group">
                         <label for="idHistoriaPersonagem">História do personagem</label>
-                        <textarea class="form-control" id="idHistoriaPersonagem" rows="3" formControlName = "historiaPersonagem"></textarea>
+                        <textarea maxlength="200" class="form-control" id="idHistoriaPersonagem" rows="3" formControlName = "historiaPersonagem"></textarea>
                     </div>
 
                     <div *ngIf="formRegistroPersonagem.get('historiaPersonagem').invalid && (formRegistroPersonagem.get('historiaPersonagem').dirty || formRegistroPersonagem.get('historiaPersonagem').touched)"
@@ -82,11 +81,9 @@
                 
             </form>
           </div>
-        </div>
       </div>
     
 
-      <app-personagem></app-personagem>
     
 
   </section>

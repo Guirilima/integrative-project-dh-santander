@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import {PersonagemComponent} from '../personagem/personagem.component'
+import {LoggedUserService} from '../logged-user.service'
 
 @Component({
   selector: 'app-register-character',
@@ -10,6 +10,7 @@ import {PersonagemComponent} from '../personagem/personagem.component'
 })
 export class RegisterCharacterComponent implements OnInit {
 
+  
   CLASSES = null;
   RACAS = null;
   
@@ -21,9 +22,9 @@ export class RegisterCharacterComponent implements OnInit {
     classePersonagem: new FormControl(null),
     historiaPersonagem: new FormControl(null,[Validators.required,Validators.minLength(150)])});
 
-  constructor(private http : HttpClient) {
+  constructor(private http : HttpClient, private loggedUser: LoggedUserService) {
 
-    var promiseClasses = this.http.get(`${ this.apiURL }/classe/listar-classes`).toPromise();
+    var promiseClasses = this.http.get(`${ this.apiURL }/classe/select-listar-classes`).toPromise();
     
     promiseClasses.then((data)=>{
 
@@ -31,7 +32,6 @@ export class RegisterCharacterComponent implements OnInit {
       //console.log(jsonInfo);
       var Info = JSON.parse(jsonInfo);
       this.CLASSES = Info.response;
-      console.log(this.CLASSES[0]);
       
      
   
@@ -42,15 +42,15 @@ export class RegisterCharacterComponent implements OnInit {
 
 
     
-    var promiseRacas = this.http.get(`${ this.apiURL }/raca/listar-racas`).toPromise();
+    var promiseRacas = this.http.get(`${ this.apiURL }/raca/select-listar-racas`).toPromise();
     
     promiseRacas.then((data)=>{
 
       var jsonInfo = JSON.stringify(data);
       //console.log(jsonInfo);
       var Info = JSON.parse(jsonInfo);
+      console.log(Info.response)
       this.RACAS = Info.response;
-      console.log(this.RACAS[0]);
       
      
   
@@ -72,7 +72,7 @@ export class RegisterCharacterComponent implements OnInit {
       historiaPersonagem: this.formRegistroPersonagem.get('historiaPersonagem').value,
       idClasse: this.formRegistroPersonagem.get('classePersonagem').value,
       idRaca: this.formRegistroPersonagem.get('racaPersonagem').value,
-      idUsuario: 3,
+      idUsuario: this.loggedUser.getId(),
       nomePersonagem: this.formRegistroPersonagem.get('nomePersonagem').value
     }
 

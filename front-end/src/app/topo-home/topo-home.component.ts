@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {LoggedUserService} from '../logged-user.service';
 @Component({
   selector: 'app-topo-home',
   templateUrl: './topo-home.component.html',
@@ -7,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopoHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loggedUser: LoggedUserService) { }
 
-  mostrarHomeLogin: boolean = false;
+  mostrarHomeLogin: boolean;
 
   ngOnInit(): void {
+
+    if(sessionStorage.getItem('user') === null ) this.mostrarHomeLogin = true;
+
   }
 
 }

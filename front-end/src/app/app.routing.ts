@@ -16,6 +16,7 @@ import {RegisterCharacterComponent} from './register-character/register-characte
 import {RegisterMasterComponent} from './register-master/register-master.component';
 import {FeedComponent} from './feed/feed.component';
 import {ConvidarComponent} from './convidar/convidar.component';
+import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
 
 const APP_ROUTES: Routes = [
     { path: '', component: HomeComponent },
@@ -33,6 +34,7 @@ const APP_ROUTES: Routes = [
     { path: 'register-master', component: RegisterMasterComponent},
     { path: 'feed', component: FeedComponent},
     { path: 'convidar', component:ConvidarComponent},
+    { path: 'dashboard-user', component:DashboardUserComponent},
 ];
 
 const config: ExtraOptions = {
