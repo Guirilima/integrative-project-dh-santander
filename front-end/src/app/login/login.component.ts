@@ -2,6 +2,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService} from '../auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   readonly apiURL : string; //url base 
    
-  constructor(private authService: AuthService ) {
+  constructor(private authService: AuthService,private router:Router ) {
 
     this.apiURL = 'http://localhost:8080/api';
 
@@ -56,12 +57,13 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem('user', jsonInfo);
 
     console.log(JSON.parse(sessionStorage.getItem('user')))
+    this.router.navigate(['/dashboard-user']); 
+    location.reload();
 
 
    }).catch((error) =>{
 
-    
-
+  
 
    })
   }

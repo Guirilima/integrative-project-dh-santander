@@ -13,8 +13,10 @@ export class PersonagensService {
 
   public getPersonagens(): Promise<Personagem[]> {
     
+
     return this.http.get( `${URL_API}/personagens`)
       .toPromise()
       .then((resposta: any) => resposta)
   }
+  
 }

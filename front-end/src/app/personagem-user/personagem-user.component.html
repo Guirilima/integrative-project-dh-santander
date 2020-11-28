@@ -1,0 +1,28 @@
+<section id="funcionalidades" >
+  <div class="container">
+      <div class="card-deck">
+          <div class="card">
+              <div class="card-header">
+                  <div class="d-flex">
+                      <div class="w-100">
+                          {{racaPersonagem}}
+                      </div>
+                      <div>
+                          <small>{{classePersonagem}}</small>
+                      </div>
+                  </div>
+              </div>
+            <!--  <img src="../assets/img/photo-three.jpg" class="card-img-top" alt="..."> -->
+              <div class="card-body">
+                  <h5 class="card-title">{{nomePersonagem}}</h5>
+                  <p class="card-text">{{historiaPersonagem}}</p>
+              </div>
+
+              <a class="btn botao-hover  mx-12 my-sm-0 text-center align-middle" (click)="deletarPersonagem()">
+                <span class="btn btn-dark align-middle">Deletar</span>
+            </a>
+          </div>
+         
+      </div>
+  </div>
+</section>

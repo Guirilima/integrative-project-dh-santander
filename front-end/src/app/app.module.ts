@@ -17,12 +17,13 @@ import { MestreComponent } from './mestre/mestre.component';
 import { PersonagemComponent } from './personagem/personagem.component';
 import {TopoHomeComponent} from './topo-home/topo-home.component';
 import {RodapeComponent} from './rodape/rodape.component';
-import {TopoComponent} from './main/topo/topo.component';
 import { ConviteComponent } from './convite/convite.component';
 import { RegisterCharacterComponent } from './register-character/register-character.component';
 import { RegisterMasterComponent } from './register-master/register-master.component';
 import { FeedComponent } from './feed/feed.component';
 import { ConvidarComponent } from './convidar/convidar.component';
+import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
+import { PersonagemUserComponent } from './personagem-user/personagem-user.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -42,7 +43,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		ConviteComponent,
 		RegisterMasterComponent,
 		FeedComponent,
-		ConvidarComponent
+		ConvidarComponent,
+		DashboardUserComponent,
+		PersonagemUserComponent
 	],
 	imports: [
 		NgxMaskModule.forRoot(),

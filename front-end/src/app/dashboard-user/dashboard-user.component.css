@@ -1,4 +1,5 @@
 #register {
+    padding:10vh;
     background-image: linear-gradient(to right, #46C2FF, #BD11FA);
 }
 .form-register{
@@ -28,3 +29,4 @@
     padding: 10px;
     outline: unset;
 }
+

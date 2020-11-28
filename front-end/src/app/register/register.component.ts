@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router'; 
 import {UsuarioService} from '../usuario.service';
@@ -160,16 +160,19 @@ cadastrarUsuario()
    
   var usuario = { 
     
-    cidadeUsur : this.cidade,
-    cpfUsur: this.formRegistro.get('cpf').value,
-    nascimentoUsur:  "2020-10-20T12:20:30.726Z",
-    emailUsur: this.formRegistro.get('email').value,
-    generoUsur: this.formRegistro.get('genero').value,
-    sobrenomeUsur: this.formRegistro.get('sobrenome').value,
+    role: 1,
     nomeUsur: this.formRegistro.get('nomeUsuario').value,
+    sobrenomeUsur: this.formRegistro.get('sobrenome').value,
+    nascimentoUsur:  "2020-10-20T12:20:30.726Z",
+    generoUsur: this.formRegistro.get('genero').value,
+    emailUsur: this.formRegistro.get('email').value,
     senhaUsur: this.formRegistro.get('senha').value,
+    cpfUsur: this.formRegistro.get('cpf').value,
     telefoneUsur: this.formRegistro.get('telefone').value,
     estadoUsur: this.estado,
+    cidadeUsur : this.cidade,
+    flagAtivoUsur: 1
+    
 
   }; 
 
