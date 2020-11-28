@@ -1,6 +1,7 @@
 package br.com.xrpg.controller;
 
 import java.math.BigInteger;
+import java.net.URI;
 import java.util.List;
 
 import br.com.xrpg.entity.CampanhaEntity;
@@ -17,6 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Slf4j
 @RestController
@@ -85,10 +87,13 @@ public class RacaController {
 
             newRaca = racaService.inclusaoRaca(newRaca);
 
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newRaca.getIdRaca())
+                    .toUri();
+
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
                     .mensagem("Criação concluída")
-                    .response(newRaca).build(), HttpStatus.OK);
+                    .response(uri).build(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("NOK")

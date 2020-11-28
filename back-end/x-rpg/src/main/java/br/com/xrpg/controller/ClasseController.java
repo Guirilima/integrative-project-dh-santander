@@ -1,6 +1,7 @@
 package br.com.xrpg.controller;
 
 import java.math.BigInteger;
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Slf4j
 @RestController
@@ -82,10 +84,13 @@ public class ClasseController {
 
             newClass = classeService.inclusaoClasse(newClass);
 
+            URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newClass.getIdClasse())
+                    .toUri();
+
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("OK")
                     .mensagem("Criação concluída")
-                    .response(newClass).build(), HttpStatus.OK);
+                    .response(uri).build(), HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
                     .status("NOK")
