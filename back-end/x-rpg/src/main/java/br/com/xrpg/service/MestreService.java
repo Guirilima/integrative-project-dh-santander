@@ -20,4 +20,6 @@ public interface MestreService {
 	public HttpGenericPageableResponse findAll(int pagina,int qtdPagina);
 	
 	public void delete(BigInteger id) ;
+
+	public MestreEntity findByIdUsuario(BigInteger idUsuario);
 }

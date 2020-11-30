@@ -26,7 +26,15 @@ public class MestreServiceImpl implements MestreService {
 
     public MestreEntity create(MestreEntity master) {
 
-        return this.repository.save(master);
+        if (repository.findByIdUsuario(master.getIdUsuario()) != null) {
+            throw new RuntimeException("Esse Usuário já possui um mestre cadastrado.");
+        }
+
+        try {
+            return this.repository.save(master);
+        }catch (Exception e) {
+            throw new RuntimeException("Erro durante o salvamento do novo mestre");
+        }
     }
 
     public MestreEntity update(MestreEntity master) {
@@ -63,5 +71,14 @@ public class MestreServiceImpl implements MestreService {
         this.findById(id);
 
         this.repository.deleteById(id);
+    }
+
+    public MestreEntity findByIdUsuario(BigInteger idUsuario) {
+
+        MestreEntity mestreEntity = repository.findByIdUsuario(idUsuario);
+        if (mestreEntity == null) {
+            throw new RuntimeException("Não há mestre para esse Usuário.");
+        }
+        return mestreEntity;
     }
 }

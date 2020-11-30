@@ -145,4 +145,25 @@ public class MestreController {
 		}
 
 	}
+
+	@ApiOperation(value = "API RESPONSÁVEL POR BUSCAR O MESTRE PELO ID USUARIO.")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Mestre encontrado com sucesso."),
+			@ApiResponse(code = 400, message = "Erro durante a busca dos dados.")
+	})
+	@GetMapping("busca-por-usuario/{idUsuario}")
+	public ResponseEntity<HttpGenericResponse> findByIdUsuario(@PathVariable BigInteger idUsuario){
+		try {
+
+			return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+					.status("OK")
+					.mensagem("")
+					.response( this.service.findByIdUsuario(idUsuario) ).build(), HttpStatus.OK);
+		}catch (Exception e) {
+			return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+					.status("NOK")
+					.mensagem(e.getMessage())
+					.response(null).build(), HttpStatus.BAD_REQUEST);
+		}
+
+	}
 }

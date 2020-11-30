@@ -8,4 +8,6 @@ import br.com.xrpg.entity.MestreEntity;
 
 public interface MestreRepository extends JpaRepository<MestreEntity, BigInteger> {
 
+    public MestreEntity findByIdUsuario(BigInteger idUsuario);
+
 }

@@ -47,4 +47,13 @@ public class MestreEntity {
 	@Column(name = "campanhasMestradas", nullable = false)
 	private BigInteger campanhasMestradas;
 
+	@Column(name = "descricao")
+	private String descricao;
+
+	@Min(0)
+	@NotNull
+	@PositiveOrZero
+	@Column(name = "idUsuario", nullable = false)
+	private BigInteger idUsuario;
+
 }
