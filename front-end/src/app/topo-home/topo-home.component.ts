@@ -17,4 +17,8 @@ export class TopoHomeComponent implements OnInit {
 
   }
 
+  sair(){
+    sessionStorage.removeItem('user');
+  }
+
 }

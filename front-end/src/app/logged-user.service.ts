@@ -9,7 +9,10 @@ export class LoggedUserService {
   constructor(private http: HttpClient) { }
 
   public isLogged(){
-    return sessionStorage.getItem('user');
+
+    if(sessionStorage.getItem('user') === null) return false;
+    else return true;
+
   }
 
   public getJwt(){

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {LoggedUserService} from '../logged-user.service'
+import { options } from '../app.module';
 
 @Component({
   selector: 'app-register-character',
@@ -9,6 +10,15 @@ import {LoggedUserService} from '../logged-user.service'
   styleUrls: ['./register-character.component.css']
 })
 export class RegisterCharacterComponent implements OnInit {
+
+
+   httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Authorization: `Bearer ${ this.loggedUser.getJwt() }`
+    })
+  };
+
 
   
   CLASSES = null;
@@ -24,7 +34,9 @@ export class RegisterCharacterComponent implements OnInit {
 
   constructor(private http : HttpClient, private loggedUser: LoggedUserService) {
 
-    var promiseClasses = this.http.get(`${ this.apiURL }/classe/select-listar-classes`).toPromise();
+  
+    
+    var promiseClasses = this.http.get(`${ this.apiURL }/classe/select-listar-classes`,this.httpOptions).toPromise();
     
     promiseClasses.then((data)=>{
 
@@ -40,9 +52,9 @@ export class RegisterCharacterComponent implements OnInit {
       console.log("Promise rejected with " + JSON.stringify(error));
     })
 
-
+ 
     
-    var promiseRacas = this.http.get(`${ this.apiURL }/raca/select-listar-racas`).toPromise();
+    var promiseRacas = this.http.get(`${ this.apiURL }/raca/select-listar-racas`, this.httpOptions).toPromise();
     
     promiseRacas.then((data)=>{
 
@@ -64,6 +76,13 @@ export class RegisterCharacterComponent implements OnInit {
    }
 
    onSubmit() {
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: `Bearer ${ this.loggedUser.getJwt() }`
+      })
+    };
     // aqui você pode implementar a logica para fazer seu formulário salvar
     console.log("Okay");
     if(this.formRegistroPersonagem.valid)
@@ -78,7 +97,7 @@ export class RegisterCharacterComponent implements OnInit {
 
     console.log(personagem);
 
-    var request = this.http.post(`${ this.apiURL }/personagem` , personagem).toPromise();
+    var request = this.http.post(`${ this.apiURL }/personagem` ,personagem, this.httpOptions).toPromise();
 
     request.then((data)=>{
 
