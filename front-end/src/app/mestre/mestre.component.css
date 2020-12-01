@@ -2,21 +2,18 @@
     padding:1vh;
     background-image: linear-gradient(to right, #46C2FF, #BD11FA);
 }
-.container{
-    padding-left: 15vw;
+.row{
+    width:90%;
 }
-.card-img{
-    max-width: 180px;
-    
-    padding: 5px;
-    border-radius: 10px;
+.col-sm-3{
+    padding-top: 10px;
+    padding-left: 30px;
 }
-
-.card-body{
-    height: 280px;
+.card-header{
+    border-color:#46C2FF;
 }
-
-.historia{
-    height:75px ;
+.card{
+    background-color: #21212E;
+    color: white;
 }
 
