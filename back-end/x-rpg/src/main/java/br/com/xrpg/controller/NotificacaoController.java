@@ -83,7 +83,7 @@ public class NotificacaoController {
     })
 
     @GetMapping("/{idNotificacao}")
-    public ResponseEntity<HttpGenericResponse> findById(@PathVariable BigInteger idNotificacao) {
+    public ResponseEntity<HttpGenericResponse> findById(@PathVariable("idNotificacao") BigInteger idNotificacao) {
         try {
 
             NotificacaoEntity newNotificação = this.notificacaoService.buscarPorId(idNotificacao);
@@ -106,7 +106,7 @@ public class NotificacaoController {
             @ApiResponse(code = 400, message = "Erro durante a busca e/ou notificacao não encontrado.")
     })
     @GetMapping("/usuarioConvidado/{idUsuarioConvidado}")
-    public ResponseEntity<HttpGenericResponse> findAllConvidado(@PathVariable BigInteger idNotificacaoConvidado,
+    public ResponseEntity<HttpGenericResponse> findAllConvidado(@PathVariable("idUsuarioConvidado") BigInteger idNotificacaoConvidado,
                                                        @RequestParam(value = "pagina",defaultValue = "0",required = false) int pagina,
                                                        @RequestParam(value = "qtdPagina",defaultValue = "6",required = false) int qtdPagina) {
         try {
@@ -130,7 +130,7 @@ public class NotificacaoController {
             @ApiResponse(code = 400, message = "Erro durante a busca e/ou notificacao não encontrado.")
     })
     @GetMapping("/usuarioConvidou/{idUsuarioConvidou}")
-    public ResponseEntity<HttpGenericResponse> findAllConvidou(@PathVariable BigInteger idNotificacaoConvidou,
+    public ResponseEntity<HttpGenericResponse> findAllConvidou(@PathVariable("idUsuarioConvidou") BigInteger idNotificacaoConvidou,
                                                        @RequestParam(value = "pagina",defaultValue = "0",required = false) int pagina,
                                                        @RequestParam(value = "qtdPagina",defaultValue = "6",required = false) int qtdPagina) {
         try {
