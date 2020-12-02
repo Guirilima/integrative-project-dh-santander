@@ -6,7 +6,7 @@ import { options } from '../app.module';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register-character',
+  selector: 'app-convidar',
   templateUrl: './convidar.component.html',
   styleUrls: ['./convidar.component.css']
 })

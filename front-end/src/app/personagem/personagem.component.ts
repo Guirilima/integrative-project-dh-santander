@@ -25,7 +25,7 @@ export class PersonagemComponent implements OnInit {
   constructor(private router:Router, private http : HttpClient, private loggedUserService: LoggedUserService) {
 
     if( this.loggedUserService.isLogged()) {
-    var promiseClasses = this.http.get(`${URL_API}/api/personagem`, 
+    var promiseClasses = this.http.get(`${URL_API}/api/personagem?pagina=0&qtdPagina=100`, 
       this.httpOptions)
       .toPromise();
     

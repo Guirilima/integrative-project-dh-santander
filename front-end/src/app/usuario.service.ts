@@ -10,14 +10,6 @@ export class UsuarioService {
 
   constructor(private http: HttpClient,private loggedUserService: LoggedUserService) { }
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      Authorization: `Bearer ${ this.loggedUserService.getJwt() }`
-    })
-  };
-
-
 
   public postUsuario(usuario, apiURL): any{
 
@@ -28,7 +20,17 @@ export class UsuarioService {
  public getUserName(id, apiURL)
  {
 
-  var promiseUsuario = this.http.get(`${ apiURL }/usuario/${ id }`, this.httpOptions).toPromise();
+  
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Authorization: `Bearer ${ this.loggedUserService.getJwt() }`
+    })
+  };
+
+
+
+  var promiseUsuario = this.http.get(`${ apiURL }/usuario/${ id }`, httpOptions).toPromise();
       
   promiseUsuario.then((data)=>{
 

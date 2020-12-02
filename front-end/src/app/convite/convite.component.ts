@@ -63,9 +63,8 @@ export class ConviteComponent implements OnInit {
 
 nomeConvite(id)
 {
- console.log("nome no convite");
-  return "SilasSiolver";
  // return this.usuarioService.getUserName(id,this.apiURL);
+  return "Silão"
 }
 
 statusNotificacao(flag)

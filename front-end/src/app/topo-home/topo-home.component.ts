@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {LoggedUserService} from '../logged-user.service';
+
 @Component({
   selector: 'app-topo-home',
   templateUrl: './topo-home.component.html',

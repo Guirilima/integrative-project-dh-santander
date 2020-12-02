@@ -29,6 +29,8 @@ export class ConviteCardComponent implements OnInit {
   constructor(private loggedUserService: LoggedUserService,private http : HttpClient) { }
 
   ngOnInit(): void {
+
+    console.log(this.fullNotificacao)
   }
 
 
@@ -61,7 +63,6 @@ export class ConviteCardComponent implements OnInit {
 
     var promiseNotificacaoPut = this.http.delete(`${ this.apiURL }/notificacao/${ this.fullNotificacao.idNotificacao }`, this.httpOptions).toPromise();
     
-    //http://localhost:8080/api/notificacao/29?newDescricao=Convite%20Recusado&newFlagSituacao=R
     
     promiseNotificacaoPut.then((data)=>{
 
@@ -75,9 +76,13 @@ export class ConviteCardComponent implements OnInit {
       console.log("Promise rejected with " + JSON.stringify(error));
     })
 
+  }
 
 
-
+  tipoConvite()
+  {
+    if(this.fullNotificacao.destinoNotificacao === "Personagem") return true;
+    else return false;
   }
 
 }
