@@ -25,6 +25,7 @@ export class MestreComponent implements OnInit {
   };
 
   MESTRES = null;
+  NOME = null;
 
   @ViewChild('modalConvite') modalConvite: any;
 
@@ -40,7 +41,7 @@ export class MestreComponent implements OnInit {
         var jsonInfo = JSON.stringify(data);
         var Info = JSON.parse(jsonInfo);
         this.MESTRES = Info.response.data;
-        
+        // console.log(this.MESTRES);
 
        
     
@@ -48,6 +49,27 @@ export class MestreComponent implements OnInit {
         
         console.log("Promise rejected with " + JSON.stringify(error));
       })
+
+      var promiseNome = this.http.get(`${URL_API}/api/usuario?pagina=0&qtdPagina=100`,
+        this.httpOptions)
+        .toPromise();
+
+        promiseNome.then((data) => {
+
+        var jsonInfo = JSON.stringify(data)
+        // console.log(jsonInfo);
+        var Info = JSON.parse(jsonInfo);
+        this.NOME= Info.response.data;
+        // console.log(this.RACAS[0].nomeRaca);
+        // console.log(this.RACAS[0].idRaca);
+        // console.log(this.NOME);
+
+
+      }).catch((error) => {
+
+        console.log("Promise rejected with " + JSON.stringify(error));
+      })
+
      }
     }
   ngOnInit(): void {
@@ -96,8 +118,18 @@ export class MestreComponent implements OnInit {
   }
 
   abrirModal() {
-    console.log("Tentei abrir");
+    // console.log("Tentei abrir");
 
     this.modalService.open(this.modalConvite);
+  }
+
+
+  idUsuarioToNome(idUsuario){
+    var tamanho = this.NOME.length;
+    for (let i = 0; i <tamanho; i++){
+      if(this.NOME[i].idUsuario == idUsuario){
+        return this.NOME[i].nomePessoal;
+      }
+    }
   }
 }

@@ -53,7 +53,7 @@ export class PersonagemComponent implements OnInit {
         // console.log(jsonInfo);
         var Info = JSON.parse(jsonInfo);
         this.PERSONAGENS = Info.response.data;
-        console.log(this.PERSONAGENS);
+        // console.log(this.PERSONAGENS);
 
 
       }).catch((error) => {
@@ -71,7 +71,9 @@ export class PersonagemComponent implements OnInit {
         // console.log(jsonInfo);
         var Info = JSON.parse(jsonInfo);
         this.RACAS = Info.response.data;
-        console.log(this.RACAS);
+        // console.log(this.RACAS[0].nomeRaca);
+        // console.log(this.RACAS[0].idRaca);
+        // console.log(this.RACAS);
 
 
       }).catch((error) => {
@@ -89,7 +91,7 @@ export class PersonagemComponent implements OnInit {
       // console.log(jsonInfo);
       var Info = JSON.parse(jsonInfo);
       this.CLASSES = Info.response;
-      console.log(this.CLASSES);
+      // console.log(this.CLASSES);
 
 
     }).catch((error) => {
@@ -130,7 +132,21 @@ export class PersonagemComponent implements OnInit {
   //    console.log("deu boa")
   //  }
 
+  idRacaToNomeRaca(idRaca){
+    var tamanho = this.RACAS.length;
+    for (let i = 0; i <tamanho; i++){
+      if(this.RACAS[i].idRaca == idRaca){
+        return this.RACAS[i].nomeRaca;
+      }
+    }
+  }
+
   idClasseToNomeClasse(idClasse){
-    
+    var tamanho = this.CLASSES.length;
+    for (let i = 0; i <tamanho; i++){
+      if(this.CLASSES[i].idClasse == idClasse){
+        return this.CLASSES[i].nomeClasse;
+      }
+    }
   }
 }

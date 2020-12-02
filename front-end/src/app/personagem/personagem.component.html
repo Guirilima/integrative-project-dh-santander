@@ -6,8 +6,8 @@
           {{personagem.nomePersonagem}}
         </div>
         <div class="card-body">
-          <h5 class="card-title">Raça: {{personagem.nomeRaca}}</h5>
-          <h5 class="card-title">Classe: {{personagem.classePersonagem}}</h5>
+          <h5 class="card-title">Raça: {{idRacaToNomeRaca(personagem.idRaca)}}</h5>
+          <h5 class="card-title">Classe: {{idClasseToNomeClasse(personagem.idClasse)}}</h5>
           <p class="card-text">{{personagem.historiaPersonagem}}</p>
           <a (click) = 'salvarPersonagem(personagem.idUsuario,personagem.idPersonagem)' (click) = 'abrirModal()'  class="btn btn-dark">Convidar</a>
         </div>
