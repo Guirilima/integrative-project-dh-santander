@@ -4,6 +4,6 @@
         <div class="col-sm"><h5 class="card-title"> {{nomeConvite}} quer convidar você para jogar </h5></div>
         <div class="col-sm descricao"><p class="card-text historia"> {{mensagemConvite}} </p></div>
         <div class="col-2 d-flex justify-content-end" ><button type="button" (click) = "sendWpp()" class="btn btn-success">Aceitar</button></div>
-        <div class="col-2 d-flex justify-content-start"><button type="button" class="btn btn-danger">Recusar</button></div>
+        <div class="col-2 d-flex justify-content-start"><button type="button" (click) =  "recusarConvite()" class="btn btn-danger">Recusar</button></div>
     </div>
 </div>

@@ -2,11 +2,13 @@
     <div class="container">
 
 <div  *ngFor="let convite of convitesRecebidos">
-      <app-convite-card  
+
+      <app-convite-card  *ngIf="statusNotificacao(convite.flagSituacaoConvite)"
       
       [nomeConvite] =  this.nomeConvite(convite.idUsuarioConvidou)
       [mensagemConvite] = convite.descricaoConvite
-      
+      [idConvidou] = convite.idUsuarioConvidou
+      [fullNotificacao] = convite
       
       ></app-convite-card>
 

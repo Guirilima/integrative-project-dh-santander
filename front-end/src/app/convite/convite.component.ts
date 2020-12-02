@@ -68,4 +68,10 @@ nomeConvite(id)
  // return this.usuarioService.getUserName(id,this.apiURL);
 }
 
+statusNotificacao(flag)
+{
+  if(flag === "R") return false;
+  else return true;
+}
+
 }
