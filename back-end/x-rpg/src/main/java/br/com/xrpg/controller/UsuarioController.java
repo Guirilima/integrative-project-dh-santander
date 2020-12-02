@@ -1,8 +1,7 @@
 package br.com.xrpg.controller;
 
 import br.com.xrpg.entity.UsuarioEntity;
-import br.com.xrpg.vo.HttpGenericPageableResponse;
-import br.com.xrpg.vo.UsuarioApresentacaoVO;
+import br.com.xrpg.vo.*;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.xrpg.service.UsuarioService;
-import br.com.xrpg.vo.DadosUsuarioVO;
-import br.com.xrpg.vo.HttpGenericResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -161,4 +158,28 @@ public class UsuarioController {
         }
     }
 
+    @ApiOperation(value = "API RESPONSÁVEL RETORNAR OS DADOS NECESSARIOS PARA O ENVIO PELO WHATSAPP.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Dados construido com sucesso."),
+            @ApiResponse(code = 400, message = "Erro na manipulação dos dados.")
+    })
+    @GetMapping(path = "dadosEnvioWhatsapp/{idUsuario}" ,produces = "application/json")
+    public ResponseEntity<HttpGenericResponse> gerarDadosEnvioWhatsapp(@PathVariable("idUsuario") BigInteger idUsuario,
+                                                             @RequestParam(value = "mensagemEnvio",required = false) String mensagem) {
+        try {
+
+            DadosUsuarioEnvioWhatsapp objectUsuario = usuarioService.dadosEnvioWhatsapp(idUsuario,mensagem);
+
+
+            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                    .status("OK")
+                    .mensagem("")
+                    .response(objectUsuario).build(), HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<HttpGenericResponse>(new HttpGenericResponse().builder()
+                    .status("NOK")
+                    .mensagem(e.getMessage())
+                    .response(null).build(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

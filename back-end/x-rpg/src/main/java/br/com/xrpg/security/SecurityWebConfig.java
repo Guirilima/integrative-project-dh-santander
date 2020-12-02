@@ -29,6 +29,8 @@ public class SecurityWebConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/usuario").hasRole("ADMINISTRADOR")
                 .antMatchers(HttpMethod.DELETE, "/api/usuario").hasRole("ADMINISTRADOR")
                 .antMatchers(HttpMethod.PUT, "/api/usuario").hasRole("ADMINISTRADOR")
+                .antMatchers(HttpMethod.GET, "/api/usuario/dadosEnvioWhatsapp").hasAnyRole("ADMINISTRADOR","NORMAL")
+
 
                 .antMatchers(HttpMethod.POST, "/api/seguranca/**").permitAll()
 

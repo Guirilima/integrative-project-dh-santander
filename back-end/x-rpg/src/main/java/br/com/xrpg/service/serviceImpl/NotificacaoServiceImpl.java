@@ -1,15 +1,12 @@
 package br.com.xrpg.service.serviceImpl;
 
 import br.com.xrpg.entity.NotificacaoEntity;
-import br.com.xrpg.entity.UsuarioEntity;
 import br.com.xrpg.exceptions.ErrorSalvamento;
 import br.com.xrpg.exceptions.ObjectNotFound;
 import br.com.xrpg.repository.NotificacaoReposiotry;
-import br.com.xrpg.service.NoticiasService;
 import br.com.xrpg.service.NotificacaoService;
 import br.com.xrpg.vo.GenericPageRequestResponse;
 import br.com.xrpg.vo.HttpGenericPageableResponse;
-import br.com.xrpg.vo.UsuarioApresentacaoVO;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

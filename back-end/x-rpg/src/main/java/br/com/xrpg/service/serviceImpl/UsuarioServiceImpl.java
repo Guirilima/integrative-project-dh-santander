@@ -8,6 +8,7 @@ import br.com.xrpg.enumber.TipoUsuarioEnum;
 import br.com.xrpg.exceptions.ArgumentNotValid;
 import br.com.xrpg.repository.RoleRepository;
 import br.com.xrpg.vo.*;
+import javassist.tools.rmi.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -159,5 +160,40 @@ public class UsuarioServiceImpl implements UsuarioService {
         }else {
             throw new ObjectNotFound("Não foi encontrado em nosso sistema esse usuário.");
         }
+    }
+
+    public DadosUsuarioEnvioWhatsapp dadosEnvioWhatsapp(BigInteger idUsuario,String mensagemEnvio) {
+
+        Optional.ofNullable(idUsuario).orElseThrow(() -> new ArgumentNotValid("idUsuario não pode ser nulo"));
+
+        Optional<UsuarioEntity> usuarioEntity = this.usuarioRepository.findById(idUsuario);
+
+        if (usuarioEntity.isPresent()) {
+
+            try {
+                String mensagemDefault = "Olá |NOME_USUARIO| ! Vi sua solicitação no site X-RPG e " +
+                        "tenho interesse em jogar com você. Poderia me falar mais sobre a sua campanha ?";
+
+                StringBuilder urlWhatsapp = new StringBuilder();
+
+                urlWhatsapp.append("https://api.whatsapp.com/send?phone=55");
+                urlWhatsapp.append(usuarioEntity.get().getTelefone());
+                urlWhatsapp.append("&text=");
+
+                if (mensagemEnvio == null) {
+                    urlWhatsapp.append(mensagemDefault.replace("|NOME_USUARIO|",usuarioEntity.get().getNomePessoal()));
+                } else {
+                    urlWhatsapp.append(mensagemEnvio);
+                }
+
+                return DadosUsuarioEnvioWhatsapp.builder()
+                        .idUsuario(usuarioEntity.get().getIdUsuario())
+                        .nomeUsuario(usuarioEntity.get().getNomePessoal().concat(" ").concat(usuarioEntity.get().getSobrenomePessoal()))
+                        .urlApiWhatsapp(urlWhatsapp.toString()).build();
+            }catch (Exception e) {
+                throw new RuntimeException("Erro durante a construção da url usada para a API Whatsapp");
+            }
+        }
+        throw new ObjectNotFound("Usuário não encontrado.");
     }
 }
