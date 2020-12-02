@@ -112,6 +112,7 @@ export class RegisterCharacterComponent implements OnInit {
       this.formRegistroPersonagem.get('historiaPersonagem').untouched;
       this.formRegistroPersonagem.get('nomePersonagem').untouched;
       
+      window.location.reload();
 
   
   

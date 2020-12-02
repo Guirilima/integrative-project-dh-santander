@@ -1,6 +1,11 @@
 <section id = mestre>
    <div class="row" >
+    
     <div class="col-sm-3 " *ngFor="let mestre of MESTRES" >
+    
+
+<div *ngIf="proprioMestre(mestre.idUsuario)">
+
       <div class="card text">
         <div class="card-header">
           {{idUsuarioToNome(mestre.idUsuario)}}
@@ -12,7 +17,13 @@
         </div>
       </div>
     </div>
-  </div>
+
+    </div>
+
+
+
+   </div>
+
 
   <ng-template #modalConvite let-c="close" let-d="dismiss">
     <app-convidar></app-convidar>

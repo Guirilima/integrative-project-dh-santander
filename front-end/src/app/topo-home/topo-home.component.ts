@@ -21,7 +21,9 @@ export class TopoHomeComponent implements OnInit {
 
   sair(){
     sessionStorage.removeItem('user');
-    this.router.navigate(['/login']); 
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });; 
 
   }
 

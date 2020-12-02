@@ -72,9 +72,8 @@ export class RegisterMasterComponent implements OnInit {
       this.formRegistroMestre.get('anosExperiencia').untouched;
       this.formRegistroMestre.get('qtdCampanhas').untouched;
       
+      window.location.reload();
 
-  
-  
     }).catch((error)=>{
       
       console.log("Promise rejected with " + JSON.stringify(error));

@@ -1,8 +1,9 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService} from '../auth.service';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -24,9 +25,12 @@ export class LoginComponent implements OnInit {
   senha: new FormControl(null,Validators.required),
   })
 
+  @ViewChild('modalErro') modalErro;
+
+
   readonly apiURL : string; //url base 
    
-  constructor(private authService: AuthService,private router:Router ) {
+  constructor(config: NgbModalConfig, private modalService: NgbModal,private authService: AuthService,private router:Router ) {
 
     this.apiURL = 'http://localhost:8080/api';
 
@@ -58,14 +62,22 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem('user', jsonInfo);
 
     console.log(JSON.parse(sessionStorage.getItem('user')))
-    this.router.navigate(['/dashboard-user']); 
+    this.router.navigate(['/dashboard-user']).then(() => {
+      window.location.reload();
+    });; 
 
 
    }).catch((error) =>{
 
+
+this.open(this.modalErro);
   
 
    })
+  }
+
+  open(content) {
+    this.modalService.open(content);
   }
 
 

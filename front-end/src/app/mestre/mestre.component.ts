@@ -123,6 +123,12 @@ export class MestreComponent implements OnInit {
     this.modalService.open(this.modalConvite);
   }
 
+  proprioMestre(idMestre)
+  {
+    if(idMestre === this.loggedUserService.getId()) return false;
+    return true;
+  }
+
 
   idUsuarioToNome(idUsuario){
     var tamanho = this.NOME.length;
