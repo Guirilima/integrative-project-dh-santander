@@ -8,7 +8,7 @@
         <div class="card-body">
           <h5 class="card-title">Experiencia: {{mestre.anosExperiencia}} anos</h5>
           <h5 class="card-title">Campanhas mestradas: {{mestre.campanhasMestradas}}</h5>
-          <a href="#" class="btn btn-dark">Convidar</a>
+          <a  (click) = 'salvarMestre(mestre.idUsuario,mestre.idMestre)'  class="btn btn-dark">Convidar</a>
         </div>
       </div>
     </div>

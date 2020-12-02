@@ -31,7 +31,8 @@ export class PersonagemComponent implements OnInit {
     
     promiseClasses.then((data)=>{
 
-      var jsonInfo = JSON.stringify(data);
+      var jsonInfo = JSON.stringify(data)
+      // console.log(jsonInfo);
       var Info = JSON.parse(jsonInfo);
       this.PERSONAGENS = Info.response.data;
       
@@ -52,4 +53,12 @@ export class PersonagemComponent implements OnInit {
 
 
   }
+
+  salvarPersonagem(idConvidado, idPersonagem){
+    sessionStorage.setItem('idPersonagem',idPersonagem);
+    sessionStorage.setItem('idConvidado',idConvidado);
+    this.router.navigate((['/convidar']));
+  }
+
+  
 }
