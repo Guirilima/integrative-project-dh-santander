@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {MestresService} from '../services/mestres.service';
 import { Mestre } from '../shared/mestre.model';
 import {LoggedUserService} from '../logged-user.service';
 import {URL_API} from '../app.api';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-mestre',
@@ -25,7 +26,9 @@ export class MestreComponent implements OnInit {
 
   MESTRES = null;
 
-  constructor(private router:Router, private http : HttpClient, private loggedUserService: LoggedUserService) {
+  @ViewChild('modalConvite') modalConvite: any;
+
+  constructor(private router:Router, private http : HttpClient, private loggedUserService: LoggedUserService, private modalService: NgbModal, config: NgbModalConfig) {
 
     if( loggedUserService.isLogged() ) {
       var promiseClasses = this.http.get(`${this.apiURL}/mestre`, 
@@ -61,7 +64,7 @@ export class MestreComponent implements OnInit {
     sessionStorage.setItem('idMestre',idMestre);
     sessionStorage.setItem('idConvidado',idConvidado);
     sessionStorage.setItem('idPersonagem',null);
-    this.router.navigate((['/convidar']));
+    // this.router.navigate((['/convidar']));
   }
 
   getUserName(id)
@@ -92,4 +95,9 @@ export class MestreComponent implements OnInit {
     })
   }
 
+  abrirModal() {
+    console.log("Tentei abrir");
+
+    this.modalService.open(this.modalConvite);
+  }
 }

@@ -8,9 +8,16 @@
         <div class="card-body">
           <h5 class="card-title">Experiencia: {{mestre.anosExperiencia}} anos</h5>
           <h5 class="card-title">Campanhas mestradas: {{mestre.campanhasMestradas}}</h5>
-          <a  (click) = 'salvarMestre(mestre.idUsuario,mestre.idMestre)'  class="btn btn-dark">Convidar</a>
+          <a  (click) = 'salvarMestre(mestre.idUsuario,mestre.idMestre)'  (click) = 'abrirModal()' class="btn btn-dark">Convidar</a>
         </div>
       </div>
     </div>
   </div>
+
+  <ng-template #modalConvite let-c="close" let-d="dismiss">
+
+    <app-convidar></app-convidar>
+  
+  </ng-template> 
+
 </section>
