@@ -52,4 +52,19 @@ public class NotificacaoEntity {
     private Date dataConvite;
 
 
+    @Min(0)
+    @PositiveOrZero
+    @Column(name = "idPersonagemConvidado")
+    private BigInteger idPersonagemConvidado;
+
+    @Min(0)
+    @PositiveOrZero
+    @Column(name = "idMestreConvidado")
+    private BigInteger idMestreConvidado;
+
+    @NotNull
+    @NotBlank
+    @Column(name = "destinoNotificacao",nullable = false)
+    private String destinoNotificacao;//Personagem / Mestre
+
 }

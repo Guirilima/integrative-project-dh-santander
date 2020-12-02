@@ -32,6 +32,11 @@ public class NotificacaoServiceImpl implements NotificacaoService {
         try {
             newNotificacaoEntity.setFlagSituacaoConvite("N");
             newNotificacaoEntity.setDataConvite(new Date());
+            if (newNotificacaoEntity.getIdPersonagemConvidado() != null) {
+                newNotificacaoEntity.setDestinoNotificacao("Personagem");
+            }else {
+                newNotificacaoEntity.setDestinoNotificacao("Mestre");
+            }
             return notificacaoReposiotry.save(newNotificacaoEntity);
         }catch (Exception ee) {
             throw new ErrorSalvamento("Erro durante o salvamento. Por favor confirme o preenchimento de todos os campos.");
