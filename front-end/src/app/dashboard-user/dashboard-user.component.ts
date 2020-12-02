@@ -22,9 +22,11 @@ export class DashboardUserComponent implements OnInit {
 
 
   PERSONAGENS = null;
-
+  MESTRE = null;
 
   @ViewChild('modalCadastro') modalCadastro: any;
+  @ViewChild('modalMestre') modalMestre: any;
+
 
   
 
@@ -46,6 +48,24 @@ export class DashboardUserComponent implements OnInit {
       
       console.log("Promise rejected with " + JSON.stringify(error));
     })
+
+    var promiseMaster = this.http.get(`${ this.apiURL }/mestre/busca-por-usuario/${ this.loggedUserService.getId() }`, this.httpOptions).toPromise();
+    
+    
+    promiseMaster.then((data)=>{
+
+      var jsonInfo = JSON.stringify(data);
+      //console.log(jsonInfo);
+      var Info = JSON.parse(jsonInfo);
+      this.MESTRE = Info.response;
+      
+    }).catch((error)=>{
+      
+      console.log("Promise rejected with " + JSON.stringify(error));
+    })
+
+
+
    }
   }
 
@@ -70,10 +90,23 @@ export class DashboardUserComponent implements OnInit {
 
   
   abrirModal(){
-    console.log("Tentei abrir")
+   // console.log("Tentei abrir")
 
     this.modalService.open(this.modalCadastro);
   }
+
+  abrirModalMestre(){
+    console.log("Tentei abrir")
+
+    this.modalService.open(this.modalMestre);
+  }
+
+  existeMestre()
+  {
+    if(this.MESTRE === null) return false;
+    else return true;
+  }
+
 
   
 

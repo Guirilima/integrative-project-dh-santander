@@ -12,6 +12,7 @@
         </div>
         <div class="col-md-4 mb-4"></div>
     </div>
+
     <div class="row">
         <div class="col-md-2 mb-3" *ngFor="let personagem of PERSONAGENS">
         <app-personagem-user class="pr-4 pt-5" 
@@ -24,18 +25,50 @@
         </app-personagem-user>
         </div>
     </div>
+
+    <div class="row pb-3">
+        <div class="col-md-4 mb-4"></div>
+        <div class="col-md-4 mb-4">
+        <div>
+            <a class="btn botao-hover btn-outline-primary mx-12 my-sm-0 text-center align-middle" (click)="abrirModalMestre()">
+                <span class="btn btn-dark align-middle">Inserir Mestre</span>
+            </a>
+        </div>
+        </div>
+        <div class="col-md-4 mb-4"></div>
+    </div>
    
+     
+    <div class="row">
+        <div class="col-md-2 mb-3">
+        <app-master-user  *ngIf="existeMestre()" class="pr-4 pt-5" 
+            [anosExperiencia] =  MESTRE.anosExperiencia 
+            [qtdCampanhas] = MESTRE.campanhasMestradas
+            [resumoMestre] = MESTRE.descricao
+            [idMestre] = MESTRE.idMestre
+        >
+        </app-master-user>
+        </div>
+    </div>
 
  
 
 </div>
 
-
+<!-- Modal de cadastro de mestre-->
 <ng-template #modalCadastro let-c="close" let-d="dismiss">
   
   <app-register-character></app-register-character>
 
 </ng-template>
+
+
+<!-- Modal de cadastro de mestre-->
+<ng-template #modalMestre let-c="close" let-d="dismiss">
+  
+    <app-register-master></app-register-master>
+  
+  </ng-template>
   
 
 

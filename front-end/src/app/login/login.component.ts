@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    
   }
 
   onSubmit()
@@ -58,7 +59,6 @@ export class LoginComponent implements OnInit {
 
     console.log(JSON.parse(sessionStorage.getItem('user')))
     this.router.navigate(['/dashboard-user']); 
-    location.reload();
 
 
    }).catch((error) =>{

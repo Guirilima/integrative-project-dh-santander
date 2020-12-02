@@ -12,7 +12,6 @@ import { ContactComponent } from './contact/contact.component';
 import {MestreComponent} from './mestre/mestre.component';
 import {PersonagemComponent} from './personagem/personagem.component';
 import {ConviteComponent} from './convite/convite.component';
-import {RegisterCharacterComponent} from './register-character/register-character.component';
 import {RegisterMasterComponent} from './register-master/register-master.component';
 import {FeedComponent} from './feed/feed.component';
 import {ConvidarComponent} from './convidar/convidar.component';
@@ -30,7 +29,6 @@ const APP_ROUTES: Routes = [
     { path: 'mestre', component: MestreComponent},
     { path: 'personagem', component: PersonagemComponent},
     { path: 'convite', component: ConviteComponent},
-    { path: 'register-character', component: RegisterCharacterComponent},
     { path: 'register-master', component: RegisterMasterComponent},
     { path: 'feed', component: FeedComponent},
     { path: 'convidar', component:ConvidarComponent},

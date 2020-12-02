@@ -2,25 +2,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import {LoggedUserService} from '../logged-user.service';
 
+
 @Component({
-  selector: 'app-personagem-user',
-  templateUrl: './personagem-user.component.html',
-  styleUrls: ['./personagem-user.component.css']
+  selector: 'app-master-user',
+  templateUrl: './master-user.component.html',
+  styleUrls: ['./master-user.component.css']
 })
-export class PersonagemUserComponent implements OnInit {
+export class MasterUserComponent implements OnInit {
+
 
 
   apiURL = 'http://localhost:8080/api';
-
-
-  @Input() nomePersonagem: string;
-  @Input() historiaPersonagem: string;
-  @Input() classePersonagem: string;
-  @Input() racaPersonagem: string;
-  @Input() idPersonagem: any;
-
-
-  constructor(private http : HttpClient, private loggedUserService: LoggedUserService) { }
 
 
   httpOptions = {
@@ -31,12 +23,23 @@ export class PersonagemUserComponent implements OnInit {
   };
 
 
+  @Input() anosExperiencia: any;
+  @Input() qtdCampanhas: any;
+  @Input() resumoMestre: string;
+  @Input() idMestre: any;
+
+  constructor(private http : HttpClient,private loggedUserService: LoggedUserService) { }
+
+
+
   ngOnInit(): void {
   }
 
-  deletarPersonagem(){
 
-    var promiseDelete = this.http.delete(`${ this.apiURL }/personagem/${ this.idPersonagem }`, this.httpOptions).toPromise();
+  deletarMestre()
+  {
+
+    var promiseDelete = this.http.delete(`${ this.apiURL }/mestre/${ this.idMestre }`, this.httpOptions).toPromise();
     
     promiseDelete.then((data)=>{
 
@@ -52,5 +55,6 @@ export class PersonagemUserComponent implements OnInit {
     })
    }
 
+  
 
 }

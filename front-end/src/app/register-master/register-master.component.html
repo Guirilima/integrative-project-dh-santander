@@ -1,13 +1,11 @@
-<section id="register" class = "section-padding">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-          <div class="col-md-4 offset-md-4 form-register">
+<section id="register" >
+    <div class="container-fluid pt-4 pb-4">
+          <div class="col-md-12 offset-md-12 form-register">
             <p>Cadastro de perfil de Mestre</p>
-            <form method="post" [formGroup]= "formRegistroMestre">
-               
-
+            <form method="post" [formGroup]= "formRegistroMestre" (ngSubmit)="onSubmit()">
+            
                 <div class="form-row pb-3">
-                    <div class="col-md-6 mb-6">
+                    <div class="col-md-12 mb-12">
                         <div class="form-group">
                             <label for="inputAnos">Anos de Experiência</label>
                             <input type="number" class="form-control" id="inputAnos" min="0"  placeholder="Apenas números" formControlName = "anosExperiencia" required>
@@ -56,7 +54,6 @@
             </form>
           </div>
         </div>
-      </div>
     
     
 
