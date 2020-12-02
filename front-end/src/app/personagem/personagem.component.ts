@@ -5,6 +5,7 @@ import { Personagem } from '../shared/personagem.model';
 import { LoggedUserService } from '../logged-user.service';
 import { URL_API } from '../app.api';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserModule } from '@angular/platform-browser'
 
 
 @Component({
@@ -12,6 +13,8 @@ import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './personagem.component.html',
   styleUrls: ['./personagem.component.css']
 })
+
+
 export class PersonagemComponent implements OnInit {
 
   httpOptions = {
@@ -61,7 +64,7 @@ export class PersonagemComponent implements OnInit {
     sessionStorage.setItem('idPersonagem', idPersonagem);
     sessionStorage.setItem('idConvidado', idConvidado);
     sessionStorage.setItem('idMestre',null);
-    this.router.navigate((['/convidar']));
+    // this.router.navigate((['/convidar']));
   }
 
   abrirModal() {

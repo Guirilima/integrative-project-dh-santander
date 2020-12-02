@@ -9,18 +9,18 @@
           <h5 class="card-title">Raça: {{personagem.racaPersonagem}}</h5>
           <h5 class="card-title">Classe: {{personagem.classePersonagem}}</h5>
           <p class="card-text">{{personagem.historiaPersonagem}}</p>
-          <a (click) = 'salvarPersonagem(personagem.idUsuario,personagem.idPersonagem)'  class="btn btn-dark">Convidar</a>
+          <a (click) = 'salvarPersonagem(personagem.idUsuario,personagem.idPersonagem)' (click) = 'abrirModal()'  class="btn btn-dark">Convidar</a>
         </div>
       </div>
     </div>
   </div>
 
-<!-- 
+
   <ng-template #modalConvite let-c="close" let-d="dismiss">
 
     <app-convidar></app-convidar>
   
-  </ng-template> -->
+  </ng-template> 
 </section>
 
 
