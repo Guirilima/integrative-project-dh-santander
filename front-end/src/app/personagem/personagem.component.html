@@ -1,6 +1,6 @@
-<section id = personagem>
-  <div class="row" >
-    <div class="col-sm-3 " *ngFor="let personagem of PERSONAGENS" >
+<section id=personagem>
+  <div class="row">
+    <div class="col-sm-3 " *ngFor="let personagem of PERSONAGENS">
       <div class="card text">
         <div class="card-header">
           {{personagem.nomePersonagem}}
@@ -9,9 +9,18 @@
           <h5 class="card-title">Raça: {{personagem.racaPersonagem}}</h5>
           <h5 class="card-title">Classe: {{personagem.classePersonagem}}</h5>
           <p class="card-text">{{personagem.historiaPersonagem}}</p>
-          <a  (click) = 'salvarPersonagem(personagem.idUsuario,personagem.idPersonagem)'  class="btn btn-dark">Convidar</a>
+          <a (click) = 'salvarPersonagem(personagem.idUsuario,personagem.idPersonagem)'  class="btn btn-dark">Convidar</a>
         </div>
       </div>
     </div>
   </div>
+
+<!-- 
+  <ng-template #modalConvite let-c="close" let-d="dismiss">
+
+    <app-convidar></app-convidar>
+  
+  </ng-template> -->
 </section>
+
+

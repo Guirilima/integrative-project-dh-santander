@@ -56,6 +56,7 @@ export class MestreComponent implements OnInit {
   salvarMestre(idConvidado, idMestre){
     sessionStorage.setItem('idMestre',idMestre);
     sessionStorage.setItem('idConvidado',idConvidado);
+    sessionStorage.setItem('idPersonagem',null);
     this.router.navigate((['/convidar']));
   }
 
