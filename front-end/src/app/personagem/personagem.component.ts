@@ -1,29 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import { PersonagensService } from '../services/personagens.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { Personagem } from '../shared/personagem.model';
+import {LoggedUserService} from '../logged-user.service';
+import {URL_API} from '../app.api';
 
 
 @Component({
   selector: 'app-personagem',
   templateUrl: './personagem.component.html',
-  styleUrls: ['./personagem.component.css'],
-  providers: [PersonagensService]
+  styleUrls: ['./personagem.component.css']
 })
 export class PersonagemComponent implements OnInit {
 
-  public personagens: Personagem[];
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Authorization: `Bearer ${ this.loggedUserService.getJwt() }`
+    })
+  };
 
-  constructor(private personagensService: PersonagensService) { }
+  PERSONAGENS = null;
 
-  ngOnInit() {
-    this.personagensService.getPersonagens()
-      .then((personagens: Personagem[]) => {
-        this.personagens = personagens;
-      })
-      .catch((param: any) => {
-        console.log(param);
-      })
+  constructor(private router:Router, private http : HttpClient, private loggedUserService: LoggedUserService) {
+
+    if( this.loggedUserService.isLogged()) {
+    var promiseClasses = this.http.get(`${URL_API}/api/personagem`, 
+      this.httpOptions)
+      .toPromise();
+    
+    promiseClasses.then((data)=>{
+
+      var jsonInfo = JSON.stringify(data);
+      var Info = JSON.parse(jsonInfo);
+      this.PERSONAGENS = Info.response.data;
+      
+     
+  
+    }).catch((error)=>{
+      
+      console.log("Promise rejected with " + JSON.stringify(error));
+    })
+   }
   }
+  ngOnInit(): void {
 
 
+    if(!this.loggedUserService.isLogged()) {
+      this.router.navigate(['/login']); 
+    }
+
+
+  }
 }

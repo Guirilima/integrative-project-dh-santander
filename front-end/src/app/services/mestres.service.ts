@@ -12,7 +12,7 @@ export class MestresService {
 
   public getMestres(): Promise<Mestre[]> {
     
-    return this.http.get(`${URL_API}/mestres`)
+    return this.http.get(`http://localhost:3000/mestres`)
       .toPromise()
       .then((resposta: any) => resposta)
   }
