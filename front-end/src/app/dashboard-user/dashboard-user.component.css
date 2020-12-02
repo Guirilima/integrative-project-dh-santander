@@ -30,3 +30,12 @@
     outline: unset;
 }
 
+#sobre .titulo-sobre,
+#contato .titulo-contato {
+    font-size: 25px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #21212E;
+    width: 250px;
+    font-weight: bold;
+    padding: 5px;
+}

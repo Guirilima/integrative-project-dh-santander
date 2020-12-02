@@ -73,6 +73,12 @@ export class PersonagemComponent implements OnInit {
     this.modalService.open(this.modalConvite);
   }
 
+  proprioPersonagem(idUsuario)
+  {
+    if(idUsuario === this.loggedUserService.getId()) return false;
+    return true;
+  }
+
 //   print(){
 //    console.log("deu boa")
 //  }

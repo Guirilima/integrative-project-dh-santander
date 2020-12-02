@@ -23,6 +23,7 @@ export class DashboardUserComponent implements OnInit {
 
   PERSONAGENS = null;
   MESTRE = null;
+  NomeUsuario;
 
   @ViewChild('modalCadastro') modalCadastro: any;
   @ViewChild('modalMestre') modalMestre: any;
@@ -83,6 +84,23 @@ export class DashboardUserComponent implements OnInit {
       this.router.navigate(['/login']); 
 
     }
+
+    var promiseClasses = this.http.get(`${ this.apiURL }/usuario/${ this.loggedUserService.getId() }`, this.httpOptions).toPromise();
+    
+    promiseClasses.then((data)=>{
+
+      var jsonInfo = JSON.stringify(data);
+      //console.log(jsonInfo);
+      var Info = JSON.parse(jsonInfo);
+      this.NomeUsuario = Info.response.nomePessoal;
+
+     
+  
+    }).catch((error)=>{
+      
+      console.log("Promise rejected with " + JSON.stringify(error));
+    })
+
 
 
   }

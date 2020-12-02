@@ -28,6 +28,7 @@ export class ConviteCardComponent implements OnInit {
   };
 
   NomeConvite = null;
+  NomePersonagem = null;
 
   constructor(public usuarioService: UsuarioService,private loggedUserService: LoggedUserService,private http : HttpClient) { }
 
@@ -56,6 +57,31 @@ export class ConviteCardComponent implements OnInit {
       
       console.log("Promise rejected with " + JSON.stringify(error));
     })
+
+
+    if(this.tipoConvite()) {
+    var promiseNomePersonagem = this.http.get(`${ this.apiURL }/personagem/${ this.fullNotificacao.idPersonagemConvidado }`, httpOptions).toPromise();
+        
+    promiseNomePersonagem.then((data)=>{
+  
+      var jsonInfo = JSON.stringify(data);
+      //console.log(jsonInfo);
+      var Info = JSON.parse(jsonInfo);
+      this.NomePersonagem = Info.response.nomePersonagem;
+         
+  
+    }).catch((error)=>{
+      
+      console.log("Promise rejected with " + JSON.stringify(error));
+    })
+  }
+
+
+
+
+
+
+
      
    }
 
@@ -69,7 +95,6 @@ export class ConviteCardComponent implements OnInit {
   {
     var promiseMensagemWpp = this.http.get(`${ this.apiURL }/usuario/dadosEnvioWhatsapp/${ this.idConvidou }`, this.httpOptions).toPromise();
     
-    
     promiseMensagemWpp.then((data)=>{
 
       var jsonInfo = JSON.stringify(data);
@@ -77,13 +102,14 @@ export class ConviteCardComponent implements OnInit {
       var Info = JSON.parse(jsonInfo);
       this.WppUrl = Info.response.urlApiWhatsapp;
       console.log(this.WppUrl);
+      window.open(String(this.WppUrl),'_blank')
+
       
     }).catch((error)=>{
       
       console.log("Promise rejected with " + JSON.stringify(error));
     })
 
-    window.open(String(this.WppUrl),'_blank')
 
   }
 

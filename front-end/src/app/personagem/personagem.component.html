@@ -1,7 +1,7 @@
 <section id=personagem>
   <div class="row">
     <div class="col-sm-3 " *ngFor="let personagem of PERSONAGENS">
-      <div class="card text">
+      <div class="card text" *ngIf="proprioPersonagem(personagem.idUsuario)">
         <div class="card-header">
           {{personagem.nomePersonagem}}
         </div>
