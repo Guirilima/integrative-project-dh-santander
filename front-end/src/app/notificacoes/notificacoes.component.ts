@@ -1,26 +1,20 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {ConvitesService} from '../services/convites.service';
-import {Convite} from '../shared/convite.model';
-import {LoggedUserService} from '../logged-user.service';
 import {UsuarioService} from '../usuario.service';
+import {LoggedUserService} from '../logged-user.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
-  selector: 'app-convite',
-  templateUrl: './convite.component.html',
-  styleUrls: ['./convite.component.css'],
-  providers: [ConvitesService]
+  selector: 'app-notificacoes',
+  templateUrl: './notificacoes.component.html',
+  styleUrls: ['./notificacoes.component.css']
 })
-export class ConviteComponent implements OnInit {
+export class NotificacoesComponent implements OnInit {
 
   public convitesRecebidos = null;
   public convitesEnviados = null;
 
-  testeString = "TesteString"
-
-
+  public testeString = "Teste"
   apiURL = 'http://localhost:8080/api';
-
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,9 +23,7 @@ export class ConviteComponent implements OnInit {
     })
   };
 
-
-
-  constructor(public usuarioService: UsuarioService,private convitesService: ConvitesService, private loggedUserService: LoggedUserService,private http : HttpClient) { }
+  constructor(public usuarioService: UsuarioService, private loggedUserService: LoggedUserService,private http : HttpClient) { }
 
   ngOnInit(){
 
@@ -54,7 +46,6 @@ export class ConviteComponent implements OnInit {
       })
     
     
-
 }
 
 }
@@ -62,10 +53,10 @@ export class ConviteComponent implements OnInit {
 
   
 
-getNomeConvite(id)
+getNomeConvite(_id: any)
 {
  // return this.usuarioService.getUserName(id,this.apiURL);
-   console.log("Passei por aqui");
+   console.log(this.convitesRecebidos);
 
   return "Silão"
 }
@@ -75,5 +66,7 @@ statusNotificacao(flag)
   if(flag === "R") return false;
   else return true;
 }
+
+
 
 }

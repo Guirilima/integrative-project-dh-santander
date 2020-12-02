@@ -26,6 +26,7 @@ import { DashboardUserComponent } from './dashboard-user/dashboard-user.componen
 import { PersonagemUserComponent } from './personagem-user/personagem-user.component';
 import { MasterUserComponent } from './master-user/master-user.component';
 import { ConviteCardComponent } from './convite-card/convite-card.component';
+import { NotificacoesComponent } from './notificacoes/notificacoes.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -49,7 +50,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		DashboardUserComponent,
 		PersonagemUserComponent,
 		MasterUserComponent,
-		ConviteCardComponent
+		ConviteCardComponent,
+		NotificacoesComponent
 	],
 	imports: [
 		NgxMaskModule.forRoot(),

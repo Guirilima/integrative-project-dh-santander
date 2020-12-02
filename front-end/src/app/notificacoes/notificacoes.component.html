@@ -5,7 +5,6 @@
 
       <app-convite-card  *ngIf="statusNotificacao(convite.flagSituacaoConvite)"
       
-      [nomeConvite] =  this.getNomeConvite(convite.idUsuarioConvidou)
       [mensagemConvite] = convite.descricaoConvite
       [idConvidou] = convite.idUsuarioConvidou
       [fullNotificacao] = convite

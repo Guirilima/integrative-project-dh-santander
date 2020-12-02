@@ -37,6 +37,7 @@ export class UsuarioService {
     var jsonInfo = JSON.stringify(data);
     //console.log(jsonInfo);
     var Info = JSON.parse(jsonInfo);
+
     return Info.response.nomePessoal;
     
    

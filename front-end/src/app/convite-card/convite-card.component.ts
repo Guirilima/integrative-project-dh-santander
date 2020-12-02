@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { LoggedUserService } from '../logged-user.service';
+import {UsuarioService} from '../usuario.service';
+
 
 @Component({
   selector: 'app-convite-card',
@@ -9,7 +11,6 @@ import { LoggedUserService } from '../logged-user.service';
 })
 export class ConviteCardComponent implements OnInit {
 
-  @Input() nomeConvite: string;
   @Input() mensagemConvite: string;
   @Input() idConvidou: any
   @Input() fullNotificacao: any;
@@ -26,12 +27,42 @@ export class ConviteCardComponent implements OnInit {
     })
   };
 
-  constructor(private loggedUserService: LoggedUserService,private http : HttpClient) { }
+  NomeConvite = null;
 
-  ngOnInit(): void {
+  constructor(public usuarioService: UsuarioService,private loggedUserService: LoggedUserService,private http : HttpClient) { }
 
-    console.log(this.fullNotificacao)
-  }
+  ngOnInit(): void { 
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: `Bearer ${ this.loggedUserService.getJwt() }`
+      })
+    };
+  
+  
+  
+    var promiseUsuario = this.http.get(`${ this.apiURL }/usuario/${ this.idConvidou }`, httpOptions).toPromise();
+        
+    promiseUsuario.then((data)=>{
+  
+      var jsonInfo = JSON.stringify(data);
+      //console.log(jsonInfo);
+      var Info = JSON.parse(jsonInfo);
+      this.NomeConvite = Info.response.nomePessoal;
+         
+  
+    }).catch((error)=>{
+      
+      console.log("Promise rejected with " + JSON.stringify(error));
+    })
+     
+   }
+
+
+    
+
+   
 
 
   sendWpp()
@@ -84,5 +115,14 @@ export class ConviteCardComponent implements OnInit {
     if(this.fullNotificacao.destinoNotificacao === "Personagem") return true;
     else return false;
   }
+
+  getNomeConvite(_id: any)
+{
+
+   //console.log("Cheguei aqui de novo")
+  return this.usuarioService.getUserName(_id,this.apiURL);
+
+  //return "Silão"
+}
 
 }

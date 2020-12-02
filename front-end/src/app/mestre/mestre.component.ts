@@ -13,6 +13,9 @@ import {URL_API} from '../app.api';
 })
 export class MestreComponent implements OnInit {
 
+  apiURL = 'http://localhost:8080/api';
+
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',
@@ -25,7 +28,7 @@ export class MestreComponent implements OnInit {
   constructor(private router:Router, private http : HttpClient, private loggedUserService: LoggedUserService) {
 
     if( loggedUserService.isLogged() ) {
-      var promiseClasses = this.http.get(`${URL_API}/api/mestre`, 
+      var promiseClasses = this.http.get(`${this.apiURL}/mestre`, 
         this.httpOptions)
         .toPromise();
       
@@ -35,6 +38,7 @@ export class MestreComponent implements OnInit {
         var Info = JSON.parse(jsonInfo);
         this.MESTRES = Info.response.data;
         
+
        
     
       }).catch((error)=>{
@@ -58,6 +62,34 @@ export class MestreComponent implements OnInit {
     sessionStorage.setItem('idConvidado',idConvidado);
     sessionStorage.setItem('idPersonagem',null);
     this.router.navigate((['/convidar']));
+  }
+
+  getUserName(id)
+  {
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: `Bearer ${ this.loggedUserService.getJwt() }`
+      })
+    };
+  
+  
+  
+    var promiseUsuario = this.http.get(`${ this.apiURL }/usuario/${ id }`, httpOptions).toPromise();
+        
+    promiseUsuario.then((data)=>{
+  
+      var jsonInfo = JSON.stringify(data);
+      //console.log(jsonInfo);
+      var Info = JSON.parse(jsonInfo);
+      return Info.response.nomePessoal;
+         
+  
+    }).catch((error)=>{
+      
+      console.log("Promise rejected with " + JSON.stringify(error));
+    })
   }
 
 }

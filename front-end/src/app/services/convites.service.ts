@@ -9,9 +9,8 @@ export class ConvitesService {
   constructor(private http: HttpClient) { }
 
   public getConvites(): Promise<Convite[]> {
-    
-    return this.http.get(`${URL_API}/convites`)
-      .toPromise()
-      .then((resposta: any) => resposta)
+    console.log("Passei pelo service");
+   return null;
+
   }
 }
