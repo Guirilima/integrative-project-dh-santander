@@ -16,6 +16,7 @@ import {RegisterMasterComponent} from './register-master/register-master.compone
 import {FeedComponent} from './feed/feed.component';
 import {ConvidarComponent} from './convidar/convidar.component';
 import {DashboardUserComponent} from './dashboard-user/dashboard-user.component';
+import {NotificacoesComponent} from './notificacoes/notificacoes.component'
 
 const APP_ROUTES: Routes = [
     { path: '', component: HomeComponent },
@@ -28,7 +29,7 @@ const APP_ROUTES: Routes = [
     { path: 'contact', component: ContactComponent},
     { path: 'mestre', component: MestreComponent},
     { path: 'personagem', component: PersonagemComponent},
-    { path: 'convite', component: ConviteComponent},
+    { path: 'convite', component: NotificacoesComponent},
     { path: 'register-master', component: RegisterMasterComponent},
     { path: 'feed', component: FeedComponent},
     { path: 'convidar', component:ConvidarComponent},
