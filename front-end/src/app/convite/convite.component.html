@@ -1,18 +1,17 @@
 <section id = convite>
     <div class="container">
-        <div class="alert" role="alert" *ngFor="let convite of convites">
-            <form action="" >
-                <div class="row">
-                    <div class="col-1"><img src="../../assets/img/teste4k.jpg"></div>
-                    <div class="col-sm"><h5 class="card-title"> {{convite.nome_anfitriao}} quer convidar você para jogar </h5></div>
-                    <div class="col-sm descricao"><p class="card-text historia"> {{convite.descricao}}</p></div>
-                    
-                    <div class="col-2 d-flex justify-content-end" ><button type="button" class="btn btn-success">Aceitar</button></div>
-                    <div class="col-2 d-flex justify-content-start"><button type="button" class="btn btn-danger">Recusar</button></div>
-        
-                </div>
-            </form>
-          </div>
+
+<div  *ngFor="let convite of convitesRecebidos">
+      <app-convite-card  
+      
+      [nomeConvite] =  this.nomeConvite(convite.idUsuarioConvidou)
+      [mensagemConvite] = convite.descricaoConvite
+      
+      
+      ></app-convite-card>
+
+    </div>
+
     </div>
 </section>
 

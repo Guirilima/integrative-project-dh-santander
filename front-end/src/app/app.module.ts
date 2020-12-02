@@ -24,6 +24,8 @@ import { FeedComponent } from './feed/feed.component';
 import { ConvidarComponent } from './convidar/convidar.component';
 import { DashboardUserComponent } from './dashboard-user/dashboard-user.component';
 import { PersonagemUserComponent } from './personagem-user/personagem-user.component';
+import { MasterUserComponent } from './master-user/master-user.component';
+import { ConviteCardComponent } from './convite-card/convite-card.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -45,7 +47,9 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		FeedComponent,
 		ConvidarComponent,
 		DashboardUserComponent,
-		PersonagemUserComponent
+		PersonagemUserComponent,
+		MasterUserComponent,
+		ConviteCardComponent
 	],
 	imports: [
 		NgxMaskModule.forRoot(),

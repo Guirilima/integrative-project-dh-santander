@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {LoggedUserService} from '../logged-user.service';
 @Component({
   selector: 'app-topo-home',
@@ -7,7 +8,7 @@ import {LoggedUserService} from '../logged-user.service';
 })
 export class TopoHomeComponent implements OnInit {
 
-  constructor(private loggedUser: LoggedUserService) { }
+  constructor(private loggedUser: LoggedUserService, private router: Router) { }
 
   mostrarHomeLogin: boolean;
 
@@ -19,6 +20,8 @@ export class TopoHomeComponent implements OnInit {
 
   sair(){
     sessionStorage.removeItem('user');
+    this.router.navigate(['/login']); 
+
   }
 
 }
