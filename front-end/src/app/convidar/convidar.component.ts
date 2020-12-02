@@ -88,10 +88,11 @@ export class ConvidarComponent implements OnInit {
     {
       var convidar = {
         descricaoConvite: this.formRegistroConvidar.get('descricaoConvite').value,
-        flagMeioConvite: "",
+        flagMeioConvite: "W",
         idMestreConvidado: sessionStorage.getItem('idMestre'),
         idPersonagemConvidado: sessionStorage.getItem('idPersonagem'),
-        idUsuarioConvidado: sessionStorage.getItem('idUsuario')
+        idUsuarioConvidado: sessionStorage.getItem('idConvidado'),
+        idUsuarioConvidou:this.loggedUser.getId()
     }
 
     console.log(convidar);
