@@ -3,7 +3,7 @@
     <div class="col-sm-3 " *ngFor="let mestre of MESTRES" >
       <div class="card text">
         <div class="card-header">
-          nome_mestre
+          {{mestre.idMestre}
         </div>
         <div class="card-body">
           <h5 class="card-title">Experiencia: {{mestre.anosExperiencia}} anos</h5>
@@ -15,9 +15,6 @@
   </div>
 
   <ng-template #modalConvite let-c="close" let-d="dismiss">
-
     <app-convidar></app-convidar>
-  
   </ng-template> 
-
 </section>
